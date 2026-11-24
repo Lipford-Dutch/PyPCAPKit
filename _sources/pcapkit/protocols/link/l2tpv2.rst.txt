@@ -1,0 +1,134 @@
+L2TPv2 - Layer Two Tunnelling Protocol Version 2
+================================================
+
+.. module:: pcapkit.protocols.link.l2tpv2
+.. module:: pcapkit.protocols.link.l2tpv2.protocol
+
+:mod:`pcapkit.protocols.link.l2tpv2.protocol` contains
+:class:`~pcapkit.protocols.link.l2tpv2.protocol.L2TPv2` only, which implements the extractor
+for the Layer Two Tunnelling Protocol version 2 (L2TPv2) [*]_ as specified by
+:rfc:`2661` -- a 16-bit tunnel ID and a 16-bit session ID, with the version nibble
+reading ``2``. It is dispatched from
+:attr:`UDP.__proto__ <pcapkit.protocols.transport.udp.protocol.UDP.__proto__>` at port
+1701, and a data message's payload is dissected as
+:class:`~pcapkit.protocols.link.ppp.protocol.PPP`. Its structure is:
+
+.. table::
+
+   ======= ===== ===================== ==========================================
+    Octets Bits  Name                  Description
+   ======= ===== ===================== ==========================================
+    0          0 ``l2tp.flags``        Flags and Version Info
+   ------- ----- --------------------- ------------------------------------------
+    0          0 ``l2tp.flags.type``   Type (control / data)
+   ------- ----- --------------------- ------------------------------------------
+    0          1 ``l2tp.flags.len``    Length
+   ------- ----- --------------------- ------------------------------------------
+    0          2                       Reserved (must be zero)
+   ------- ----- --------------------- ------------------------------------------
+    0          4 ``l2tp.flags.seq``    Sequence
+   ------- ----- --------------------- ------------------------------------------
+    0          5                       Reserved (must be zero)
+   ------- ----- --------------------- ------------------------------------------
+    0          6 ``l2tp.flags.offset`` Offset
+   ------- ----- --------------------- ------------------------------------------
+    0          7 ``l2tp.flags.prio``   Priority
+   ------- ----- --------------------- ------------------------------------------
+    1          8                       Reserved (must be zero)
+   ------- ----- --------------------- ------------------------------------------
+    1         12 ``l2tp.version``      Version (``2``)
+   ------- ----- --------------------- ------------------------------------------
+    2         16 ``l2tp.length``       Length (optional by ``len``)
+   ------- ----- --------------------- ------------------------------------------
+    4         32 ``l2tp.tunnelid``     Tunnel ID
+   ------- ----- --------------------- ------------------------------------------
+    6         48 ``l2tp.sessionid``    Session ID
+   ------- ----- --------------------- ------------------------------------------
+    8         64 ``l2tp.ns``           Sequence Number (optional by ``seq``)
+   ------- ----- --------------------- ------------------------------------------
+    10        80 ``l2tp.nr``           Next Sequence Number (optional by ``seq``)
+   ------- ----- --------------------- ------------------------------------------
+    12        96 ``l2tp.offset``       Offset Size (optional by ``offset``)
+   ======= ===== ===================== ==========================================
+
+.. note::
+
+   The parsed datagram appears under ``l2tp``, not ``l2tpv2``:
+   :attr:`~pcapkit.protocols.link.l2tp.protocol.L2TP.info_name` is declared on the
+   version-agnostic base so that a consumer finds the data at the same key
+   whichever version was on the wire. The version is reported by
+   :attr:`~pcapkit.protocols.link.l2tpv2.protocol.L2TPv2.alias` instead.
+
+.. autoclass:: pcapkit.protocols.link.l2tpv2.protocol.L2TPv2
+   :no-members:
+   :show-inheritance:
+
+   .. rubric:: Properties
+
+   .. autoproperty:: name
+   .. autoproperty:: alias
+   .. autoproperty:: version
+   .. autoproperty:: length
+   .. autoproperty:: type
+
+   .. rubric:: Methods
+
+   .. automethod:: read
+   .. automethod:: make
+   .. automethod:: id
+
+   .. rubric:: Data Models
+
+   .. automethod:: __index__
+
+   .. rubric:: Utilities
+
+   .. automethod:: _make_data
+
+Header Schemas
+--------------
+
+.. module:: pcapkit.protocols.link.l2tp.schema
+
+.. versionremoved:: 1.6.0
+
+   ``pcapkit.protocols.schema.link.l2tp``, with no alias: the module moved here
+   (:issue:`2534`).
+
+.. autoclass:: pcapkit.protocols.link.l2tp.schema.L2TP
+   :members:
+   :show-inheritance:
+
+Type Stubs
+~~~~~~~~~~
+
+.. autoclass:: pcapkit.protocols.link.l2tp.schema.FlagsType
+   :members:
+   :show-inheritance:
+
+Auxiliary Functions
+~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: pcapkit.protocols.link.l2tp.schema.l2tp_payload_length
+
+Data Models
+-----------
+
+.. module:: pcapkit.protocols.link.l2tp.data
+
+.. versionremoved:: 1.6.0
+
+   ``pcapkit.protocols.data.link.l2tp``, with no alias: the module moved here
+   (:issue:`2534`).
+
+.. autoclass:: pcapkit.protocols.link.l2tp.data.L2TP
+   :members:
+   :show-inheritance:
+
+.. autoclass:: pcapkit.protocols.link.l2tp.data.Flags
+   :members:
+   :show-inheritance:
+
+.. rubric:: Footnotes
+
+.. [*] https://en.wikipedia.org/wiki/Layer_2_Tunneling_Protocol

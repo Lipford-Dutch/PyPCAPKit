@@ -1,0 +1,52 @@
+Link Layer
+==========
+
+.. module:: pcapkit.protocols.link
+
+:mod:`pcapkit.protocols.link` holds the link layer protocols.
+
+.. versionremoved:: 1.5.0
+
+   ``pcapkit.protocols.link.OSPF``, ``pcapkit.protocols.link.RARP`` and
+   ``pcapkit.protocols.link.DRARP``, and ``OSPF`` and
+   ``OSPF_CrytographicAuthentication`` in ``pcapkit.protocols.data.link`` and
+   ``pcapkit.protocols.schema.link``, with no alias. The protocols moved to
+   :mod:`pcapkit.protocols.application` (:issue:`719`); see
+   :class:`~pcapkit.protocols.application.ospf.protocol.OSPF` and
+   :class:`~pcapkit.protocols.application.rarp.protocol.RARP`.
+
+.. toctree::
+   :maxdepth: 1
+
+   link
+   ethernet
+   arp
+   inarp
+   frad
+   gre
+   ieee802_11
+   l2tp
+   l2tpv2
+   linux_sll
+   linux_sll1
+   linux_sll2
+   loopback
+   netlink
+   ppp
+   pppoe
+   radiotap
+   vlan
+   c_tag
+   s_tag
+
+.. todo::
+
+   Implement DSL, EAPOL, FDDI, ISDN, LLC/SNAP.
+
+Protocol Registry
+-----------------
+
+.. data:: LINKTYPE
+   :module: pcapkit.protocols.link
+
+   alias of :class:`pcapkit.const.reg.linktype.LinkType`

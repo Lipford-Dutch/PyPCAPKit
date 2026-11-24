@@ -1,0 +1,42 @@
+Application Layer Base Protocol
+===============================
+
+.. module:: pcapkit.protocols.application.application
+
+:mod:`pcapkit.protocols.application.application` contains only
+:class:`~pcapkit.protocols.application.application.Application`,
+which is a base class for application layer protocols, e.g.
+:class:`HTTP/1.* <pcapkit.protocols.application.httpv1.protocol.HTTPv1>` and
+:class:`HTTP/2 <pcapkit.protocols.application.httpv2.protocol.HTTPv2>`.
+
+.. versionchanged:: 1.5.0
+
+   :meth:`~pcapkit.protocols.application.application.Application._decode_next_layer`
+   and
+   :meth:`~pcapkit.protocols.application.application.Application._import_next_layer`
+   accept the ``-1`` sentinel, so an application layer protocol can carry the
+   rest of its packet undissected as its payload; every call raised
+   :exc:`~pcapkit.utilities.exceptions.UnsupportedCall` (:issue:`719`).
+
+.. autoclass:: pcapkit.protocols.application.application.Application
+   :no-members:
+   :show-inheritance:
+
+   .. rubric:: Defaults
+
+   .. autoattribute:: __layer__
+      :no-value:
+
+   .. rubric:: Properties
+
+   .. autoproperty:: layer
+
+   .. rubric:: Data Models
+
+   .. automethod:: __post_init__
+   .. automethod:: __index__
+
+   .. rubric:: Utilities
+
+   .. automethod:: _decode_next_layer
+   .. automethod:: _import_next_layer

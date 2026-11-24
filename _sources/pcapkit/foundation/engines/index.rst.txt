@@ -1,0 +1,290 @@
+Engine Support
+==============
+
+.. module:: pcapkit.foundation.engines
+
+:mod:`pcapkit.foundation.engines` holds the extraction engines of
+:mod:`pcapkit`: the built-in PCAP and `PCAP-NG`_ readers, and the
+`Scapy`_, `PyShark`_, `DPKT`_, `PyPCAP`_, `pcap-ct`_ and `PyPCAPFile`_
+3rd party engines.
+
+.. seealso::
+
+   :doc:`../../../ext`, on customisation and extension.
+
+.. toctree::
+   :maxdepth: 2
+
+   engine
+   builtin
+   3rdparty
+
+Every engine subclasses :class:`~pcapkit.foundation.engines.engine.EngineBase`,
+parsing the input file and extracting its packets:
+
+.. mermaid::
+
+   flowchart TD
+       A{{EngineMeta}} -.->|metaclass| B(EngineBase)
+
+       subgraph built-in [Built-in Engines]
+           direction TB
+
+           PCAP
+           PCAPNG
+           PCAP ~~~ PCAPNG
+       end
+       B --> built-in
+
+       subgraph third-party [3rd Party Engines]
+           direction TB
+
+           Scapy
+           DPKT
+           PyShark
+           PyPCAP
+           PCAP_CT
+           PyPCAPFile
+           Scapy ~~~ DPKT ~~~ PyShark ~~~ PyPCAP ~~~ PCAP_CT ~~~ PyPCAPFile
+       end
+       B --> third-party
+
+       B --> C(Engine)
+       C --> D([user customisation ...])
+
+       click A "engine.html#pcapkit.foundation.engines.engine.EngineMeta"
+       click B "engine.html#pcapkit.foundation.engines.engine.EngineBase"
+       click C "engine.html#pcapkit.foundation.engines.engine.Engine"
+       click D "../../../ext.html#extractor-engines"
+
+       click PCAP "builtin.html#pcapkit.foundation.engines.pcap.PCAP"
+       click PCAPNG "builtin.html#pcapkit.foundation.engines.pcapng.PCAPNG"
+
+       click Scapy "3rdparty.html#pcapkit.foundation.engines.scapy.Scapy"
+       click DPKT "3rdparty.html#pcapkit.foundation.engines.dpkt.DPKT"
+       click PyShark "3rdparty.html#pcapkit.foundation.engines.pyshark.PyShark"
+       click PyPCAP "3rdparty.html#pcapkit.foundation.engines.pypcap.PyPCAP"
+       click PCAP_CT "3rdparty.html#pcapkit.foundation.engines.pcap_ct.PCAP_CT"
+       click PyPCAPFile "3rdparty.html#pcapkit.foundation.engines.pypcapfile.PyPCAPFile"
+
+An engine that cannot do all :class:`~pcapkit.foundation.extraction.Extractor`
+offers says so rather than quietly doing less, unless its row says otherwise:
+
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| Engine                                                          | Gap, and how it is surfaced                                   |
++=================================================================+===============================================================+
+| :class:`~pcapkit.foundation.engines.pyshark.PyShark`            | no reassembly unless an adapter is registered, and no trace   |
+|                                                                 | ``analyze``, since it reports dissected fields rather than    |
+|                                                                 | octets -- each disabled with an                               |
+|                                                                 | :class:`~pcapkit.utilities.warnings.AttributeWarning`         |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pypcap.PyPCAP`              | no protocol dissection at all, hence no reassembly and no     |
+|                                                                 | flow tracing unless an adapter is registered -- both          |
+|                                                                 | otherwise disabled with an                                    |
+|                                                                 | :class:`~pcapkit.utilities.warnings.AttributeWarning`; PCAP   |
+|                                                                 | savefiles on disk only, otherwise                             |
+|                                                                 | :exc:`~pcapkit.utilities.exceptions.FormatError` /            |
+|                                                                 | :exc:`~pcapkit.utilities.exceptions.UnsupportedCall`          |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pcap_ct.PCAP_CT`            | the same gaps as                                              |
+|                                                                 | :class:`~pcapkit.foundation.engines.pypcap.PyPCAP` above --   |
+|                                                                 | it reads the same interface, so no dissection, no reassembly  |
+|                                                                 | and no flow tracing unless an adapter is registered, and PCAP |
+|                                                                 | savefiles on disk only                                        |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pypcapfile.PyPCAPFile`      | no IPv6 decoder, hence no IPv6 reassembly -- disabled with an |
+|                                                                 | :class:`~pcapkit.utilities.warnings.AttributeWarning`, and    |
+|                                                                 | :func:`~pcapkit.toolkit.pypcapfile.ipv6_reassembly` raises;   |
+|                                                                 | TCP over IPv6 straight over Ethernet is left out of TCP       |
+|                                                                 | reassembly and flow tracing, with an                          |
+|                                                                 | :class:`~pcapkit.utilities.warnings.AttributeWarning` once    |
+|                                                                 | per capture, and TCP behind a VLAN tag, in a tunnel or behind |
+|                                                                 | an extension header (an IPv6 one, or AH in IPv4) without one; |
+|                                                                 | PCAP savefiles only, otherwise                                |
+|                                                                 | :exc:`~pcapkit.utilities.exceptions.FormatError`              |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.dpkt.DPKT`                  | TCP in an IP-in-IP tunnel, or behind an AH or IPv6 extension  |
+|                                                                 | header carried in IPv4, is left out of TCP reassembly and     |
+|                                                                 | flow tracing, and IPv4 carried in IPv6, or IPv6 in IPv4, out  |
+|                                                                 | of IP reassembly, all without a warning; a frame `DPKT`_      |
+|                                                                 | cannot decode is kept raw, with a                             |
+|                                                                 | :class:`~pcapkit.utilities.warnings.DPKTWarning`, and is      |
+|                                                                 | neither reassembled nor traced                                |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.scapy.Scapy`                | reads IPv6 only as far as `Scapy`_ dissects it, without a     |
+|                                                                 | warning: behind a BSD loopback header only at the family      |
+|                                                                 | Scapy binds it to on the host it runs on, and no TCP or       |
+|                                                                 | Fragment header behind an AH, Mobility, HIP or Shim6 header   |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.dpkt.DPKT`,                 | no DTLS reassembly, since                                     |
+| :class:`~pcapkit.foundation.engines.scapy.Scapy` and            | :func:`~pcapkit.toolkit.pcap.dtls_reassembly` reads           |
+| :class:`~pcapkit.foundation.engines.pypcapfile.PyPCAPFile`      | :mod:`pcapkit`'s own DTLS layer -- disabled with an           |
+|                                                                 | :class:`~pcapkit.utilities.warnings.AttributeWarning`         |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.dpkt.DPKT`,                 | no PCAP or PCAP-NG output, since each frame reaches the       |
+| :class:`~pcapkit.foundation.engines.scapy.Scapy`,               | writer as a plain :obj:`dict` -- ``json`` is written          |
+| :class:`~pcapkit.foundation.engines.pyshark.PyShark`,           | instead, with a                                               |
+| :class:`~pcapkit.foundation.engines.pypcap.PyPCAP`,             | :class:`~pcapkit.utilities.warnings.FormatWarning`            |
+| :class:`~pcapkit.foundation.engines.pcap_ct.PCAP_CT` and        |                                                               |
+| :class:`~pcapkit.foundation.engines.pypcapfile.PyPCAPFile`      |                                                               |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pcapng.PCAPNG`              | no PCAP output for a PCAP-NG input, which declares its link   |
+|                                                                 | type and timestamp resolution per interface --                |
+|                                                                 | :exc:`~pcapkit.utilities.exceptions.FormatError`              |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+
+Availability
+------------
+
+A third-party engine needs its backing package, and some are harder to obtain
+than a plain :program:`pip install` suggests. Without it, :mod:`pcapkit` warns
+with an :class:`~pcapkit.utilities.warnings.EngineWarning` and falls back to its
+own parser instead of the engine requested.
+
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| Engine                                                          | What it needs beyond ``pip install``                          |
++=================================================================+===============================================================+
+| :class:`~pcapkit.foundation.engines.pcap.PCAP`,                 | nothing -- built in                                           |
+| :class:`~pcapkit.foundation.engines.pcapng.PCAPNG`              |                                                               |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.dpkt.DPKT`,                 | nothing -- both are pure Python, and neither                  |
+| :class:`~pcapkit.foundation.engines.scapy.Scapy`                | overrides ``unsupported_reason()``                            |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pyshark.PyShark`            | Wireshark's :program:`tshark` binary -- on ``PATH``, or       |
+|                                                                 | wherever |pyshark|_'s :file:`config.ini` points -- **and**    |
+|                                                                 | Python **3.13 or older**: |pyshark|_ 0.6 builds its event     |
+|                                                                 | loop with :func:`asyncio.get_event_loop`, which raises from   |
+|                                                                 | 3.14                                                          |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pypcap.PyPCAP`              | :manpage:`libpcap(3)` headers and library, a C compiler, and  |
+|                                                                 | Python **3.11 or older** -- ``pypcap`` 1.3.0 publishes no     |
+|                                                                 | wheel and its pre-generated :file:`pcap.c` does not compile   |
+|                                                                 | on 3.12+                                                      |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pcap_ct.PCAP_CT`            | a system ``libpcap.so.1`` at *run* time -- nothing to build,  |
+|                                                                 | since ``pcap-ct`` and ``libpcap`` ship pure-Python wheels,    |
+|                                                                 | but see the warning below: the vendored library those wheels  |
+|                                                                 | carry is not what gets loaded by default                      |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pypcapfile.PyPCAPFile`      | Python **3.11 or older** -- ``pypcapfile`` 0.12.0 imports the |
+|                                                                 | ``imp`` module, removed in Python 3.12                        |
++-----------------------------------------------------------------+---------------------------------------------------------------+
+
+A constraint an import cannot reveal is enforced by overriding
+:meth:`~pcapkit.foundation.engines.engine.EngineBase.unsupported_reason`, which
+the :class:`~pcapkit.foundation.extraction.Extractor` constructor consults
+*before* the import test, so an engine that cannot run here gives one warning
+naming the cause and a fall back to the built-in parser.
+:class:`~pcapkit.foundation.engines.pyshark.PyShark` checks its Python ceiling and for
+``tshark``, :class:`~pcapkit.foundation.engines.pypcapfile.PyPCAPFile` its Python ceiling,
+and :class:`~pcapkit.foundation.engines.pypcap.PyPCAP` and
+:class:`~pcapkit.foundation.engines.pcap_ct.PCAP_CT` which distribution owns |pcap|_ and
+whether it loads at all -- for :class:`~pcapkit.foundation.engines.pcap_ct.PCAP_CT`, whether
+a system ``libpcap`` is present (:issue:`2132`).
+:class:`~pcapkit.foundation.engines.pypcap.PyPCAP` deliberately has no Python ceiling
+check, though upstream cannot be installed on 3.12 or newer: what matters is which
+distribution is present, and a version check would refuse a working build.
+
+.. _engine-selection:
+
+The constructor settles the engine in this order, each fallback with its own warning:
+
+.. mermaid::
+
+   flowchart TD
+       REQ["engine= name, lowercased<br/>none given means default"]
+       K{"a name in<br/>Extractor.\_\_engine\_\_?"}
+       U{"unsupported\_reason()<br/>gives a reason?"}
+       W2["EngineWarning:<br/>not supported on this interpreter"]
+       I{"import\_test(module)<br/>imports it?"}
+       W3["EngineWarning: not installed"]
+       RUN["the requested engine runs"]
+       D{"default or pcapkit?"}
+       W1["EngineWarning:<br/>unsupported extraction engine"]
+       DEF["the default engine"]
+       M{"the input's magic number"}
+       PCAP["built-in PCAP engine"]
+       PCAPNG["built-in PCAP-NG engine"]
+       FE["FormatError: unknown file format"]
+
+       REQ --> K
+       K -->|yes| U
+       U -->|yes| W2 --> DEF
+       U -->|no| I
+       I -->|yes| RUN
+       I -->|no| W3 --> DEF
+       K -->|no| D
+       D -->|yes| DEF
+       D -->|no| W1 --> DEF
+       DEF --> M
+       M -->|PCAP| PCAP
+       M -->|PCAP-NG| PCAPNG
+       M -->|neither| FE
+
+       click RUN "../extraction.html#pcapkit.foundation.extraction.Extractor.run"
+       click DEF "../extraction.html#pcapkit.foundation.extraction.Extractor.run"
+       click I "../extraction.html#pcapkit.foundation.extraction.Extractor.import_test"
+
+.. seealso::
+
+   The :ref:`engine prerequisites <engine-prerequisites>` cover installation in
+   full, including how ``pypcap``'s :file:`setup.py` looks for :file:`pcap.h` and
+   why a Homebrew ``libpcap`` is not always found.
+
+Choosing Between PyPCAP and PCAP_CT
+-----------------------------------
+
+:class:`~pcapkit.foundation.engines.pypcap.PyPCAP` and
+:class:`~pcapkit.foundation.engines.pcap_ct.PCAP_CT` read the same
+:manpage:`libpcap(3)` interface from two independent distributions, both
+installing a top-level |pcap|_ module. They are separate engines because they are
+separate projects, with different install requirements and interpreter coverage:
+
++---------------------------------------------------------------+---------------------+-------------------+---------------------------------------------------+
+| Engine (``engine=``)                                          | Distribution        | Python            | What it needs                                     |
++===============================================================+=====================+===================+===================================================+
+| :class:`~pcapkit.foundation.engines.pypcap.PyPCAP`            | `PyPCAP`_ 1.3.0     | 3.11 or older     | to build: a C compiler, ``pcap.h`` and a system   |
+| (``'pypcap'``)                                                | (stable)            |                   | libpcap -- no wheels are published                |
++---------------------------------------------------------------+---------------------+-------------------+---------------------------------------------------+
+| :class:`~pcapkit.foundation.engines.pcap_ct.PCAP_CT`          | `pcap-ct`_ 1.3.0b3  | 3.10 and newer    | to install: nothing -- ``py3-none-any`` wheels.   |
+| (``'pcap_ct'``)                                               | + `libpcap`_        |                   | At run time: a system ``libpcap.so.1`` all the    |
+|                                                               | 1.11.0b29 (**beta**)|                   | same -- see the warning below                     |
++---------------------------------------------------------------+---------------------+-------------------+---------------------------------------------------+
+
+Neither engine dissects anything, so both have the same gaps -- **no reassembly
+and no flow tracing unless an adapter is registered, whichever is installed** -- a
+property of :manpage:`libpcap(3)` rather than of the distribution. Pick on
+availability, not on features.
+
+.. warning::
+
+   :class:`~pcapkit.foundation.engines.pcap_ct.PCAP_CT` needs no toolchain to *install*,
+   but needs a system :manpage:`libpcap(3)` to *run*. `libpcap`_ ships a vendored
+   :file:`libpcap.so` and, as published, does not use it: its :file:`libpcap.cfg` says
+   ``LIBPCAP = None``, which sends the loader to :func:`ctypes.util.find_library`. With no
+   system library, ``import pcap`` raises :exc:`OSError` rather than
+   :exc:`ImportError`, which :meth:`PCAP_CT.unsupported_reason
+   <pcapkit.foundation.engines.pcap_ct.PCAP_CT.unsupported_reason>` turns into an
+   ordinary fall back to the :term:`default engine` instead of a hard error.
+
+**The two distributions collide, so install exactly one.** Both own the top-level
+|pcap|_ module, and pip installs both -- on Python 3.10, the ``pcap-ct`` package
+then wins the import and upstream's extension module is unreachable. Each engine
+therefore detects which distribution it got, via
+:func:`pcapkit.foundation.engines._pcap_backend.probe`, and:
+
+* reports it -- :attr:`PyPCAP.backend
+  <pcapkit.foundation.engines.pypcap.PyPCAP.backend>` and
+  :attr:`PCAP_CT.backend <pcapkit.foundation.engines.pcap_ct.PCAP_CT.backend>`
+  name the distribution, version and file in use, so a bug report about
+  "the pypcap engine" says which one ran;
+* declines to run on the other, through ``unsupported_reason()``, naming the
+  ``engine=`` string that wants it, and likewise on a |pcap|_ that is installed
+  but cannot load, falling back to the :term:`default engine` rather than letting
+  the import error escape; and
+* warns with an :class:`~pcapkit.utilities.warnings.EngineWarning` when both are
+  installed, since that leaves one engine permanently unselectable and nothing
+  else would explain why.
+
+.. _PCAP-NG: https://wiki.wireshark.org/Development/PcapNg
+.. _libpcap: https://pypi.org/project/libpcap/

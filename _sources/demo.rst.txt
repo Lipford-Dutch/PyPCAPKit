@@ -1,0 +1,111 @@
+How to ...
+==========
+
+Basic Samples
+-------------
+
+:mod:`pcapkit` is built around the :func:`~pcapkit.interface.core.extract`,
+:func:`~pcapkit.interface.core.reassemble` and :func:`~pcapkit.interface.core.trace`
+functions. Some common scenarios:
+
+1. extract a PCAP file and dump the result to a specific file
+   (with no reassembly)
+
+   .. code-block:: python
+
+      from pcapkit import DumpOptions, extract
+      # dump to a PLIST file with no frame storage (property frame disabled)
+      plist = extract('in.pcap', dump=DumpOptions(fout='out.plist', format='plist'), store=False)
+      # dump to a JSON file with no extension auto-complete
+      json = extract('in.cap', dump=DumpOptions(fout='out.json', format='json', extension=False))
+      # dump to a folder with each tree-view text file per frame
+      tree = extract('in.pcap', dump=DumpOptions(fout='out', format='tree', files=True))
+
+2. extract a PCAP file and fetch IP packet (both IPv4 and IPv6) from a frame
+   (with no output file)
+
+   .. code-block:: python
+
+      from pcapkit import IP, extract
+      extraction = extract('in.pcap')
+      frame0 = extraction.frame[0]
+      # check if IP (IPv4 or IPv6) in this frame
+      if IP in frame0:
+          # fetch the IP packet from this frame
+          ip = frame0[IP]
+
+3. extract a PCAP file and reassemble TCP payload
+   (with no output file nor frame storage)
+
+   .. code-block:: python
+
+      from pcapkit import HTTP, extract
+      # under strict reassembly, the default, an incompletely reassembled
+      # datagram carries no packet, hence the check below
+      extraction = extract('in.pcap', store=False, reassembly=['tcp'])
+      # print extracted packet if HTTP in reassembled payloads
+      for datagram in extraction.reassembly.tcp:
+          if datagram.packet is not None and HTTP in datagram.packet:
+              print(datagram.packet[HTTP])
+
+CLI Samples
+-----------
+
+:mod:`pcapkit`'s command line interface runs as either:
+
+* ``pcapkit-cli [...]``, the console script the samples below use; or
+* ``python -m pcapkit [...]`` -- the module is ``pcapkit``, though the
+  distribution on PyPI is ``pypcapkit``.
+
+Samples:
+
+1. export to a macOS Property List
+   (`Xcode`_ has special support for this format)
+
+   .. code-block:: shell
+
+      $ pcapkit-cli in --auto-extension --format plist --verbose
+      🚨 Loading file 'in.pcap'
+      Frame   1: Ethernet:IPv6:ICMPv6
+      Frame   2: Ethernet:IPv6:ICMPv6
+      Frame   3: Ethernet:IPv4:TCP
+      Frame   4: Ethernet:IPv4:TCP
+      Frame   5: Ethernet:IPv4:TCP
+      Frame   6: Ethernet:IPv4:UDP:Raw
+      🍺 Report file stored in 'out.plist'
+
+2. export to a JSON file
+
+   .. note::
+
+      The output format is **not** inferred from the output file name, so
+      give ``-f``/``--format`` (or the ``-j``/``--json`` switch); without it the
+      default tree view is written to the file named.
+
+   .. code-block:: shell
+
+      $ pcapkit-cli in --auto-extension --output out.json --format json --verbose
+      🚨 Loading file 'in.pcap'
+      Frame   1: Ethernet:IPv6:ICMPv6
+      Frame   2: Ethernet:IPv6:ICMPv6
+      Frame   3: Ethernet:IPv4:TCP
+      Frame   4: Ethernet:IPv4:TCP
+      Frame   5: Ethernet:IPv4:TCP
+      Frame   6: Ethernet:IPv4:UDP:Raw
+      🍺 Report file stored in 'out.json'
+
+3. export to a text tree view file (without extension autocorrect)
+
+   .. code-block:: shell
+
+      $ pcapkit-cli in.pcap --output out.txt --format tree --verbose
+      🚨 Loading file 'in.pcap'
+      Frame   1: Ethernet:IPv6:ICMPv6
+      Frame   2: Ethernet:IPv6:ICMPv6
+      Frame   3: Ethernet:IPv4:TCP
+      Frame   4: Ethernet:IPv4:TCP
+      Frame   5: Ethernet:IPv4:TCP
+      Frame   6: Ethernet:IPv4:UDP:Raw
+      🍺 Report file stored in 'out.txt'
+
+.. _Xcode: https://developer.apple.com/xcode

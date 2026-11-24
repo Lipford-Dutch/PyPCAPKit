@@ -1,0 +1,1662 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>pcapkit.corekit.fields.field - PyPCAPKit</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mermaid.css?v=10b7d883" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --font-stack: Georgia, serif;
+  --font-stack--monospace: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --font-stack: Georgia, serif;
+  --font-stack--monospace: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --font-stack: Georgia, serif;
+  --font-stack--monospace: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">PyPCAPKit</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  <span class="sidebar-brand-text">PyPCAPKit</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../pcapkit/index.html">Module Documentation</a><input aria-label="Toggle navigation of Module Documentation" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/interface/index.html">User Interface</a><input aria-label="Toggle navigation of User Interface" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/interface/core.html">Core Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/interface/misc.html">Auxiliary Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/index.html">Library Foundation</a><input aria-label="Toggle navigation of Library Foundation" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/foundation/extraction.html">File Extractor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/foundation/options.html">Extraction Options</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/engines/index.html">Engine Support</a><input aria-label="Toggle navigation of Engine Support" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/engines/engine.html">Base Engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/engines/builtin.html">Built-in Engines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/engines/3rdparty.html">3rd-Party Engines</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/index.html">Packets Reassembly</a><input aria-label="Toggle navigation of Packets Reassembly" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/reassembly.html">Reassembly Base Class</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/ip/index.html">IP Datagram Reassembly</a><input aria-label="Toggle navigation of IP Datagram Reassembly" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/ip/ip.html">IP Reassembly Base Class</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/ip/ipv4.html">IPv4 Datagram Reassembly</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/ip/ipv6.html">IPv6 Datagram Reassembly</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/tcp.html">TCP Datagram Reassembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/dtls.html">DTLS Handshake-Message Reassembly</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/analysis/index.html">Reassembled Payload Analysis</a><input aria-label="Toggle navigation of Reassembled Payload Analysis" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/analysis/ip.html">IP Datagram Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/analysis/tcp.html">TCP Datagram Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/analysis/dtls.html">DTLS Handshake-Message Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/traceflow/index.html">Flow Tracing</a><input aria-label="Toggle navigation of Flow Tracing" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/traceflow/traceflow.html">Flow Tracing Base Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/traceflow/tcp.html">Follow TCP Stream</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/foundation/registry.html">Registry Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/index.html">Protocol Family</a><input aria-label="Toggle navigation of Protocol Family" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/protocols/protocol.html">Root Protocol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/link/index.html">Link Layer</a><input aria-label="Toggle navigation of Link Layer" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/link.html">Link Layer Base Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/ethernet.html">Ethernet Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/arp.html">ARP - Address Resolution Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/inarp.html">InARP - Inverse Address Resolution Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/frad.html">FRAD - Frame Relay Access Device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/gre.html">GRE - Generic Routing Encapsulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/ieee802_11.html">IEEE 802.11 - Wireless LAN MAC Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/l2tp.html">L2TP - Layer Two Tunnelling Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/l2tpv2.html">L2TPv2 - Layer Two Tunnelling Protocol Version 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/linux_sll.html">LinuxSLL - Linux “Cooked” Capture Encapsulation Family</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/linux_sll1.html">Linux “Cooked” Capture Encapsulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/linux_sll2.html">Linux “Cooked” Capture Encapsulation v2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/loopback.html">BSD Loopback Encapsulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/netlink.html">Netlink - Linux Netlink Socket Framing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/ppp.html">PPP - Point-to-Point Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/pppoe.html">PPPoE - PPP over Ethernet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/radiotap.html">Radiotap - IEEE 802.11 Radiotap Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/vlan.html">VLAN - 802.1Q/802.1ad VLAN Tag Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/c_tag.html">C_Tag - 802.1Q Customer VLAN Tag Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/s_tag.html">S_Tag - 802.1ad Service VLAN Tag Type</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/internet/index.html">Internet Layer</a><input aria-label="Toggle navigation of Internet Layer" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/internet.html">Internet Layer Base Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ip.html">IP - Internet Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv4.html">IPv4 - Internet Protocol Version 4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6.html">IPv6 - Internet Protocol Version 6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_ext.html">IPv6-Ext - IPv6 Extension Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_frag.html">IPv6-Frag - Fragment Header for IPv6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_opts.html">IPv6-Opts - Destination Options for IPv6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_route.html">IPv6-Route - Routing Header for IPv6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/hopopt.html">HOPOPT - IPv6 Hop-by-Hop Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_option.html">IPv6 Options - Shared Option Helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/mh.html">MH - Mobility Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipsec.html">IPsec - Internet Protocol Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ah.html">AH - Authentication Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/esp.html">ESP - Encapsulating Security Payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/icmp.html">ICMP - Internet Control Message Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/icmpv4.html">ICMPv4 - Internet Control Message Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/icmpv6.html">ICMPv6 - Internet Control Message Protocol for IPv6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/hip.html">HIP - Host Identity Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/igmp.html">IGMP - Internet Group Management Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/igmpv1.html">IGMPv1 - Internet Group Management Protocol Version 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/igmpv2.html">IGMPv2 - Internet Group Management Protocol Version 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/igmpv3.html">IGMPv3 - Internet Group Management Protocol Version 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipx.html">IPX - Internetwork Packet Exchange</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/transport/index.html">Transport Layer</a><input aria-label="Toggle navigation of Transport Layer" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/transport.html">Transport Layer Base Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/dccp.html">DCCP - Datagram Congestion Control Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/sctp.html">SCTP - Stream Control Transmission Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/tcp.html">TCP - Transmission Control Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/udp.html">UDP - User Datagram Protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/application/index.html">Application Layer</a><input aria-label="Toggle navigation of Application Layer" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/application.html">Application Layer Base Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/dns.html">DNS - Domain Name System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/http.html">HTTP - Hypertext Transfer Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/httpv1.html">HTTP/1.* - Hypertext Transfer Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/httpv2.html">HTTP/2 - Hypertext Transfer Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ftp.html">FTP - File Transfer Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ftp_data.html">FTP_DATA - FTP Data Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ngap.html">NGAP - NG Application Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ospf.html">OSPF - Open Shortest Path First</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/rarp.html">RARP - Reverse Address Resolution Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/drarp.html">DRARP - Dynamic Reverse Address Resolution Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ssl.html">SSL - Secure Sockets Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/sslv2.html">SSLv2 - Secure Sockets Layer Version 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/tls.html">TLS/SSL - Transport Layer Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/sslv3.html">SSLv3 - Secure Sockets Layer Version 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/dtls.html">DTLS - Datagram Transport Layer Security</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/misc/index.html">Auxiliary Protocols</a><input aria-label="Toggle navigation of Auxiliary Protocols" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/pcap.html">PCAP File Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/pcapng.html">PCAP-NG File Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/raw.html">Raw Packet Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/no_payload.html">No-Payload Packet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/checksum.html">Checksums</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/utilities/index.html">Module Utilities</a><input aria-label="Toggle navigation of Module Utilities" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/exceptions.html">User Defined Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/warnings.html">User Defined Warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/logging.html">Logging System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/config.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/chardet.html">Character Set Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/datetime.html">Timestamp Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/pickle.html">Pickle Reductions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/contextvars.html">Shared Context Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/importlib.html">Lazy Imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/inspect.html">Abstract Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/callbacks.html">Running Callbacks</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/index.html">Core Utilities</a><input aria-label="Toggle navigation of Core Utilities" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/fields/index.html">Protocol Fields</a><input aria-label="Toggle navigation of Protocol Fields" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/field.html">Base Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/numbers.html">Numerical Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/strings.html">Text Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/ipaddress.html">IP Address Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/collections.html">Container Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/misc.html">Miscellaneous Fields</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/checksum/index.html">Checksums</a><input aria-label="Toggle navigation of Checksums" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/checksum/internet.html">Internet Checksum</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/const/index.html">Shared Format Constants</a><input aria-label="Toggle navigation of Shared Format Constants" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/const/capture.html">Capture-Format Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/const/ipheader.html">IP Header Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/const/tcpheader.html">TCP Header Constants</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/context.html">Parsing Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/decorators.html">Decorator Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/enum.html">Enumeration Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/infoclass.html">Info Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/io.html">I/O Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/module.html">Module Descriptor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/multidict.html">Multi-Mapping Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/packet.html">Deferred Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/protochain.html">Protocol Chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/registry.html">Registry Helpers</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/schema/index.html">Schema Helpers</a><input aria-label="Toggle navigation of Schema Helpers" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/byteorder.html">Byte-Order Helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/extlen.html">Extension-Header Length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/ipaddress.html">IP Address Conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/jumbogram.html">Jumbo Payload Lookup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/padding.html">Padding Arithmetic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/shortread.html">Short-Read Replay</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/sentinels.html">Sentinel Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/version.html">Version Info</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/toolkit/index.html">Compatibility Tools</a><input aria-label="Toggle navigation of Compatibility Tools" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/toolkit/builtin.html">Built-in Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/toolkit/3rdparty.html">3rd-Party Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/dumpkit/index.html">Dump Utilities</a><input aria-label="Toggle navigation of Dump Utilities" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/dumpkit/common.html">Common Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/dumpkit/pcap.html">PCAP Dumper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/dumpkit/pcapng.html">PCAP-NG Dumper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/dumpkit/null.html">Null Dumper</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/const/index.html">Constant Enumerations</a><input aria-label="Toggle navigation of Constant Enumerations" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/reg.html">Protocol Type Registry Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/arp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ARP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ieee802_11.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IEEE802_11</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/l2tp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">L2TP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/linux.html">Linux-Specific Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ppp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PPP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/pppoe.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PPPoE</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/radiotap.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Radiotap</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/vlan.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">VLAN</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/esp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ESP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/hip.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">HIP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/icmp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ICMPv4</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/icmpv6.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ICMPv6</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/igmp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IGMP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ipv4.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPv4</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ipv6.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPv6</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ipx.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPX</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/mh.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">MH</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/dccp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">DCCP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/sctp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCTP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/tcp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/dns.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">DNS</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ftp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FTP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/http.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ngap.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">NGAP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ospf.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSPF</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/sslv2.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLv2</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/tls.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSL</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/pcapng.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAPNG</span></code> Constant Enumerations</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/vendor/index.html">Vendor Crawlers</a><input aria-label="Toggle navigation of Vendor Crawlers" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/default.html">Base Crawler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/reg.html">Protocol Type Registry Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/arp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ARP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ieee802_11.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IEEE802_11</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/l2tp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">L2TP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/linux.html">Linux-Specific Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ppp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PPP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/pppoe.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PPPoE</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/radiotap.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Radiotap</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/vlan.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">VLAN</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/esp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ESP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/hip.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">HIP</span></code> Vendor Crawler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/icmp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ICMPv4</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/icmpv6.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ICMPv6</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/igmp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IGMP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ipv4.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPv4</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ipv6.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPv6</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ipx.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPX</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/mh.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">MH</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/dccp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">DCCP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/sctp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCTP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/tcp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/dns.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">DNS</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ftp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FTP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/http.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTP</span></code> Vendor Crawler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ngap.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">NGAP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ospf.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSPF</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/sslv2.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLv2</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/tls.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSL</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/pcapng.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAPNG</span></code> Vendor Crawlers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides &amp; Changelog</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../engines.html">Engine Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ext.html">Customisation &amp; Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../demo.html">How to …</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../changelog.html">Changelog</a><input aria-label="Toggle navigation of Changelog" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.6.2.html">1.6.2 – 2026-11-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.6.1.html">1.6.1 – 2026-11-05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.6.0.html">1.6.0 – 2026-11-05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.5.1.html">1.5.1 – 2026-10-30</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.5.0.html">1.5.0 – 2026-10-29</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.4.1.html">1.4.1 – 2026-08-22</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.4.0.html">1.4.0 – 2026-08-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.5.html">1.3.5 – 2024-11-16</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.4.html">1.3.4 – 2024-11-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.3.html">1.3.3 – 2024-11-03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.1.html">1.3.1 – 2023-12-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.0.html">1.3.0 – 2023-10-04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.2.2.html">1.2.2 – 2023-09-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.2.1.html">1.2.1 – 2023-08-27</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.2.0.html">1.2.0 – 2023-08-26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.1.1.html">1.1.1 – 2023-08-15</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.1.0.html">1.1.0 – 2023-07-09</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.0.3.html">1.0.3 – 2023-06-29</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.0.2.html">1.0.2 – 2023-06-05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.0.1.html">1.0.1 – 2023-05-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.0.0.html">1.0.0 – 2023-05-09</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.16.3.html">0.16.3 – 2022-10-31</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.16.2.html">0.16.2 – 2022-08-03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.16.1.html">0.16.1 – 2022-06-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.16.0.html">0.16.0 – 2022-05-31</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.5.html">0.15.5 – 2020-10-11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.4.html">0.15.4 – 2020-08-28</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.3.html">0.15.3 – 2020-08-17</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.2.html">0.15.2 – 2020-06-27</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.1.html">0.15.1 – 2020-06-18</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.0.html">0.15.0 – 2020-06-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.5.html">0.14.5 – 2019-10-24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.4.html">0.14.4 – 2019-09-01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.3.html">0.14.3 – 2019-08-08</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.2.html">0.14.2 – 2019-03-28</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.1.html">0.14.1 – 2019-03-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.0.html">0.14.0 – 2019-03-02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.13.3.html">0.13.3 – 2019-02-26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.13.2.html">0.13.2 – 2019-01-24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.13.1.html">0.13.1 – 2019-01-23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.13.0.html">0.13.0 – 2018-12-08</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contributing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/testing.html">Testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../contributing/conventions/index.html">House Conventions</a><input aria-label="Toggle navigation of House Conventions" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/mint-criterion.html">Minting an Unrecognised Value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/sentinel-convention.html">Naming a Sentinel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/registry-protocol.html">The Registry Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/extension-header-subclassing.html">Extension-Header Base Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/protocol-family-grouping.html">Protocol Family Grouping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/protocol-member-order.html">Protocol Member Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/protocol-layer-placement.html">Protocol Layer Placement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/process.html">Running the Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/documentation.html">Writing the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/test-coverage.html">Testing a Change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/utilities-or-corekit.html">Choosing Between <code class="docutils literal notranslate"><span class="pre">utilities</span></code> and <code class="docutils literal notranslate"><span class="pre">corekit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/reassembly-integration.html">Reassembly Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/const-vendor-pairing.html">Const-Vendor Pairing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/public-signatures.html">Public Signatures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/releasing.html">Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/workflows.html">GitHub Actions Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/maintenance.html">Maintenance Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/pep.html">Help Wanted</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for pcapkit.corekit.fields.field</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">"""Base Fields</span>
+<span class="sd">=================</span>
+
+<span class="sd">.. module:: pcapkit.corekit.fields.field</span>
+
+<span class="sd">:mod:`pcapkit.corekit.fields.field` contains the base field classes.</span>
+
+<span class="sd">.. versionremoved:: 1.3.0</span>
+
+<span class="sd">   ``pcapkit.corekit.fields.field._Field``, renamed</span>
+<span class="sd">   :class:`~pcapkit.corekit.fields.field.FieldBase` with no alias left behind.</span>
+
+<span class="sd">.. versionremoved:: 1.5.0</span>
+
+<span class="sd">   ``pcapkit.corekit.fields.field.NoValueType``, now</span>
+<span class="sd">   :class:`pcapkit.corekit.sentinels.NoValueType` (:issue:`911`,</span>
+<span class="sd">   :issue:`1744`), and ``pcapkit.corekit.fields.field.NoValue``, now</span>
+<span class="sd">   :data:`pcapkit.corekit.sentinels.NO_VALUE` (:issue:`937`).</span>
+
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextvars</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.corekit.sentinels</span><span class="w"> </span><span class="kn">import</span> <span class="n">NO_VALUE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.utilities.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">FieldValueError</span><span class="p">,</span> <span class="n">NoDefaultValue</span><span class="p">,</span> <span class="n">ProtocolError</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Field'</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">IO</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Optional</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Self</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.corekit.sentinels</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoValueType</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.protocols.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span>
+
+<span class="n">_T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'_T'</span><span class="p">)</span>
+
+<span class="c1">#: ContextVar[Optional[list[int]]]: Running ``[octets supplied, octets</span>
+<span class="c1">#: synthesised]`` ledger for :meth:`FieldBase.unpack`, against which</span>
+<span class="c1">#: :data:`~pcapkit.utilities.config.ZERO_PAD_BUDGET_RATIO` is enforced.</span>
+<span class="c1">#:</span>
+<span class="c1">#: A :class:`~contextvars.ContextVar` rather than a plain module global so that</span>
+<span class="c1">#: a thread parsing one capture cannot spend the budget of a thread parsing</span>
+<span class="c1">#: another: a new thread runs in an empty :class:`~contextvars.Context`, so it</span>
+<span class="c1">#: reads the default and installs a ledger of its own. The default is</span>
+<span class="c1">#: :data:`None` rather than a list precisely because ``ContextVar.get()`` hands</span>
+<span class="c1">#: back the *same* default object to every context, so a mutable default would</span>
+<span class="c1">#: be the shared global this is meant to avoid.</span>
+<span class="c1">#:</span>
+<span class="c1">#: A thread gets its own ledger, but an :mod:`asyncio` task does *not*</span>
+<span class="c1">#: -- :func:`asyncio.create_task` copies the current context, and a copied</span>
+<span class="c1">#: context carries the same list object, so a task started after a ledger exists</span>
+<span class="c1">#: shares and mutates it. :func:`_zero_pad_budget` is how such a task gets a</span>
+<span class="c1">#: budget of its own.</span>
+<span class="c1">#:</span>
+<span class="c1">#: The ledger is cumulative and is not reset on its own. That is deliberate:</span>
+<span class="c1">#: real parsing supplies real octets, so the allowance grows with the work</span>
+<span class="c1">#: actually done and a long-lived process does not drift into refusing valid</span>
+<span class="c1">#: captures.</span>
+<span class="c1">#:</span>
+<span class="c1">#: Be precise about what that means in practice, because nothing in this package</span>
+<span class="c1">#: calls :func:`_zero_pad_budget` -- so the bound as shipped is over everything a</span>
+<span class="c1">#: context has ever parsed, not over one :class:`~pcapkit.foundation.extraction.Extractor` run. It is still a bound,</span>
+<span class="c1">#: and still proportionate: total padding past</span>
+<span class="c1">#: :data:`~pcapkit.utilities.config.MAX_ZERO_PAD_SHORTFALL` stays within</span>
+<span class="c1">#: ``MAX_ZERO_PAD_LENGTH + ZERO_PAD_BUDGET_RATIO`` times the octets that</span>
+<span class="c1">#: context has genuinely been given, so a long-running service that has read a</span>
+<span class="c1">#: great deal has earned proportionately more, rather than banking an unlimited</span>
+<span class="c1">#: allowance. Scoping it per file would make the bound tighter and is a one-line</span>
+<span class="c1">#: change at whichever layer owns a run; :func:`_zero_pad_budget` exists so that</span>
+<span class="c1">#: layer has something to call.</span>
+<span class="c1">#:</span>
+<span class="c1">#: Cumulative state is what makes an answer depend on history, so note what is</span>
+<span class="c1">#: *not* weighed against it: a shortfall within :data:`~pcapkit.utilities.config.MAX_ZERO_PAD_SHORTFALL`</span>
+<span class="c1">#: neither consults this ledger nor is charged to it, which is what keeps every</span>
+<span class="c1">#: legitimate short read answering the same however much preceded it. Only the</span>
+<span class="c1">#: 32-bit band above reads and writes ``[1]``, and :func:`_zero_filled_items`, whose</span>
+<span class="c1">#: fill of a list of schema items has no free band (:issue:`2686`).</span>
+<span class="n">_zero_pad_ledger</span> <span class="o">=</span> <span class="n">contextvars</span><span class="o">.</span><span class="n">ContextVar</span><span class="p">(</span>
+    <span class="s1">'pcapkit.corekit.fields.field._zero_pad_ledger'</span><span class="p">,</span>
+    <span class="n">default</span><span class="o">=</span><span class="n">cast</span><span class="p">(</span><span class="s1">'Optional[list[int]]'</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="p">)</span>  <span class="c1"># type: contextvars.ContextVar[Optional[list[int]]]</span>
+
+
+<span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_zero_pad_budget</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'Iterator[list[int]]'</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Give the parse in this block a padding budget of its own.</span>
+
+<span class="sd">    :data:`_zero_pad_ledger` is cumulative across a context, so by default the</span>
+<span class="sd">    bound :meth:`FieldBase.unpack` enforces is over everything that context has</span>
+<span class="sd">    parsed. Entering this scope starts a fresh ledger and restores the previous</span>
+<span class="sd">    one afterwards, which is what makes the bound *per parse* -- per</span>
+<span class="sd">    :class:`~pcapkit.foundation.extraction.Extractor` run, per file, per frame -- for a caller that wants it that</span>
+<span class="sd">    way, and what makes it reproducible for a test.</span>
+
+<span class="sd">    Note that nothing in this package calls it: the layer that knows where</span>
+<span class="sd">    one parse ends is the layer that should, and that is not this one.</span>
+
+<span class="sd">    Yields:</span>
+<span class="sd">        The ledger installed for the block, as ``[octets supplied, octets</span>
+<span class="sd">        synthesised]``. It is live: reading it inside the block reports what the</span>
+<span class="sd">        parse has done so far.</span>
+
+<span class="sd">    """</span>
+    <span class="n">ledger</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">_zero_pad_ledger</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ledger</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">ledger</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">_zero_pad_ledger</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+
+<span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_zero_filled_items</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s1">'str'</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s1">'bytes'</span><span class="p">,</span>
+                       <span class="n">present</span><span class="p">:</span> <span class="s1">'int'</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Iterator[IO[bytes]]'</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Zero-fill the octets of a list of schema items to its declared width.</span>
+
+<span class="sd">    :meth:`FieldBase.unpack` reads a field the data ends inside as though its</span>
+<span class="sd">    missing octets were zeros, and :meth:`ListField.unpack</span>
+<span class="sd">    &lt;pcapkit.corekit.fields.collections.ListField.unpack&gt;` gives the schema</span>
+<span class="sd">    item the data ends inside the same reading here (:issue:`2686`). The items</span>
+<span class="sd">    are read inside the block, and none from the zeros past that item, which</span>
+<span class="sd">    hold no octet of the data (:issue:`2756`).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: Field name.</span>
+<span class="sd">        length: Octets the field declares.</span>
+<span class="sd">        data: Octets of the field's buffer, fewer than ``length``, or holding</span>
+<span class="sd">            past ``present`` the zeros of an enclosing fill.</span>
+<span class="sd">        present: Octets of ``data`` the data holds; negative for all of them.</span>
+
+<span class="sd">    Yields:</span>
+<span class="sd">        A stream of ``data``, zero-filled to ``length``. The zeros left unread</span>
+<span class="sd">        past where the stream ends up are not counted as octets read, an</span>
+<span class="sd">        enclosing fill's included (:issue:`2760`).</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FieldValueError: If ``length`` is past</span>
+<span class="sd">            :data:`~pcapkit.utilities.config.MAX_ZERO_PAD_LENGTH`, or if the</span>
+<span class="sd">            fill takes this parse's padding past</span>
+<span class="sd">            :data:`~pcapkit.utilities.config.ZERO_PAD_BUDGET_RATIO` times the</span>
+<span class="sd">            octets it has actually read.</span>
+
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">present</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">present</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">ceiling</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">MAX_ZERO_PAD_LENGTH</span>
+    <span class="k">if</span> <span class="n">ceiling</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="n">ceiling</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FieldValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">'Field </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> declares a length of </span><span class="si">{</span><span class="n">length</span><span class="si">}</span><span class="s1"> octet(s), '</span>
+            <span class="sa">f</span><span class="s1">'but only </span><span class="si">{</span><span class="n">present</span><span class="si">}</span><span class="s1"> octet(s) are available.'</span>
+        <span class="p">)</span>
+
+    <span class="n">ledger</span> <span class="o">=</span> <span class="n">_zero_pad_ledger</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ledger</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ledger</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">_zero_pad_ledger</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ledger</span><span class="p">)</span>
+
+    <span class="c1"># NOTE: The fill makes up the rest of the item the data ends inside, a schema object, not</span>
+    <span class="c1"># zeros, so it gets no free band or one-off allowance (#2686); past that item it makes none.</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">shortfall</span><span class="p">,</span> <span class="n">ratio</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">MAX_ZERO_PAD_SHORTFALL</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">ZERO_PAD_BUDGET_RATIO</span>
+    <span class="k">if</span> <span class="n">shortfall</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ceiling</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">ratio</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">allowance</span> <span class="o">=</span> <span class="n">ratio</span> <span class="o">*</span> <span class="p">(</span><span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">ledger</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">padding</span> <span class="o">&gt;</span> <span class="n">allowance</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">FieldValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">'Field </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> would zero-fill </span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s1"> octet(s) of items, '</span>
+                    <span class="sa">f</span><span class="s1">'taking this parse to </span><span class="si">{</span><span class="n">ledger</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">padding</span><span class="si">}</span><span class="s1"> octet(s) of padding '</span>
+                    <span class="sa">f</span><span class="s1">'against </span><span class="si">{</span><span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s1"> octet(s) actually read, past the '</span>
+                    <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">allowance</span><span class="si">}</span><span class="s1"> octet(s) allowed.'</span>
+                <span class="p">)</span>
+        <span class="n">ledger</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">padding</span>
+
+    <span class="c1"># NOTE: Items credit the zeros they read as supplied octets, so the fill is debited up front and the</span>
+    <span class="c1"># unread rest given back (#2756, #2760); a failed item restores the ledger as it was.</span>
+    <span class="n">read</span> <span class="o">=</span> <span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">padding</span>
+    <span class="n">filled</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">padding</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">filled</span>
+    <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
+        <span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">read</span>
+        <span class="k">raise</span>
+    <span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">filled</span><span class="o">.</span><span class="n">tell</span><span class="p">(),</span> <span class="n">present</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_give_back_fill</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Give back the ``count`` zeros of a fill that a list of plain values left unread.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        count: Zeros of an enclosing fill in the list's buffer that no item</span>
+<span class="sd">            read; nothing is given back for none.</span>
+
+<span class="sd">    :func:`_zero_filled_items` takes the zeros of its fill off the octets read</span>
+<span class="sd">    in advance, as the items reading them credit them, and gives back those its</span>
+<span class="sd">    stream is left short of. A list in the item the data ends inside reads none</span>
+<span class="sd">    of its buffer past the data (:issue:`2760`), so the zeros it leaves there</span>
+<span class="sd">    are given back here.</span>
+
+<span class="sd">    """</span>
+    <span class="n">ledger</span> <span class="o">=</span> <span class="n">_zero_pad_ledger</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ledger</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">count</span>
+
+
+<span class="c1">#: Pattern[str]: Matches a leading, optionally byte-order-prefixed negative</span>
+<span class="c1">#: count in a :attr:`FieldBase.template`, e.g. the ``-1`` in ``'-1s'`` or in</span>
+<span class="c1">#: ``'&gt;-1s'``.</span>
+<span class="c1">#:</span>
+<span class="c1">#: Every template this package builds from a resolved field length is</span>
+<span class="c1">#: ``f'{length}s'`` (see :mod:`pcapkit.corekit.fields.strings`,</span>
+<span class="c1">#: :mod:`~pcapkit.corekit.fields.misc`, :mod:`~pcapkit.corekit.fields.collections`</span>
+<span class="c1">#: and, before it gets byte-order-prefixed, :mod:`~pcapkit.corekit.fields.numbers`</span>
+<span class="c1">#: --</span>
+<span class="c1">#: :meth:`NumberField.build_template &lt;pcapkit.corekit.fields.numbers.NumberField.build_template&gt;`'s</span>
+<span class="c1">#: ``else`` arm), so a negative resolved length</span>
+<span class="c1">#: always leaves that literal ``-`` immediately before the digits. What</span>
+<span class="c1">#: :class:`~pcapkit.corekit.fields.numbers.NumberField` adds is a byte-order</span>
+<span class="c1">#: prefix -- one of ``'@=&lt;&gt;!'`` -- *in front of* that whole template</span>
+<span class="c1">#: (``f'{endian}{struct_fmt}'``), which is what a plain ``^-\d+`` misses: the</span>
+<span class="c1">#: prefix, not the minus sign, is what starts the string. The optional</span>
+<span class="c1">#: character class here accounts for exactly that one prefix position, so a</span>
+<span class="c1">#: negative count is recognised whether or not it was byte-order-prefixed, while</span>
+<span class="c1">#: still refusing anything else -- a bare byte-order character with no minus</span>
+<span class="c1">#: sign after it (``'&gt;Xs'``), or any other malformed template -- which is what</span>
+<span class="c1">#: makes checking for it a reliable way to tell those cases apart from each</span>
+<span class="c1">#: other *before* :func:`struct.calcsize` is asked to size either one. See</span>
+<span class="c1">#: :issue:`825`.</span>
+<span class="n">_RE_NEGATIVE_LENGTH_TEMPLATE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">'^[@=&lt;&gt;!]?-\d+'</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FieldMeta">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldMeta">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FieldMeta</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_T</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Meta class to add dynamic support to :class:`FieldBase`.</span>
+
+<span class="sd">    It defines nothing of its own, so a field class is built exactly as by</span>
+<span class="sd">    :class:`abc.ABCMeta`.</span>
+
+<span class="sd">    """</span></div>
+
+
+
+<div class="viewcode-block" id="FieldBase">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldBase">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FieldBase</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">FieldMeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Internal base class for protocol fields.</span>
+
+<span class="sd">    Important:</span>
+<span class="sd">        A negative value of :attr:`~FieldBase.length` indicates that the field</span>
+<span class="sd">        is variable-length (i.e., length unspecified) and thus</span>
+<span class="sd">        :meth:`~FieldBase.pack` should be considerate of the template format</span>
+<span class="sd">        and the actual value provided for packing.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *args: Arbitrary positional arguments.</span>
+<span class="sd">        **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="n">_name</span><span class="p">:</span> <span class="s1">'str'</span>
+        <span class="n">_template</span><span class="p">:</span> <span class="s1">'str'</span>
+        <span class="n">_callback</span><span class="p">:</span> <span class="s1">'Callable[[Self, dict[str, Any]], None]'</span>
+
+    <span class="c1"># NOTE: Declared on the class so :attr:`default` answers even for a field whose ``__init__`` does</span>
+    <span class="c1"># not chain to this one, as ``ListField``'s does not (#422).</span>
+    <span class="n">_default</span><span class="p">:</span> <span class="s1">'_T | NoValueType'</span> <span class="o">=</span> <span class="n">NO_VALUE</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'str'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Field name."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s1">'str'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Set field name."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'_T | NoValueType'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Field default value."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default</span>
+
+    <span class="nd">@default</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s1">'_T | NoValueType'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Set field default value."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@default</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Delete field default value."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">NO_VALUE</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">template</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'str'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Field template."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_template</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'int'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Field size.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ProtocolError: If :attr:`template` resolves to a negative count</span>
+<span class="sd">                (e.g. ``'-5s'``, from a ``length`` callback such as</span>
+<span class="sd">                ``lambda pkt: pkt['__length__']`` resolving below zero once</span>
+<span class="sd">                the buffer ran short of what the schema declared).</span>
+<span class="sd">                :func:`struct.calcsize` cannot size such a template and raises</span>
+<span class="sd">                a bare :exc:`struct.error`, uncatchable as a pcapkit-specific</span>
+<span class="sd">                error; this re-raises it as the negative-length message below.</span>
+<span class="sd">                See :issue:`805`.</span>
+<span class="sd">            ProtocolError: If :attr:`template` is otherwise malformed --</span>
+<span class="sd">                anything else :func:`struct.calcsize` cannot size, such as a</span>
+<span class="sd">                typo'd format character -- rather than the negative-length</span>
+<span class="sd">                message above, which would misreport the actual cause.</span>
+<span class="sd">                :func:`struct.calcsize` raises the identical bare</span>
+<span class="sd">                :exc:`struct.error` for both cases (measured:</span>
+<span class="sd">                ``calcsize('-1s')`` and ``calcsize('Xs')`` both raise ``bad</span>
+<span class="sd">                char in struct format``), so the two are told apart by</span>
+<span class="sd">                :data:`_RE_NEGATIVE_LENGTH_TEMPLATE` against :attr:`template`</span>
+<span class="sd">                itself -- which is known already, without needing anything</span>
+<span class="sd">                :func:`struct.calcsize`'s own error says -- rather than by the</span>
+<span class="sd">                error message. See :issue:`825`.</span>
+
+<span class="sd">        .. versionchanged:: 1.5.0</span>
+
+<span class="sd">           Raises :exc:`~pcapkit.utilities.exceptions.ProtocolError` where</span>
+<span class="sd">           :func:`struct.calcsize` raised a bare :exc:`struct.error`</span>
+<span class="sd">           (:issue:`805`, :issue:`825`).</span>
+
+<span class="sd">        """</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">struct</span><span class="o">.</span><span class="n">calcsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">struct</span><span class="o">.</span><span class="n">error</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_RE_NEGATIVE_LENGTH_TEMPLATE</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">'Field </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> resolved to a negative length; '</span>
+                    <span class="sa">f</span><span class="s1">'template=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="si">!r}</span><span class="s1">'</span>
+                <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
+            <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">'Field </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> has a malformed template; '</span>
+                <span class="sa">f</span><span class="s1">'template=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="si">!r}</span><span class="s1">'</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">optional</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'bool'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Field is optional."""</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="FieldBase.__call__">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldBase.__call__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packet</span><span class="p">:</span> <span class="s1">'dict[str, Any]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Self'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Update field attributes.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            packet: Packet data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Updated field instance.</span>
+
+<span class="sd">        This method will return a new instance of :class:`FieldBase` instead of</span>
+<span class="sd">        updating the current instance.</span>
+
+<span class="sd">        """</span>
+        <span class="n">new_self</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span>
+        <span class="n">new_self</span><span class="o">.</span><span class="n">_callback</span><span class="p">(</span><span class="n">new_self</span><span class="p">,</span> <span class="n">packet</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_self</span></div>
+
+
+    <span class="c1"># NOTE: This method is created as a placeholder for the necessary attributes.</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">'Any'</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="s1">'Any'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">'_name'</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'&lt;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s1">&gt;'</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">NO_VALUE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_template</span> <span class="o">=</span> <span class="s1">'0s'</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_callback</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">_</span><span class="p">:</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="FieldBase.__copy__">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldBase.__copy__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Self'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return a shallow copy of the field.</span>
+
+<span class="sd">        Every field of every protocol is copied once per packet by</span>
+<span class="sd">        :meth:`__call__`, which makes the generic :func:`copy.copy` path -- via</span>
+<span class="sd">        :meth:`object.__reduce_ex__` and :func:`copy._reconstruct` -- one of the</span>
+<span class="sd">        costlier things an extraction would do. This does what that path would</span>
+<span class="sd">        do, and only that: a new instance of the same class, its</span>
+<span class="sd">        :attr:`~object.__dict__` shallow-updated from this one.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Every ``__call__`` in :mod:`pcapkit.corekit.fields` copies through</span>
+<span class="sd">            ``self.__copy__()`` -- directly, or by way of ``super().__call__`` --</span>
+<span class="sd">            rather than :func:`copy.copy(self) &lt;copy.copy&gt;`.</span>
+<span class="sd">            :func:`copy.copy` still has to *find* this method before it can call</span>
+<span class="sd">            it -- ``getattr(cls, '__copy__', None)`` -- and that lookup alone</span>
+<span class="sd">            was profiled at 55,846 calls (~1.7% of an</span>
+<span class="sd">            :func:`~pcapkit.interface.core.extract` run) on</span>
+<span class="sd">            ``examples/captures/http.pcap``, one per field</span>
+<span class="sd">            per packet, all from this exact path. Calling ``__copy__``</span>
+<span class="sd">            directly is exactly what :func:`copy.copy` would have done once it</span>
+<span class="sd">            found it, so a field is copied at the same points and to the same</span>
+<span class="sd">            contents either way -- only the redundant dispatch is skipped.</span>
+<span class="sd">            See GitHub issue :issue:`730`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new field instance sharing this one's attribute values.</span>
+
+<span class="sd">        """</span>
+        <span class="n">new_self</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+        <span class="n">new_self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_self</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'str'</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">isidentifier</span><span class="p">():</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s1">'&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">&gt;'</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">'&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&gt;'</span>
+
+<div class="viewcode-block" id="FieldBase.__set_name__">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldBase.__set_name__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__set_name__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner</span><span class="p">:</span> <span class="s1">'Schema'</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="s1">'str'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Set field name and update field list (if applicable).</span>
+
+<span class="sd">        This method is to be called by the metaclass during class creation.</span>
+<span class="sd">        It is used to set the field name and update the field list, i.e.,</span>
+<span class="sd">        :attr:`Schema.__fields__ &lt;pcapkit.protocols.schema.Schema.__fields__&gt;`</span>
+<span class="sd">        mapping dictionary.</span>
+
+<span class="sd">        """</span>
+        <span class="c1"># Update field list (if applicable)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="s1">'__fields__'</span><span class="p">):</span>
+            <span class="n">owner</span><span class="o">.</span><span class="n">__fields__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="c1"># Set field name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="FieldBase.pre_process">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldBase.pre_process">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pre_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s1">'_T'</span><span class="p">,</span> <span class="n">packet</span><span class="p">:</span> <span class="s1">'dict[str, Any]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Any'</span><span class="p">:</span>  <span class="c1"># pylint: disable=unused-argument</span>
+<span class="w">        </span><span class="sd">"""Process field value before construction (packing).</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            value: Field value.</span>
+<span class="sd">            packet: Packet data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Processed field value.</span>
+
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s1">'Any'</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FieldBase.pack">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldBase.pack">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s1">'Optional[_T]'</span><span class="p">,</span> <span class="n">packet</span><span class="p">:</span> <span class="s1">'dict[str, Any]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'bytes'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Pack field value into :obj:`bytes`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: Field value.</span>
+<span class="sd">            packet: Packet data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Packed field value.</span>
+
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="ow">is</span> <span class="n">NO_VALUE</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">NoDefaultValue</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Field </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> has no default value.'</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="s1">'_T'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default</span><span class="p">)</span>
+
+        <span class="n">pre_processed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_process</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">packet</span><span class="p">)</span>
+
+        <span class="c1"># NOTE: A bytearray goes over as bytes for ``s``/``p`` (PyPy refuses it, #2004) and ``c`` (CPython</span>
+        <span class="c1"># refuses it, #2015), so every engine packs alike; a memoryview is left to the engine.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pre_processed</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'s'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">):</span>
+            <span class="n">pre_processed</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">pre_processed</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="p">,</span> <span class="n">pre_processed</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FieldBase.post_process">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldBase.post_process">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">post_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="s1">'Any'</span><span class="p">,</span> <span class="n">packet</span><span class="p">:</span> <span class="s1">'dict[str, Any]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'_T'</span><span class="p">:</span>  <span class="c1"># pylint: disable=unused-argument</span>
+<span class="w">        </span><span class="sd">"""Process field value after parsing (unpacking).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: Field value.</span>
+<span class="sd">            packet: Packet data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Processed field value.</span>
+
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s1">'_T'</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FieldBase.unpack">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.FieldBase.unpack">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unpack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer</span><span class="p">:</span> <span class="s1">'bytes | IO[bytes]'</span><span class="p">,</span> <span class="n">packet</span><span class="p">:</span> <span class="s1">'dict[str, Any]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'_T'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Unpack field value from :obj:`bytes`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            buffer: Field buffer.</span>
+<span class="sd">            packet: Packet data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Unpacked field value.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            FieldValueError: If ``buffer`` holds fewer octets than :attr:`length`</span>
+<span class="sd">                declares, and either ``length`` is past</span>
+<span class="sd">                :data:`~pcapkit.utilities.config.MAX_ZERO_PAD_LENGTH`, or the shortfall is past</span>
+<span class="sd">                :data:`~pcapkit.utilities.config.MAX_ZERO_PAD_SHORTFALL` and takes this parse's total of</span>
+<span class="sd">                such shortfalls past what :data:`~pcapkit.utilities.config.ZERO_PAD_BUDGET_RATIO` allows</span>
+<span class="sd">                for the octets it has actually been given. A shortfall within</span>
+<span class="sd">                :data:`~pcapkit.utilities.config.MAX_ZERO_PAD_SHORTFALL` is always padded and never</span>
+<span class="sd">                raises.</span>
+
+<span class="sd">        .. versionchanged:: 1.5.0</span>
+
+<span class="sd">           A short read is zero-filled on the tail, where its missing octets</span>
+<span class="sd">           are, rather than on the head (:issue:`604`).</span>
+
+<span class="sd">        """</span>
+        <span class="c1"># NOTE: ``length`` recomputes struct.calcsize() on every read, so it is</span>
+        <span class="c1"># read once here.</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+
+        <span class="c1"># NOTE: ``length`` is often wire-derived, so past ``MAX_ZERO_PAD_LENGTH`` a length the buffer falls</span>
+        <span class="c1"># short of is bogus, and honouring it would zero-fill on the packet's own say-so (#554).</span>
+        <span class="n">ceiling</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">MAX_ZERO_PAD_LENGTH</span>
+        <span class="k">if</span> <span class="n">ceiling</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">length</span> <span class="o">&gt;</span> <span class="n">ceiling</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FieldValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">'Field </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> declares a length of </span><span class="si">{</span><span class="n">length</span><span class="si">}</span><span class="s1"> octet(s), '</span>
+                <span class="sa">f</span><span class="s1">'but only </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span><span class="si">}</span><span class="s1"> octet(s) are available.'</span>
+            <span class="p">)</span>
+
+        <span class="c1"># NOTE: The ceiling above bounds one field and this bounds their sum (#573); ``max(length, 0)``</span>
+        <span class="c1"># is defensive, so a negative width can never grant padding allowance.</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">supplied</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">width</span> <span class="k">else</span> <span class="n">width</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="n">supplied</span>
+
+        <span class="c1"># ``supplied`` is what earns allowance, so it is tallied on every read,</span>
+        <span class="c1"># padded or not: a parse made of small, honest reads is exactly the parse</span>
+        <span class="c1"># that should be able to afford the one large shortfall a capture</span>
+        <span class="c1"># truncated at EOF ends on.</span>
+        <span class="c1">#</span>
+        <span class="c1"># It counts octets as each field saw them, which is not the same as</span>
+        <span class="c1"># octets consumed from the file. A nested schema re-reads its enclosing</span>
+        <span class="c1"># field's span, and :meth:`OptionField.unpack &lt;pcapkit.corekit.fields.</span>
+        <span class="c1"># collections.OptionField.unpack&gt;` peeks an option's type field and then</span>
+        <span class="c1"># rewinds and parses the same span again, so a span can be credited more</span>
+        <span class="c1"># than once -- measured at 28 credited octets for a 24-octet IPv4 header</span>
+        <span class="c1"># carrying four one-octet ``NOP`` options. The over-count is bounded by</span>
+        <span class="c1"># nesting depth, so it makes the allowance somewhat more generous than the</span>
+        <span class="c1"># ratio alone suggests; it cannot grow without limit, which is what would</span>
+        <span class="c1"># actually matter.</span>
+        <span class="n">ledger</span> <span class="o">=</span> <span class="n">_zero_pad_ledger</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ledger</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ledger</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">_zero_pad_ledger</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ledger</span><span class="p">)</span>
+        <span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">supplied</span>
+
+        <span class="c1"># A shortfall no larger than :data:`~pcapkit.utilities.config.MAX_ZERO_PAD_SHORTFALL` is padded</span>
+        <span class="c1"># without consulting the budget, and is not charged to it either. That is</span>
+        <span class="c1"># load-bearing rather than a concession: it is</span>
+        <span class="c1"># what keeps the answer a function of *this* read rather than of</span>
+        <span class="c1"># everything read before it. No shortfall a 16-bit wire length can produce</span>
+        <span class="c1"># -- which is every shortfall a snapshot-truncated capture, a truncated</span>
+        <span class="c1"># option area or an over-long ``ihl`` can produce (#431, #554) -- is ever</span>
+        <span class="c1"># refused, on the first frame or the ten-thousandth.</span>
+        <span class="c1">#</span>
+        <span class="c1"># Nor may those small shortfalls *spend* the budget, which is why they are</span>
+        <span class="c1"># not tallied against it. A snapshot-truncated capture of offload-sized</span>
+        <span class="c1"># frames pads some 935 octets for every octet it reads, all of it in this</span>
+        <span class="c1"># band; charging that to the same ledger would exhaust it within a few</span>
+        <span class="c1"># frames and refuse the next large shortfall -- making the answer depend on</span>
+        <span class="c1"># history, which is exactly what the band exists to prevent.</span>
+        <span class="n">shortfall</span><span class="p">,</span> <span class="n">ratio</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">MAX_ZERO_PAD_SHORTFALL</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">ZERO_PAD_BUDGET_RATIO</span>
+        <span class="k">if</span> <span class="n">shortfall</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">padding</span> <span class="o">&gt;</span> <span class="n">shortfall</span><span class="p">:</span>
+            <span class="c1"># NOTE: ``-1`` for either term of the allowance lifts the budget.</span>
+            <span class="n">unbounded</span> <span class="o">=</span> <span class="n">ceiling</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">ratio</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">allowance</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">unbounded</span> <span class="k">else</span> <span class="n">ceiling</span> <span class="o">+</span> <span class="n">ratio</span> <span class="o">*</span> <span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">unbounded</span> <span class="ow">and</span> <span class="n">ledger</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">padding</span> <span class="o">&gt;</span> <span class="n">allowance</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">FieldValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">'Field </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> would zero-pad </span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s1"> octet(s), '</span>
+                    <span class="sa">f</span><span class="s1">'taking this parse to </span><span class="si">{</span><span class="n">ledger</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">padding</span><span class="si">}</span><span class="s1"> octet(s) of '</span>
+                    <span class="sa">f</span><span class="s1">'padding past </span><span class="si">{</span><span class="n">shortfall</span><span class="si">}</span><span class="s1"> octet(s) against '</span>
+                    <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">ledger</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> octet(s) actually read, past the </span><span class="si">{</span><span class="n">allowance</span><span class="si">}</span><span class="s1"> '</span>
+                    <span class="sa">f</span><span class="s1">'octet(s) allowed.'</span>
+                <span class="p">)</span>
+            <span class="n">ledger</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">padding</span>
+
+        <span class="c1"># NOTE: ``ljust()``, not ``rjust()``: a short read lost the trailing octets, so zeros go at the end</span>
+        <span class="c1"># for any byte order (#604); it changes what a cut field reports, not whether it parses (#431).</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="p">,</span> <span class="n">buffer</span><span class="p">[:</span><span class="n">length</span><span class="p">]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="sa">b</span><span class="s1">'</span><span class="se">\x00</span><span class="s1">'</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post_process</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">packet</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Field">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.Field">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Field</span><span class="p">(</span><span class="n">FieldBase</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">Generic</span><span class="p">[</span><span class="n">_T</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Base class for protocol fields.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        length: Field size (in bytes); if a callable is given, it should return</span>
+<span class="sd">            an integer value and accept the current packet as its only argument.</span>
+<span class="sd">        default: Field default value, if any.</span>
+<span class="sd">        callback: Callback function to be called upon</span>
+<span class="sd">            :meth:`self.__call__ &lt;pcapkit.corekit.fields.field.FieldBase.__call__&gt;`.</span>
+
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="n">_template</span><span class="p">:</span> <span class="s1">'str'</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">template</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'str'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Field template."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_template</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="s1">'int | Callable[[dict[str, Any]], int]'</span><span class="p">,</span>
+                 <span class="n">default</span><span class="p">:</span> <span class="s1">'_T | NoValueType'</span> <span class="o">=</span> <span class="n">NO_VALUE</span><span class="p">,</span>
+                 <span class="n">callback</span><span class="p">:</span> <span class="s1">'Callable[[Self, dict[str, Any]], None]'</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">_</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+        <span class="c1">#self._name = '&lt;unknown&gt;'</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">'_name'</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'&lt;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s1">&gt;'</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default</span> <span class="o">=</span> <span class="n">default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_callback</span> <span class="o">=</span> <span class="n">callback</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_length_callback</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_length_callback</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">length</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_length</span> <span class="o">=</span> <span class="n">length</span>
+
+<div class="viewcode-block" id="Field.__call__">
+<a class="viewcode-back" href="../../../../pcapkit/corekit/fields/field.html#pcapkit.corekit.fields.field.Field.__call__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packet</span><span class="p">:</span> <span class="s1">'dict[str, Any]'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Self'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Update field attributes.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            packet: Packet data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            New instance of :class:`Field`.</span>
+
+<span class="sd">        This method will return a new instance of :class:`Field` instead of</span>
+<span class="sd">        updating the current instance.</span>
+
+<span class="sd">        Past the cut of a schema whose length ends with the data, which</span>
+<span class="sd">        ``__past_cut__`` in ``packet`` marks, a callable ``length`` resolving</span>
+<span class="sd">        below zero from the zeros the cut left resolves to zero instead; see</span>
+<span class="sd">        :meth:`Schema.unpack &lt;pcapkit.protocols.schema.Schema.unpack&gt;`.</span>
+
+<span class="sd">        .. versionchanged:: 1.7.0</span>
+
+<span class="sd">           Resolves a length below zero past such a cut to zero (:issue:`2880`).</span>
+
+<span class="sd">        """</span>
+        <span class="n">new_self</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span>
+        <span class="n">new_self</span><span class="o">.</span><span class="n">_callback</span><span class="p">(</span><span class="n">new_self</span><span class="p">,</span> <span class="n">packet</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_self</span><span class="o">.</span><span class="n">_length_callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_self</span><span class="o">.</span><span class="n">_length</span> <span class="o">=</span> <span class="n">new_self</span><span class="o">.</span><span class="n">_length_callback</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+            <span class="c1"># NOTE: Nothing is left past the cut (#2880).</span>
+            <span class="k">if</span> <span class="n">new_self</span><span class="o">.</span><span class="n">_length</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">packet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'__past_cut__'</span><span class="p">):</span>
+                <span class="n">new_self</span><span class="o">.</span><span class="n">_length</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">new_self</span></div>
+</div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2017-2026, Jarry Shaw
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=469f8872"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: fit-content;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: auto;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: fit-content;\n}\n\n.mermaid-container > pre > svg {\n    height: auto;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false, "flowchart": {"useMaxWidth": false}, "state": {"useMaxWidth": false}, "sequence": {"useMaxWidth": false}},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false, "flowchart": {"useMaxWidth": false}, "state": {"useMaxWidth": false}, "sequence": {"useMaxWidth": false}},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    </body>
+</html>

@@ -1,0 +1,679 @@
+Release Process
+================
+
+.. important::
+
+   The **operational contract** for cutting a release: what a maintainer touches
+   by hand, what the workflow does unattended, and the precautions that follow.
+
+   **The only manual edit is bumping** :data:`pcapkit.__version__`. Everything
+   else -- the ``v*`` tag, the GitHub Release, the PyPI and Anaconda uploads, the
+   ``conda-*`` tag and its commit to ``main`` -- is produced by
+   ``.github/workflows/create-release.yml`` and is never hand-made.
+
+.. _release-lines:
+
+Release Lines
+-------------
+
+A minor release, ``X.Y.0``, carries the roadmap work (:doc:`pep`) its milestone
+tracks; a patch release, ``X.Y.Z``, ships fixes and vendor refreshes; and a vendor bump
+between releases is a ``.postN`` of the release before it. A line is planned on its
+milestone and its *Release X.Y* view on the project board (:ref:`process`).
+
+A final release, ``X.Y.0`` or ``X.Y.Z``, runs these steps in order, ruled on
+:issue:`2805`:
+
+#. **One central changelog pull request opens first**, for ``X.Y.0`` with the line's
+   milestone and view. It alone edits :file:`CHANGELOG.md` and
+   :file:`docs/source/changelog/`: feature pull requests carry no changelog edits
+   (:issue:`2449`), and each one's entry is folded into it once it merges
+   (:doc:`maintenance`). A patch release of a single change may carry its entry in
+   that change's own pull request instead.
+#. **The release's other issues and pull requests close.**
+#. **A docs sweep** runs once they have closed and before the bump: the documentation
+   re-checked against the code and the rules on :ref:`documentation`. It also brings
+   :doc:`the roadmap <pep>` up to date, a page feature pull requests leave alone.
+#. **The version-bump push** (`The One Manual Step`_) starts the release. The changelog
+   pull request merges no later than that push, since the release ships its run's
+   commit, whose :file:`CHANGELOG.md` leads the release body.
+
+The One Manual Step
+-------------------
+
+:file:`util/bump_version.py` bumps :data:`pcapkit.__version__`; its docstring is the
+authority. Given the current version, read from ``pcapkit/__init__.py`` through
+:mod:`ast` rather than by importing :mod:`pcapkit`, it works out the next one under
+:pep:`440` -- a ``devN`` counter, a pre-release counter, a post-release
+counter, or a fresh ``.post1`` for a final release -- and then:
+
+* rewrites the ``__version__`` assignment in ``pcapkit/__init__.py``, refusing,
+  before anything is written, a rewrite that would not parse or not hold the new
+  version (:issue:`2800`);
+* moves :file:`CITATION.cff`'s ``version`` and ``date-released`` fields to
+  match, line-oriented so the file's quoting and comments survive.
+  ``date-released`` becomes the bump's date in UTC, its intended meaning, not
+  the later publication date (:issue:`2163`);
+* resets :file:`conda/build` to ``0``.
+
+Its one scheduled caller is the ``Bump Version`` step of
+``.github/workflows/cron-vendor.yml``, run only when a registry crawl changed code.
+It passes ``--github-output``, and ``Commit changes`` takes its subject's version
+from that ``version`` output, failing when it is empty (:issue:`2800`).
+``util/vendor_code_changed.py`` compares each changed file with ``HEAD``; a crawl
+changing only comments or docstrings is committed as "Updated vendor documentation
+without a version bump", reaching ``main`` without starting a release
+(:issue:`1674`). A crawl that finds nothing commits nothing. The bump commit carries
+every module the crawl wrote under ``pcapkit/const/``, new and deleted ones included
+(:issue:`1685`), and starts the automated path below.
+
+The steps of a ``vendor-update`` run, from the crawl to the push:
+
+.. mermaid::
+
+   flowchart TD
+       CRAWL["Update Vendor<br/>crawls the registries"] --> TEST{"Test the regenerated<br/>tree: finished?"}
+       TEST -->|"yes: failing modules go<br/>back to HEAD's copy"| VERIFY
+       TEST -->|"no: failed or timed out"| DISCARD["Discard untested const changes"]
+       DISCARD --> VERIFY{"Verify Changed files<br/>anything changed?"}
+       VERIFY -->|no| NONE["commits nothing"]
+       VERIFY -->|yes| CLASSIFY{"Classify Changed files<br/>vendor_code_changed.py"}
+       CLASSIFY -->|"comments and docstrings only"| DOCS["Commit documentation<br/>changes, no bump"]
+       CLASSIFY -->|"any other change,<br/>or the step failing"| BUMP["Bump Version<br/>util/bump_version.py"]
+       DOCS -->|"held: raised by its own<br/>documentation commit"| NONE
+       BUMP --> COMMIT["Commit changes, new<br/>const modules too"]
+       DOCS -->|committed| PUSH["Push changes to main<br/>not on a manual run"]
+       COMMIT --> PUSH
+
+The same script is the manual entry point: run ``python util/bump_version.py`` and
+commit the result to ``main`` for a release that is not a vendor-registry refresh.
+While ``main``'s version is a ``.devN`` one it only advances that counter
+(``1.6.0.dev2`` to ``1.6.0.dev3``), producing another blocked dev version, not a
+release (see the dev-release note below).
+
+Editing ``__version__`` by hand without moving :file:`CITATION.cff`'s ``version``
+field to match **blocks the release**.
+``tests/project/test_bump_version.py``'s
+``RepositoryCitationTests.test_the_citation_file_names_the_packaged_version``
+asserts the two agree, and ``create-release.yml``'s ``unit-tests`` job calls
+``unit-tests.yml`` with ``gate-only: true``, whose ``gate`` job runs the **full**
+suite rather than an ordinary push's tiered subset. That gate runs whenever a
+release will, since a moved ``__version__`` is what makes ``version_check``'s
+evidence read "not yet published", and every publishing job ``needs:`` it, so a
+stale citation fails before any approval is requested. Run the script, or move both
+fields in the same commit.
+
+Other checks run on the same path without being steps of this process: the
+``changelog`` job's "Check CHANGELOG.md is in step with its source entry" step fails
+if ``CHANGELOG.md`` has drifted from its source entry under
+:file:`docs/source/changelog/`, and ``github``'s "Select release body" step warns,
+without failing, if that entry's heading still reads "unreleased".
+
+By the owner's ruling, a version under active development carries the :pep:`440`
+``devN`` suffix, a work-in-progress signal distinct from a deliberately tagged
+alpha, beta or release candidate, which this project ships for real (``1.5.0b14``)
+and must keep publishable. ``version_check``'s ``PCAPKIT_DEV_RELEASE`` output reads
+``Version(__version__).is_devrelease``, never ``is_prerelease`` (which a real beta
+sets too), and ``github``, ``tag``, ``pypi`` and ``conda`` all refuse to run while it
+is ``true``, so a scheduled Vendor Update can never tag or publish a dev version on
+``github-release``'s one approval alone (:issue:`887`, below). That approval is one
+person approving a diff, usually for reasons unrelated to the version string, so a
+stray ``.devN`` is easy to miss there, and a re-run of a job that already skipped
+``github`` asks for no fresh approval; the gate closes that in code.
+
+The suffix comes off only by hand, since :file:`util/bump_version.py` never drops it:
+once the version is ready to ship, edit the ``__version__`` assignment in
+:file:`pcapkit/__init__.py` to the final string, and :file:`CITATION.cff`'s
+``version`` field in the same commit.
+
+Ways to Start a Release
+-----------------------
+
+``create-release.yml``'s ``on:`` triggers are all first-class; none is a
+workaround for another:
+
+``push: tags: ['v*']``
+   Pushing a ``v*`` tag yourself. This chooses **which commit** to release, not
+   which version: ``version_check``'s "Checkout code" step pins
+   ``ref: ${{ github.sha }}``, the commit the tag points at, and its "Get Version"
+   step reads :data:`pcapkit.__version__` from that tree. Every downstream tag and
+   release name comes from that ``PCAPKIT_VERSION`` output, never from
+   ``github.ref_name``: ``v${{ needs.version_check.outputs.PCAPKIT_VERSION }}`` is
+   the ``tag_name`` of ``github``'s "Create Release" step and the release ``pypi``
+   and ``conda`` upload to. Push ``v1.6.0`` at a commit whose ``__version__`` is
+   still ``1.5.0b5`` and ``softprops/action-gh-release`` creates a *new*
+   ``v1.5.0b5`` tag and names the Release after it, leaving ``v1.6.0`` dangling.
+   The workflow is version-driven rather than tag-driven, and nothing enforces the
+   match, so name the tag after the version.
+
+``workflow_run`` after **Vendor Update** completes
+   The path a version bump on ``main`` takes without anyone pushing a tag:
+   a push to ``main`` completes **Unit Tests**, whose completion triggers
+   **Vendor Update** (``cron-vendor.yml``), whose completion -- bump step run
+   or not -- triggers this workflow. A ``workflow_run``-triggered run
+   evaluates the tip of the default branch as it was when the run was
+   *created*: ``github.ref_name`` reads ``main``, never a tag, and
+   ``github.sha`` is that tip, fixed for the life of the run. On run
+   38008819343 it was ``b6b95bc8e``, the bump Vendor Update had just pushed,
+   while ``github.event.workflow_run.head_sha`` -- the commit Vendor Update
+   ran *on* -- was the bump's parent, ``945c3c3d8``.
+
+The paths converge on the same job graph from ``version_check`` onward; only the
+trigger and ``github.ref_name``, which the guards below read, differ. The release
+test gate runs only once ``version_check`` has passed, and
+``version_check`` itself skips the release App's own tag push and a Vendor
+Update that did not conclude ``success`` or skipped ``vendor-update`` (below).
+Past it, a ``v*`` ref always runs the gate; on ``main`` it
+runs only when the version is not tagged at another commit and some target's
+evidence is not yet ``'true'``
+(:issue:`1052`), so the
+common Vendor Update run that bumped nothing costs a minute, not a full-suite
+run.
+
+A run that may release waits for the one ahead of it on the same ref and never
+cancels it (the ``concurrency`` block), since two Vendor Update runs
+completing close together raise two runs on the same tip. A group holds one
+pending run, which a newer one cancels, so a run whose Vendor Update did not
+conclude ``success`` is keyed on its own ``github.run_id`` instead
+(:issue:`1705`). It releases
+nothing, so it neither waits behind a release nor displaces a run waiting
+there; only a newer run that may release, reading ``main``'s newer tip, can.
+A Vendor Update that concluded ``success`` with ``vendor-update`` skipped, its
+Unit Tests verdict being for another commit, releases nothing either
+(:issue:`1748`): the ``vendor_update`` job reads that run's jobs, and
+``version_check`` skips. The group cannot see that, so such a run still joins
+the ref's group; if it displaces a pending run, that release waits for the
+next Vendor Update on ``main``.
+
+One Commit per Release
+----------------------
+
+Every job that checks out, tags, builds or publishes pins ``github.sha``
+(:issue:`1634`), so a run
+releases the commit it was created for however long it waits on approval.
+Without the pins, a run releases whatever ``main``'s tip is once approved: run
+38008819343 was created for ``b6b95bc8e``, approved three days later, and
+tagged ``main``'s tip ``2c0008c3c`` as both ``v1.5.0b9`` and
+``conda-1.5.0b9+0``, since ``action-gh-release`` defaults ``target_commitish`` to
+the default branch, and ``tag`` pulls ``main`` before tagging.
+
+* On ``workflow_run``, where ``github`` creates the ``v*`` tag, it passes
+  ``target_commitish`` ``github.sha``; on a ``v*`` push the tag
+  already exists and it passes none. Either way it then checks that the tag
+  names that commit.
+* ``tag``'s "Create Tag" step cuts ``conda-<version>+0`` at that commit before
+  it reads ``main`` at all; the :file:`conda/build` reset, "Reset Build
+  Number", is a separate commit on top of ``main``, described under
+  `Precautions`_.
+* ``pypi`` and ``conda`` check out that commit and, before building, check
+  that every tag they publish under names it, as ``tag`` does for the ``v*``
+  tag. A run created for a *later* commit of the same version therefore never
+  publishes a second tree under that version. ``version_check`` resolves the
+  ``v*`` tag the same way first, in "Check which commit the version's tag
+  names", and off a ``v*`` ref a tag naming another commit skips the gate and every publisher
+  (:issue:`1748`):
+  ``Release status`` posts a ``::notice`` if that release is complete, or a
+  ``::warning`` naming both commits and what is missing, and the run stays
+  green. A ``v*`` push of such a version still fails with the
+  check's ``::error``. A partial release is finished by re-running the run that
+  tagged it, or, for Anaconda files that run's own ``conda`` legs cannot
+  build, by Conda Update's ``publish`` dispatch (see `Recovery`_).
+* ``pypi`` and ``conda`` attach their files with ``gh release upload``, in
+  their "Upload package to GitHub Release" steps, not ``action-gh-release``,
+  which calls Update a release before every upload (3.0.3's ``release()`` in
+  ``src/github.ts``, on a release that exists). A file
+  the release already has is left alone
+  (:issue:`1640`): the action
+  deletes and re-uploads it, and a rebuild against live PyPI is not
+  byte-identical to the published copy. Only an asset in state ``uploaded``
+  counts: `Upload a release asset
+  <https://docs.github.com/en/rest/releases/assets#upload-a-release-asset>`__
+  says a ``502`` "may leave an empty asset with a state of starter. It can be
+  safely deleted.", so an asset in any other state is deleted and uploaded
+  again (``--clobber``). ``conda``'s upload is not gated on ``check_leg``, so a
+  leg whose Anaconda upload landed but whose GitHub upload failed still gets
+  its asset on a re-run.
+* ``gh release upload`` also fails, deliberately, where the action does not.
+  With no release for the tag, the upload fails with ``gh``'s
+  "release not found", where the action makes one, with no notes and
+  ``target_commitish`` unset (``release()`` and ``createRelease()`` there), which Create a
+  release defaults to "the repository's default branch"; the release is
+  ``github``'s to make, at the run's commit. A file pattern matching nothing
+  exits 1 with ``::error title=Nothing to upload``, where the action,
+  ``fail_on_unmatched_files`` unset, only warns (``run()`` in ``src/run.ts``) and
+  publishes the release without that file.
+
+Pinning the target may have a cost, and GitHub documents the rule two ways.
+Its REST docs for `Create a release
+<https://docs.github.com/en/rest/releases/releases#create-a-release>`__ say
+that if "the commit identified by target_commitish (or, when target_commitish
+is omitted, the latest commit on the default branch) adds or modifies any file
+under .github/workflows/ relative to the repository's default branch", the
+token must be authorized to modify workflows, and "The GITHUB_TOKEN available
+to GitHub Actions cannot be authorized for this"; the call fails with ``404
+Not Found``, or on some paths ``403 Resource not accessible by integration``.
+`Update a release
+<https://docs.github.com/en/rest/releases/releases#update-a-release>`__
+applies it to "the new value of target_commitish if you are changing it,
+otherwise the existing target"; `Upload a release asset
+<https://docs.github.com/en/rest/releases/assets#upload-a-release-asset>`__
+states no such rule. GitHub's `2023-11-02 changelog
+<https://github.blog/changelog/2023-11-02-github-actions-enforcing-workflow-scope-when-creating-a-release/>`__
+instead requires that authorization for a ``target_commitish`` "that modifies
+an Actions workflow file and that SHA does not have an existing ref (branch
+head or tag)".
+
+The two readings disagree on run 38008819343. Against the default branch,
+``b6b95bc8e..2c0008c3c`` changed ``ci-timing.yml`` and ``unit-tests.yml``, so
+its ``github`` would have failed at Create Release. As the commit's own
+change, ``b6b95bc8e`` touches no workflow file -- its diff against its parent
+is :file:`CITATION.cff`, :file:`conda/build`, :file:`pcapkit/__init__.py` and
+``apptype`` modules -- so it would not. Which reading GitHub enforces is
+not measured here. `softprops/action-gh-release#411
+<https://github.com/softprops/action-gh-release/issues/411>`__ was closed with
+"The latest repro still hits ``403 Resource not accessible by integration``
+when ``github.token`` is used to create a release/tag against an older
+commit. …", but the thread does not say whether that commit touched a
+workflow file, so it fits both readings.
+
+Under the first, once ``main`` changes a workflow file after a run's commit,
+Create Release refuses that run's ``GITHUB_TOKEN``, which is why ``github``
+spends a GitHub App's token instead (`The Release App`_). After ``github``,
+nothing in this workflow calls Update a release, so by the docs nothing
+re-checks the target (unmeasured).
+``cron-conda.yml``'s ``conda-dist`` does: it attaches packages with
+``ncipollo/release-action`` v1.21.0, pinned to its commit, and
+``allowUpdates: true``, which updates the release before uploading
+(``Action.createOrUpdateRelease()`` and ``Action.updateRelease()`` in
+``src/Action.ts``). It therefore
+names the default branch -- ``github.ref_name`` whichever trigger raised it -- as
+``commit``, which that update sends as ``target_commitish``
+(``GithubReleases.update()`` in ``src/Releases.ts``), so the rule checks ``main`` itself; the tag
+stays put, as Update a release calls the target "Unused if the Git tag already
+exists". It also uploads only to a published release, read first with ``gh
+release view``. With none, the action would create one, and its tag, at
+``commit`` (``Action.checkForMissingReleaseError()`` and
+``Action.updateDraftOrCreateRelease()``). Conda Update bumped 1.5.0b9's build
+three times while that run waited on approval, and ``conda-dist`` runs on
+every pushed bump of a version whose ``v*`` tag exists and names ``main``'s
+dependencies (:issue:`1632`, :issue:`2841`), which a pushed tag makes true before
+its release, so a release the
+action created there would tag the pending version at ``main``'s tip and fail
+Create Release's tag check.
+The action would also retarget a draft at ``commit``
+(``Action.updateDraftOrCreateRelease()`` and ``Action.updateRelease()``), which ``omitDraftDuringUpdate`` keeps a
+draft, but Create Release's ``workflow_run`` run finds the draft and resets
+its target to the run's sha (``action-gh-release`` 3.0.3's ``release()`` and
+``findTagFromReleases()``), so skipping a draft is a precaution
+against retargeting a release Create Release owns.
+Either way the build goes to anaconda.org only, with a ``::notice``. The
+update also sends the release's name, notes and ``prerelease`` and ``draft``
+flags, which unset inputs make the tag, ``""`` and ``false``
+(``CoreInputs``' ``updatedReleaseName``, ``updatedReleaseBody``, ``updatedDraft``
+and ``updatedPrerelease`` getters, and the ``name`` and ``body`` they fall back
+on, in ``src/Inputs.ts``), so the step sets the
+``omit*DuringUpdate`` inputs that leave them out (:issue:`1657`).
+
+The Release App
+---------------
+
+The owner's choice on :issue:`1634`:
+``github`` creates
+the release with a GitHub App installation token, which Create a release
+accepts for a target that changes a workflow file when it has the "Workflows"
+repository permission (write). "Mint the release App's token" runs
+``actions/create-github-app-token`` v3.3.0, pinned to its commit, with
+``permission-contents: write`` and ``permission-workflows: write`` and no
+``owner`` or ``repositories``, so the token is "scoped to only the current
+repository" and revoked in the action's ``post`` step (v3.3.0's README). Only
+Create Release spends it.
+While ``vars.RELEASE_APP_CLIENT_ID`` is unset, which reads as "an empty
+string", the step skips and Create Release spends ``GITHUB_TOKEN``, so the
+workflow keeps working, refusals included, until the App exists. A PAT would
+work too, but its tag push is attributed to a person, so no guard could tell
+it from a tag pushed by hand.
+
+One-time setup:
+
+1. Register a GitHub App with the **Contents** and **Workflows** repository
+   permissions at read and write, and install it on this repository only. Add
+   **Pull requests** at read and write too, and accept it on the installation:
+   the Python Versions and Issue and PR Kinds workflows' ``pr`` jobs open their
+   pull requests with a token of this App, with contents and pull requests write
+   only (:issue:`1660`, :issue:`2561`, :doc:`workflows`).
+2. Add repository variables ``RELEASE_APP_CLIENT_ID``, the App's Client ID, and
+   ``RELEASE_APP_BOT_ID``, its bot's user id (``gh api
+   "/users/<app-slug>[bot]" --jq .id``, as the action's README reads it).
+3. Store the App's private key as ``RELEASE_APP_PRIVATE_KEY`` in each
+   environment below, the same value in each, replaced in all of them on a
+   rotation, rather than at the repository, where every job could read it:
+
+   * ``github-release``, for ``github``: "If the environment requires approval,
+     a job cannot access environment secrets until one of the required reviewers
+     approves it".
+   * ``release-app``, for the ``pr`` jobs of Python Versions and Issue and PR
+     Kinds. Create it with no required reviewer and its deployment branches
+     limited to ``main``, where those jobs run.
+
+   A job reads only the secrets of the environment it names, so the scheduled
+   jobs need a copy outside ``github-release``, or they would wait on its
+   approval, which the owner ruled on :issue:`2648` is for Create Release alone.
+   ``github`` is the only job naming ``github-release``, and those ``pr`` jobs
+   the only others reading the key; where ``release-app`` has no key, each warns
+   and opens nothing.
+
+Unlike ``GITHUB_TOKEN``'s, the App's tag starts a tag-push run. It would rerun
+the release test gate, ask for a second approval and race the first run's
+uploads from another concurrency group, so ``version_check``'s ``if:`` skips a
+``push`` whose ``github.actor_id`` is ``vars.RELEASE_APP_BOT_ID``, and
+``release_status`` reports it with ``::notice title=Nothing to release``. A
+tag pushed by a person is not skipped. Whether a tag made
+through the Releases API fires ``push``, and with the bot as actor, is
+unmeasured; if not, the guard never matches and the cost is one approval to
+reject.
+
+A refused Create Release (404, or 403 "Resource not accessible by
+integration") is explained by "Explain a refused release tag"
+according to the token spent: with ``GITHUB_TOKEN`` it lists the setup above;
+with the App's, it points at the App's permissions and installation. For a
+final release, first delete any draft ``v<version>`` the refused run left:
+``action-gh-release`` creates a non-prerelease as a draft and publishes it
+with Update a release in the same step (``createRelease()`` in
+``src/github.ts``), and the next run would reuse that draft and its target
+(``release()`` there). Then re-run
+the job; that a re-run reads variables and secrets set since is unmeasured.
+
+Per-Job Evidence, Not a Shared Proxy
+------------------------------------
+
+One guard shared by every job past ``version_check`` would read "the ``v*`` tag
+exists" as a proxy for "this version was already published":
+
+.. code-block:: yaml
+
+   if: ${{ startsWith(github.ref_name, 'v') || needs.version_check.outputs.PCAPKIT_TAG_EXISTS == 'false' }}
+
+Those diverge exactly when a release half-completes -- ``github`` tags, a later
+job fails or is rejected, and the tag is left behind with the publish
+incomplete -- which is the whole subject of `Precautions`_ below
+(:issue:`888`). Of the publishers, only ``github`` uses that clause, for its own
+artefact, since
+the tag it checks *is* the one it is about to create; the clause beside it skips
+a version whose tag names another commit (`One Commit per Release`_):
+
+.. code-block:: yaml
+
+   if: >-
+     ${{ (startsWith(github.ref_name, 'v') || needs.version_check.outputs.PCAPKIT_RELEASED_ELSEWHERE != 'true') &&
+     (startsWith(github.ref_name, 'v') || needs.version_check.outputs.PCAPKIT_TAG_EXISTS == 'false') }}
+
+``tag``, ``pypi`` and ``conda`` each read their own evidence instead:
+
+* ``tag`` checks whether ``conda-<version>+0``, the tag *it* creates, already
+  exists.
+* ``pypi`` compares PyPI's file count for the version against the expected one
+  -- a wheel per supported leg plus the sdist kept only on the 3.15 leg; the
+  :ref:`KTLO <ktlo-tier>` legs' wheels (:issue:`1633`) are not counted. This job is
+  already idempotent (``skip-existing: true`` on every upload step), so the
+  check exists only to save the cost of the build matrix, not for correctness.
+* ``conda`` compares Anaconda's aggregate count against the expected one (the
+  ``linux-64``, ``osx-64``, ``osx-arm64`` and ``win-64`` files for each Python
+  version of its matrix, one platform per ``os`` leg,
+  :issue:`1922`, :issue:`2060`) as the same
+  kind of job-level cost saver, and *also*
+  checks, per matrix leg, whether that leg's own platform/Python distribution
+  is already there -- this second check is the actual correctness fix, because
+  ``anaconda/actions/upload-package`` has no ``skip-existing`` equivalent, only
+  ``force:`` (never set), so re-uploading a file it already has fails outright
+  rather than being absorbed. The ``macos-26-intel`` leg is the exception: the
+  action's CLI download returns 404 there, so its "Upload conda packages to
+  Anaconda (Intel)" step runs ``anaconda upload --skip-existing`` instead
+  (:issue:`2044`), which skips
+  such a file. The ``windows-latest`` leg's "Upload conda packages to Anaconda
+  (Windows)" makes the same call (:issue:`2060`). Conda Update's Intel and
+  Windows legs run the same steps, so they keep a file anaconda.org already has,
+  where the action's ``force: true`` on its other legs replaces it.
+
+These evidence checks all run inside ``version_check``, curling PyPI's and
+Anaconda's public, unauthenticated JSON APIs; the per-leg check runs inside
+``conda`` itself, once per matrix leg, against the same Anaconda endpoint.
+
+The PyPI and Anaconda counts are of the tiers the version was released with.
+Until its ``v*`` tag exists, that is this run's
+:file:`.github/python-versions.toml`; once it does, ``version_check`` reads the
+file at the tag's commit with that commit's ``util/python_versions.py``. A
+supported version added since (:issue:`1660`)
+was never built for the
+release, and counting it would read a finished release as incomplete, run the
+gate and ``pypi``, and fail `One Commit per Release`_'s tag check on every run
+until the next release. A tag older than the file, as ``v1.5.0b12`` is, counts
+the tiers the file was added with, which the change for :issue:`1660` copied unchanged from the
+workflows of the time.
+The Anaconda count's platforms follow the same rule, from the ``SUBDIRS`` line
+of :file:`util/release_published.py` at the tag's commit or, for a tag older
+than that file, the line it was added with, so a version released before
+``win-64`` was published is not read as lacking it (:issue:`2060`).
+
+On the tag-push path ``startsWith(github.ref_name, 'v')`` bypasses the
+evidence check unconditionally; on the ``workflow_run`` path it falls through
+to whichever evidence that job owns.
+
+The Skip-Cascade Guard
+----------------------
+
+``tag``, ``pypi`` and ``conda`` each depend on ``github`` (and ``conda`` also
+on ``tag``), and GitHub Actions skips a job whose ``needs:`` included a job
+that itself skipped -- *before* that job's own ``if:`` is even evaluated --
+unless the ``if:`` calls a status-check function itself. ``github``
+legitimately skips whenever its own tag already exists, which is exactly the
+retry case this guard is for. Left alone, that skip would cascade: ``pypi``'s
+own evidence might correctly say "not yet on PyPI, please run", but the
+default status check GitHub Actions prepends to an ``if:`` that does not
+itself call a status-check function -- effectively ``success()`` over
+``needs:`` -- would still skip it, because ``github`` did not *succeed* in
+this run, it *skipped*.
+
+``tag``, ``pypi`` and ``conda`` all guard against this the same way the
+other workflows gated on a test run already do for the identical problem --
+``cron-vendor.yml``, ``deploy-pages.yml`` and ``cron-conda.yml`` each open
+with ``!cancelled()`` and require ``needs.head.result != 'failure'`` (and, in
+``cron-conda.yml``, its ``mode`` job's success, :issue:`2060`), ``head`` being their
+call to ``cron-head.yml``, so that a skipped gate does not cascade-skip them,
+while an outright failure or a genuine run cancellation still does. ``tag``, ``pypi`` and ``conda`` are
+stricter about their *publishing* predecessors -- ``github``, and for
+``conda`` also ``tag``: ``!cancelled() && (needs.<job>.result == 'success' ||
+needs.<job>.result == 'skipped')``, not ``!= 'failure'``. The two spellings
+differ only when a predecessor's own result is ``cancelled``, which
+``!= 'failure'`` still admits and the equality pair does not. Concretely: if
+``tag`` is cancelled while the run itself is not, ``!= 'failure'`` would let
+``conda`` proceed into its check that ``conda-<version>+0`` names this run's
+commit, a tag ``tag`` never pushed, trading a clean skip for a failed step; the
+equality pair skips ``conda`` outright instead.
+
+``version_check`` is the exception, and deliberately so: ``tag``, ``pypi`` and
+``conda`` each require ``needs.version_check.result == 'success'`` with no
+``|| 'skipped'``. It produces the evidence the gates read, so a skipped or
+cancelled ``version_check`` leaves them nothing to decide on. ``unit-tests`` is
+held to the same bar for a different reason: it is the release test gate, and
+it skips when nothing is publishable
+(:issue:`1052`), so accepting
+``skipped`` there would publish untested. ``github`` names it in ``needs:`` instead and relies on the implicit
+``success()``. The gate's own ``if:`` is the union of the publishers'
+conditions, with ``!= 'true'`` so unknown evidence runs it; should the two
+ever drift apart, the failure is a release that did not happen, which
+``release_status`` reports loudly, never one that went out untested.
+
+The Release Pipeline
+--------------------
+
+.. mermaid::
+
+   flowchart TD
+       T1["push: tags v*<br/>ref_name starts with v"] --> VC
+       T2["workflow_run: Vendor Update completed<br/>ref_name = main"] --> VC
+       VC["version_check -- reads pcapkit.\_\_version\_\_<br/>computes each job's own evidence<br/>no gate, read-only"]
+       VC --> UT
+       UT["unit-tests -- Release test gate<br/>skipped when nothing is publishable"] --> GH
+       GH["github -- GitHub Release<br/>creates/attaches the v* tag<br/>THE ONLY APPROVAL"]
+       GH --> TG["tag -- Conda Tag<br/>conda-&lt;version&gt;+0 tag at github.sha<br/>then conda/build reset on main"]
+       GH --> PY["pypi -- build + publish<br/>OIDC trusted publishing"]
+       TG --> CD["conda -- build + upload<br/>matrix: OS x Python, per-leg evidence"]
+       GH --> CD
+       VC --> RS
+       UT --> RS
+       GH --> RS
+       TG --> RS
+       CD --> RS
+       PY --> RS
+       RS["release_status -- always runs<br/>reports why nothing released, or that it did"]
+       classDef gate stroke-dasharray:6 3,stroke-width:2px
+       class GH gate
+
+A transitive reduction: ``version_check`` and ``unit-tests`` are also direct
+``needs:`` of ``tag``, ``pypi`` and ``conda`` in the file, but ``github``
+already implies them (``github`` itself depends on both), so drawing them would
+add edges without changing which job can start before which. ``release_status``'s
+edges are drawn in full, since it depends directly on *every* job precisely so
+that it can run regardless of which of them skipped.
+
+Only ``github-release`` carries a required reviewer; ``conda-tag``,
+``pypi`` and ``anaconda`` kept their environments but had their reviewers
+removed on :issue:`887`, and ``release-app``, which no Create Release job names,
+has none either (`The Release App`_, :issue:`2648`).
+What still makes one approval mean *the whole release* is the ``needs:``
+graph: ``tag`` and ``pypi`` both depend on ``github``, and ``conda`` depends on
+``tag`` and ``github`` -- so nothing downstream of ``github`` can
+start before it is approved, and rejecting it leaves nothing tagged and
+nothing published. Without its ``needs: github``, ``tag``, which has no
+reviewer of its own, could push a commit to ``main`` and cut a ``conda-*`` tag
+*ahead of* the approval it is supposed to wait for.
+
+Precautions
+-----------
+
+.. warning::
+
+   **Do not gate a release job on whether the** ``v*`` **tag exists.** ``github``
+   creates the tag before ``pypi`` and ``conda`` upload, so a tag proves nothing
+   about whether the upload finished. A job keyed on ``PCAPKIT_TAG_EXISTS``
+   skips itself on a retry after a partial release, and the run finishes green
+   because skipped is not failed -- so nothing in the UI says the release did
+   not happen.
+
+   `Per-Job Evidence, Not a Shared Proxy`_
+   above is what prevents it: ``tag``, ``pypi`` and ``conda`` each check whether
+   *their own* artefact is missing rather than whether the ``v*`` tag exists, so an
+   incomplete release runs the jobs that did not finish instead of skipping them.
+   A half-finished release self-heals on re-running the run that tagged it
+   -- see `Recovery`_ below; a run created for a later commit releases nothing
+   instead, with a warning that names what is missing (`One Commit per Release`_).
+   ``release_status`` is the other half: it runs unconditionally and reports,
+   with a ``::notice``, a ``::warning`` or a failing ``::error``, why a run
+   released nothing or that it released something, so a stranded release is
+   never only a green checkmark, even if the evidence checks disagree with
+   reality.
+
+**Do not hand-make a tag to route around a stuck release.** This is narrower
+than "never tag by hand": pushing a *fresh* ``v<version>`` tag to start a
+release, as in `Ways to Start a Release`_, is fine. What is not sanctioned
+is deleting and re-pushing a tag that a stuck run already created, to force a
+retry. A ``git push`` of a tag ref that already points at the same commit
+produces no new event (documented GitHub Actions behaviour, not measured
+here), so the push only fires again after the tag is deleted -- which touches a
+ref the release automation owns, and lands the retry back on the tag-push path,
+where every job's guard is bypassed regardless of what has already gone out.
+Neither is worth the risk of a double upload to an index that cannot take one
+back, and neither is needed, since a plain re-run self-heals; see
+`Recovery`_ below.
+
+``environment: pypi`` **stays even though it has no reviewer.** ``pypi``
+publishes through PyPI's OIDC trusted publishing (the job's
+``environment: pypi`` and ``id-token: write``), and PyPI's trusted-publisher
+configuration can be scoped to a GitHub Actions environment name. If this
+project's publisher on PyPI is scoped that way, removing the ``pypi`` name
+-- not just its reviewer -- would break the upload with a claim mismatch;
+this is standard OIDC trusted-publishing behaviour, not checked against the
+publisher's PyPI-side configuration. Keep the name regardless: removing it gains
+nothing.
+
+``conda-tag`` **writes to** ``main``\ **, so a release is not read-only on the
+branch.** After cutting ``conda-<version>+0`` at the run's commit, the
+``tag`` job pushes a commit setting :file:`conda/build` to ``0`` on top of
+``main`` (its "Reset Build Number" step) -- a plain
+fast-forward push, never a rewrite -- so the next Conda Update bump of that
+version is ``+1``. There is none when the run's commit is not on ``main``, nor
+when ``main``'s tip already says ``0`` (the usual case, since
+:file:`util/bump_version.py` writes ``0``) or carries another ``__version__``,
+nor when origin already has a ``conda-<version>+N`` tag other than ``+0``,
+since rewinding the counter would then reuse a tagged build number; the first
+and last warn. :issue:`1634`'s own shape -- three Conda Update bumps that :issue:`1632`
+left untagged -- gets
+the reset: ``main``'s 3 becomes 0. A rejected push is retried from a fresh
+fetch, three times at most. Approving ``github-release`` therefore also
+approves a commit landing on the default branch, not only the artefacts.
+
+Recovery
+--------
+
+The sanctioned recovery from a failed or partial release run is re-running
+that run (**Re-run failed jobs**), not deleting and re-pushing a tag by hand,
+for the reasons above; a run created for a later commit will not finish it
+(`One Commit per Release`_). A run whose ``github`` was refused created no
+tag, so re-running it once the App is set up (`The Release App`_) starts its
+release rather than re-tagging it. A re-run is a real fix, since under
+`Per-Job Evidence, Not a Shared Proxy`_ ``tag``, ``pypi`` and ``conda`` each check
+whether *their own* artefact is missing, so it finishes whichever jobs did not
+complete instead of skipping them on the ``v*`` tag's mere existence. ``pypi`` is
+safe to re-run (``skip-existing: true``), and so is
+``conda``, because each matrix leg checks Anaconda for its own
+platform/Python distribution before uploading and skips only that leg's
+upload if it is already there. Neither replaces a file the GitHub Release
+already has (:issue:`1640`).
+
+A re-run repeats the tagged commit's own workflow, so it cannot upload
+Anaconda files that commit's ``conda`` legs cannot build: 1.5.0b14's
+``osx-64`` legs were broken at its tag (:issue:`2140`). Dispatching Conda Update
+with ``publish`` on ``main`` uploads every platform under a bumped build
+(:issue:`2060`). Like every Conda Update bump, it **packages only the tree of the**
+``v*`` **tag for** ``main``'s **version**, never ``main``'s own, taking
+:file:`conda/` and :file:`util/` from the bump it commits to ``main``: the recipe
+that can build what the tag's legs could not, and the scripts ``main``'s workflow
+calls (:issue:`2841`). So it works however far ``main`` has moved, and fails before
+pushing anything while that version has no tag or while the tag's
+:file:`pyproject.toml` names other dependencies than ``main``'s, which the bump's
+vendored requirements follow; a scheduled or ``workflow_run`` bump in either state
+stays green and uploads nothing (:doc:`workflows`). The warning a later commit's run posts for an
+unfinished release names that remedy wherever Anaconda files are missing.
+
+**A re-run does not need to be verified by hand against the PyPI and Anaconda
+listings, because** ``release_status`` **does it.** That job runs on every
+``Create Release`` attempt regardless of what else skipped, and reconciles
+each of ``github``/``tag``/``pypi``/``conda`` *against its own evidence*
+rather than demanding the same outcome from all of them -- a target counts as
+reconciled if it succeeded, or if it skipped *because* its own evidence
+already said it was done. That is what makes a self-heal reportable: a retry
+after a partial release legitimately produces a **mixed** result
+(``github``/``tag`` skipping because their artefacts exist while
+``pypi``/``conda`` finish the rest), and a check demanding uniformity would
+read that mix as the failure it exists to detect.
+
+With that reconciliation, ``release_status`` reports exactly one of:
+
+* nothing to release, because the trigger had nothing to do (quiet
+  ``::notice``);
+* nothing to release, because every target was already reconciled by skipping,
+  i.e. the version was already fully out before this run started (quiet
+  ``::notice``);
+* the release is fully out, because every target reconciled, whether by a fresh
+  full run or by the mixed self-heal above (quiet ``::notice`` either way);
+* a release job failed or was cancelled outright (``::warning``, already
+  visible as a red job elsewhere);
+* at least one target skipped despite its own evidence saying it is still
+  incomplete, and nothing else failed to explain that (``::error``, and the job
+  itself fails) -- the shape
+  :issue:`888` was actually
+  about.
+
+That last case should be unreachable, since a target's own incomplete evidence
+is what makes its job run rather than skip; reaching it means those checks need
+attention, not that the release needs a hand-rolled recovery.

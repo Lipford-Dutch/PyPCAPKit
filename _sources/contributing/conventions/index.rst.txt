@@ -1,0 +1,74 @@
+House Conventions
+=================
+
+.. important::
+
+   The pages below record **design rulings** for :mod:`pcapkit`: decisions not
+   derivable from the code, which a maintainer or an automated contributor would
+   otherwise rediscover from a closed issue thread. Each ruling names where it
+   was settled.
+
+   What each page governs:
+
+   * :ref:`mint-criterion` -- :mod:`pcapkit.const`;
+   * :ref:`sentinel-convention` -- :mod:`pcapkit.corekit`;
+   * :ref:`registry-protocol` -- :mod:`pcapkit.const` again, the registration
+     wrappers of :mod:`pcapkit.foundation.registry`, how a ``make()`` field holding
+     an enumeration resolves, and the value a protocol's
+     :meth:`~pcapkit.protocols.protocol.Protocol.__index__` returns;
+   * :ref:`extension-header-subclassing` -- a protocol class hierarchy;
+   * :ref:`protocol-family-grouping` -- how a protocol family's base and members
+     spell :meth:`~pcapkit.protocols.protocol.Protocol.id`, how a protocol's
+     package, modules and classes are named and imported, and how quietly a
+     next-layer fallback keeps a refused layer as
+     :class:`~pcapkit.protocols.misc.raw.protocol.Raw`;
+   * :ref:`protocol-member-order` -- the order of members in a protocol class body,
+     and the section comment each member of any class sits under;
+   * :ref:`protocol-layer-placement` -- which subpackage a dissector belongs in;
+   * :ref:`process` -- the repository rather than any of its code;
+   * :ref:`documentation` -- the prose itself, on these pages and in the API
+     reference, rather than any code at all;
+   * :ref:`test-coverage` -- what the test suite has to prove, and what a
+     :mod:`pcapkit.dumpkit` dumper writes;
+   * :ref:`utilities-or-corekit` -- which of :mod:`pcapkit.utilities` and
+     :mod:`pcapkit.corekit` a support module belongs in, how a ``utilities``
+     module is named, where a context variable lives, where a schema helper used
+     outside the schema layer or outside its own protocol lives, where a format
+     constant or a helper referenced beyond its own protocol lives, where a
+     protocol's other constants live, and what reads a capture cut;
+   * :ref:`reassembly-integration` -- :mod:`pcapkit.foundation.reassembly` and what a
+     new engine there needs from :mod:`pcapkit.toolkit` and
+     :mod:`pcapkit.foundation.analysis`, how its callbacks and those of
+     :mod:`pcapkit.foundation.traceflow` run, and how an engine feeds each
+     reassembler and flow tracer;
+   * :ref:`const-vendor-pairing` -- :mod:`pcapkit.const`, the
+     :mod:`pcapkit.vendor` crawler each module needs, and how a package of it
+     imports its modules;
+   * :ref:`public-signatures` -- how a public function or class of
+     :mod:`pcapkit.interface`, :mod:`pcapkit.foundation` or
+     :mod:`pcapkit.protocols` takes its arguments, and which settings are
+     options rather than ``PCAPKIT_*`` tunables.
+
+   **A ruling that stays in its thread is a ruling that gets rediscovered.** So
+   a question answered in a way the code cannot express on its own -- a
+   classification, a naming rule, a deliberate asymmetry -- is written onto
+   the page that covers it in the same change that implements it, on the
+   owner's standing ask on :issue:`918`.
+
+.. toctree::
+   :maxdepth: 1
+
+   mint-criterion
+   sentinel-convention
+   registry-protocol
+   extension-header-subclassing
+   protocol-family-grouping
+   protocol-member-order
+   protocol-layer-placement
+   process
+   documentation
+   test-coverage
+   utilities-or-corekit
+   reassembly-integration
+   const-vendor-pairing
+   public-signatures

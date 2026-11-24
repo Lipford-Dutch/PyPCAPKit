@@ -1,0 +1,89 @@
+Linux "Cooked" Capture Encapsulation v2
+=========================================
+
+.. module:: pcapkit.protocols.link.linux_sll2
+.. module:: pcapkit.protocols.link.linux_sll2.protocol
+
+:mod:`pcapkit.protocols.link.linux_sll2.protocol` contains
+:class:`~pcapkit.protocols.link.linux_sll2.protocol.LinuxSLL2`
+only, which implements the extractor for the Linux "cooked" capture
+encapsulation v2 [*]_ of ``LINKTYPE_LINUX_SLL2``, whose structure is:
+
+.. table::
+
+   ====== ===== ================================ ================================
+   Octets Bits  Name                             Description
+   ====== ===== ================================ ================================
+   0          0 ``linux_sll2.protocol_type``     Protocol (Internet Layer)
+   ------ ----- -------------------------------- --------------------------------
+   2         16 ``linux_sll2.reserved``          Reserved
+   ------ ----- -------------------------------- --------------------------------
+   4         32 ``linux_sll2.interface_index``   Interface Index
+   ------ ----- -------------------------------- --------------------------------
+   8         64 ``linux_sll2.arphrd_type``       ARP Hardware Type
+   ------ ----- -------------------------------- --------------------------------
+   10        80 ``linux_sll2.packet_type``       Packet Type
+   ------ ----- -------------------------------- --------------------------------
+   11        88 ``linux_sll2.link_addr_length``  Link-Layer Address Length
+   ------ ----- -------------------------------- --------------------------------
+   12        96 ``linux_sll2.link_addr``         Link-Layer Address (padded)
+   ====== ===== ================================ ================================
+
+Unlike v1, ``protocol_type`` comes first, ``interface_index`` is new, and
+``packet_type`` and ``link_addr_length`` are 1 octet rather than 2. See
+:class:`~pcapkit.protocols.link.linux_sll1.protocol.LinuxSLL1` for v1; next-layer
+dispatch is shared, see :mod:`~pcapkit.protocols.link.linux_sll.protocol`. Its
+:meth:`~pcapkit.protocols.link.linux_sll2.protocol.LinuxSLL2.id` is
+``('LinuxSLL2',)``, and its
+:attr:`~pcapkit.protocols.link.linux_sll2.protocol.LinuxSLL2.alias` is ``'LINUX_SLL2'``;
+see :ref:`linux-sll-labels`.
+
+.. versionadded:: 1.6.0
+
+.. autoclass:: pcapkit.protocols.link.linux_sll2.protocol.LinuxSLL2
+   :no-members:
+   :show-inheritance:
+
+   .. rubric:: Properties
+
+   .. autoproperty:: name
+   .. autoproperty:: alias
+   .. autoproperty:: info_name
+   .. autoproperty:: length
+   .. autoproperty:: protocol
+
+   .. rubric:: Methods
+
+   .. automethod:: id
+   .. automethod:: read
+   .. automethod:: make
+
+   .. rubric:: Data Models
+
+   .. automethod:: __index__
+
+   .. rubric:: Utilities
+
+   .. automethod:: _make_data
+
+Header Schemas
+--------------
+
+.. module:: pcapkit.protocols.link.linux_sll2.schema
+
+.. autoclass:: pcapkit.protocols.link.linux_sll2.schema.LinuxSLL2
+   :members:
+   :show-inheritance:
+
+Data Models
+-----------
+
+.. module:: pcapkit.protocols.link.linux_sll2.data
+
+.. autoclass:: pcapkit.protocols.link.linux_sll2.data.LinuxSLL2
+   :members:
+   :show-inheritance:
+
+.. rubric:: Footnotes
+
+.. [*] https://www.tcpdump.org/linktypes/LINKTYPE_LINUX_SLL2.html

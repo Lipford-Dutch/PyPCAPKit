@@ -1,0 +1,263 @@
+.. _test-coverage:
+
+Testing a Change
+----------------
+
+What the test suite has to prove, and what a change has to bring to it. The owner
+set the direction on :issue:`1203`: every round trip the library offers must pass and
+match exactly, the tests must cover all of them, and the rules belong on a page rather
+than in review threads. :issue:`1202` extended round-trip coverage past the
+:term:`registries <registry>`, to the
+:mod:`pcapkit.corekit` fields, schemas and ``Info``, the :mod:`pcapkit.foundation`
+reassembly, flow tracing, engines and :term:`registries <registry>`, and the output
+formats.
+
+Round-Trip Invariants
+~~~~~~~~~~~~~~~~~~~~~
+
+**A round trip either reproduces its input exactly or is a recorded defect.** There is
+no tolerance in between: a cycle that comes back with different octets is a bug, even
+when both halves are internally consistent, and so is one whose parsed values differ:
+``from_data(info).info`` equals ``info``, for a cut header too (:issue:`2761`).
+
+Coverage is **enumerated from the registries rather than hand-picked**, so a code
+registered tomorrow gets a case tomorrow. The registry-driven suites that carry a
+known-failure table keep their cases in a generator, beside the captures it also writes:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 34 30 36
+
+   * - Suite
+     - Cases from
+     - Asserts
+   * - :file:`tests/protocols/test_option_roundtrip_unit.py`
+     - :file:`examples/generators/options.py`, from its family modules under
+       :file:`examples/generators/option_families/`, one per protocol
+     - every option, chunk, parameter, message, frame and block code survives construct
+       -> parse -> construct with identical octets; known failures in
+       ``EXPECTED_FAILURES``
+   * - :file:`tests/protocols/test_dispatch_registry_unit.py`
+     - :file:`examples/generators/dispatch.py`, from its family modules under
+       :file:`examples/generators/dispatch_families/`, one per ``__proto__`` table,
+       per tables registered together, or per member of the versioned family base
+       owning a table
+     - every ``__proto__`` entry dispatches to the class its family module's
+       ``PINNED_TARGETS`` names; known degrades in
+       ``DispatchRegistryTests.KNOWN_DEGRADED``, which the generator's own
+       ``KNOWN_DEGRADED`` mirrors for its command-line report (:issue:`496`)
+
+What an unrelated change adds to these suites lands in a file of its own or on a line
+of its own, so that concurrent changes do not edit the same lines: a family goes in a
+module of its generator's family directory, and a :mod:`pcapkit.const` registry is a
+line in its package's module under :file:`tests/const/census/`. Where a table stays one
+file, as ``NOT_A_COPY`` and ``UNRELATED`` in
+:file:`tests/project/test_rfc_constants_one_home_1739_unit.py` and
+``CRAWLERS_WITH_CONSTANT_MISS_LINES`` in
+:file:`tests/vendor/test_vendor_missing_body_unit.py` do, it is sorted. A sweep holds
+what it finds to these records by name rather than to a pinned count -- split under
+:issue:`2615`.
+
+The rules those tables carry:
+
+*  **Every registered code has a case.** ``test_every_registered_code_has_a_case``
+   fails otherwise, and so does ``test_every_option_registry_has_a_family`` or
+   ``test_every_dispatch_table_has_a_family`` on a registry map no family exercises,
+   found from the tree's own maps rather than from the family modules. The option
+   suite's ``SKIP`` table, the merge of each family module's own ``SKIP``, is the only
+   exit, and each of its entries states why a case would assert nothing:
+   ``Multipath_TCP`` is the envelope of the ``tcp-mptcp`` family and would duplicate
+   one of its subtypes, and ``PadN`` under HOPOPT and IPv6-Opts emits the same
+   option-less header as ``Pad1``.
+   A code that fails is never skipped.
+*  **A failing case is an entry, never a changed argument.** An ``EXPECTED_FAILURES``
+   entry records the status, a failure-detail fragment narrow enough to match one
+   site, and the defect: the function, class or method that causes it, by name, and the
+   issue that tracks it.
+   Routing a case around a defect hides it: a generator that puts two parameters in
+   every HIP packet never constructs the unrepresentable length of a lone one
+   (:issue:`651`), which is why the generator's ``HIP_COPIES`` is one.
+   ``KNOWN_DEGRADED`` entries have a different shape -- the fragments of the probe's
+   ``'error'`` value the entry accepts, any one of which may match, and a reason -- and
+   they record why the probe's placeholder payload cannot reach the target, not a
+   defect to fix, so the name-and-issue rule does not apply to them.
+*  **A regression is fixed; a pre-existing defect is recorded.** A case that a change
+   breaks -- including a code it registers that does not close -- is fixed in that
+   change, not added to a table. A newly found defect that predates the change gets an
+   entry naming the function, class or method that causes it, as the failure message
+   asks, and an issue.
+*  **The tables are checked in both directions.** In the option suite, an entry whose
+   case starts passing turns ``test_round_trip_is_identity_or_a_recorded_gap`` red, and
+   one naming a case that no longer exists fails
+   ``test_expected_failures_name_real_cases``; the dispatch suite has the same pair. So
+   a fix deletes its entry in the same change.
+*  **The harness guards its own shape.** ``test_recorded_gaps_are_a_minority`` fails
+   once recorded failures reach half the option cases (the dispatch suite's
+   ``test_degraded_cases_are_a_small_minority`` draws the line at a quarter), since
+   that points at the harness rather than the library. Each case runs under
+   ``CASE_TIMEOUT``, 30 seconds in both suites, so a case that never finishes fails by
+   name instead of hanging the run.
+*  **A closed cycle is not proof of correctness.** A writer and a reader that share an
+   error round-trip perfectly: HIP's parameter padding (:issue:`651`) and IPv4's ``SID``
+   width (:issue:`534`) both closed the cycle while wrong. So a round trip is paired with
+   an assertion against the specification -- the RFC's own lengths, or a known-good
+   packet's field values.
+
+A lossless path that is not registry-shaped gets a capture-driven case instead:
+rebuild each layer with ``from_data`` and require the original octets back, as
+:file:`tests/protocols/test_declared_length_roundtrip_runtime.py` does for the
+declared lengths of a truncated capture.
+
+Registry Drift
+~~~~~~~~~~~~~~
+
+**A probe for a code the registry has not assigned is derived from the registry, never
+pinned.** A vendor refresh can assign a hard-coded *Unassigned* or *Reserved* code and
+turn the test red with no change to :mod:`pcapkit`. ``_missing_ranges`` in
+:file:`tests/protocols/application/test_tls_extensions_2514_unit.py` shows the pattern:
+it reads the ranges ``ExtensionType._missing_`` names *Unassigned*, and
+``test_names_and_ranges`` probes the lowest.
+
+Raising Coverage
+~~~~~~~~~~~~~~~~
+
+**Every change raises coverage, and each new test is shown to fail without its fix.**
+A test that also passes on the unfixed tree cannot tell the fix from its absence, so it
+pins nothing. Before opening the pull request, take the fix out, run the new test, put
+the fix back, and say in the pull request that you did. Diff the committed fix from the
+merge base, with three dots: a two-dot ``git diff origin/main`` also carries the commits
+``origin/main`` has and the branch lacks, as reverse deltas, and reverse-applying it
+undoes that work in the tree.
+
+.. code-block:: shell
+
+   git diff origin/main...HEAD -- pcapkit/ > /tmp/fix.diff
+   git apply -R /tmp/fix.diff
+   python -m pytest tests/<path>/test_<name>_unit.py -q    # must fail
+   git apply /tmp/fix.diff
+   python -m pytest tests/<path>/test_<name>_unit.py -q    # must pass
+
+CI measures the ``test`` job's Python 3.15 cell in
+:file:`.github/workflows/unit-tests.yml`, which runs the ``ALL`` tier, and each half
+of the ``LATEST`` tier in its ``test-latest-tier`` job, with branch coverage over
+:mod:`pcapkit` configured by :file:`.github/coverage.toml`; its ``coverage`` job
+combines them, and :file:`.github/workflows/coverage-comment.yml` posts the totals on
+the pull request. Locally, measure with ``coverage run`` rather than
+a pytest plugin, which this project does not install, and narrow at report time --
+``[tool.coverage.run]``'s ``source`` in :file:`pyproject.toml` takes precedence over
+``--include`` at run time:
+
+.. code-block:: shell
+
+   python -m coverage run -m pytest tests/<path>/test_<name>_unit.py -q
+   python -m coverage report --include='pcapkit/<path>/<name>.py'
+
+Running the Tests
+~~~~~~~~~~~~~~~~~
+
+*  **One module per process, never the whole suite.** Check a change by running the
+   modules it touches, each as its own ``python -m pytest <module> -q``, and leave the
+   whole tier to CI, whose ``test`` job spreads the unit tier over workers with
+   ``-n logical --dist load``. Every purge-then-import leaves the previous generation
+   of :mod:`pcapkit` behind as garbage, and the whole suite in one plain-unittest
+   process runs out of memory -- :file:`util/run_unittest_leg.py` records the
+   measurement.
+*  **Read the summary line, not the exit code.** pytest's last line
+   (``N passed, M failed``) and unittest's ``OK`` or ``FAILED (...)`` are the result;
+   an exit code read through a pipe or a wrapper is the pipe's or the wrapper's.
+*  **Keep to the tiers.** The unit tier must pass on a fresh clone with no generated
+   captures, installed as CI's ``test`` and ``unittest-ordering`` jobs install it,
+   ``pip install -e '.[test,DPKT,crypto,NGAP]'``; :file:`tests/integration/`, :file:`*_runtime.py` and
+   :file:`*_regression.py` are the fixture-dependent tier, run after ``make samples``.
+   A unit-tier module builds its own octets and never reads a generated capture --
+   :file:`tests/_tiers.py` enforces that at collection and on every ``sample_path``
+   call.
+*  **Import once per class.** A test class that needs a fresh :mod:`pcapkit` calls
+   ``reimport_once_per_class(self)`` from ``setUp``, in place of a per-test
+   ``purge_modules``, which re-imported the package before every test and dominated
+   the suite's time (:issue:`1065`). Both live in :file:`tests/_support.py`; pass
+   ``restore=True`` when the class must leave :data:`sys.modules` as it found it.
+
+   A class whose tests each need their own import purges in ``setUp`` instead of
+   calling the helper, and says why in a comment there: ``ConstEnumRegisterFallbackTests``
+   in :file:`tests/const/test_const_enum_builtin_parity.py` does, because a lookup in
+   one test grows the registries' tables the next one reads. Calling the helper and
+   then purging the whole package, later in ``setUp`` or in ``tearDown``, throws the
+   class's import away while reading as if it kept it;
+   :file:`tests/project/test_per_class_import_guard.py` fails on that (:issue:`1538`).
+*  **Check ordering under plain unittest.** :file:`tests/conftest.py` heals cross-module
+   import pollution after every test, so pytest alone cannot see it (:issue:`981`).
+   :file:`util/run_unittest_leg.py` runs one :file:`tests/` subdirectory, then the
+   root-level modules, in one plain-unittest process, which is what CI's
+   ``unittest-ordering`` job does per leg. Run it on the directory a change touches
+   when the change moves imports or module state:
+
+   .. code-block:: shell
+
+      python util/run_unittest_leg.py protocols/internet
+      python util/run_unittest_leg.py protocols --exclude protocols/internet --part 1
+      python util/run_unittest_leg.py protocols --exclude protocols/internet --part 2
+      python util/run_unittest_leg.py protocols --exclude protocols/internet --part 3
+      python util/run_unittest_leg.py project --part 1
+      python util/run_unittest_leg.py project --part 2
+      python util/run_unittest_leg.py project --part 3
+
+   The leg list lives in the workflow, not the script. Every :file:`tests/`
+   subdirectory is a leg except :file:`tests/integration/`, which holds no unit-tier
+   module and runs under pytest in the ``integration`` job;
+   :file:`tests/project/test_unittest_ordering_shards.py` fails on a subdirectory
+   left out (:issue:`2115`).
+
+Adding a Protocol, Option or Dumper
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+What each must bring in tests, on top of the fail-without-fix proof above:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 18 82
+
+   * - Adding
+     - Must bring
+   * - an option-like code
+     - Registering it gives it a case automatically. Add arguments where the
+       ``_make_*`` defaults are degenerate to the tables of its protocol's module under
+       :file:`examples/generators/option_families/`. A registry map no family exercises
+       takes a ``Family`` in that module's ``FAMILIES``, or a module of its own for a
+       protocol without one, which ``test_every_option_registry_has_a_family``
+       enforces. Its cycle closes before it merges.
+   * - a protocol
+     - A unit-tier :file:`tests/protocols/<layer>/test_<name>_unit.py` that builds its
+       own octets, asserts construct -> parse -> construct identity, and checks a parse
+       against the specification's field values. A ``__proto__`` registration also
+       needs its ``PINNED_TARGETS`` entry in its family's module under
+       :file:`examples/generators/dispatch_families/`, which
+       ``test_every_case_has_a_pinned_target`` enforces. A protocol with a dispatch
+       registry of its own, as :class:`~pcapkit.protocols.link.frad.protocol.FRAD`,
+       :class:`~pcapkit.protocols.link.loopback.protocol.Loopback` and
+       :class:`~pcapkit.protocols.link.linux_sll.protocol.LinuxSLL` have, also needs a
+       ``Family`` probing that ``__proto__`` table once it holds an entry, in a module
+       of its own there, which ``test_every_dispatch_table_has_a_family`` enforces;
+       another family whose probe passes through the table does not count
+       (:issue:`2592`). Where a versioned family base owns the table, each member
+       takes a family of its own, as
+       :class:`~pcapkit.protocols.link.linux_sll1.protocol.LinuxSLL1` and
+       :class:`~pcapkit.protocols.link.linux_sll2.protocol.LinuxSLL2` do, which
+       ``test_a_versioned_base_table_has_a_family_per_member`` enforces. A
+       :mod:`pcapkit.const` registry it adds is a line in its package's module under
+       :file:`tests/const/census/`, in sorted order, or a module of its own there for a
+       package without one; every const sweep compares what it finds against the
+       census, and names a registry it lacks.
+   * - a dumper
+     - Unit tests under :file:`tests/dumpkit/` asserting the output exactly, and a case
+       in :file:`tests/integration/test_output_formats.py` for the file that lands on
+       disk. That a format :mod:`pcapkit` also reads reproduces its input -- PCAP
+       byte for byte, PCAP-NG packet for packet -- is asserted over every sample
+       capture by :file:`tests/dumpkit/test_capture_dump_runtime.py` (:issue:`1202`).
+
+**A dumper writes the records it is given**, with their interfaces and options, rather
+than re-emitting every block of an input file byte for byte. :mod:`pcapkit.dumpkit`
+serves flow tracing and reassembly output, and the parser already keeps an input's
+context blocks, as the PCAP-NG engine's
+:class:`~pcapkit.foundation.engines.pcapng.Context` does. Ruled by the owner on
+:issue:`2835`. So a dump that leaves those blocks out is not a failed round trip.

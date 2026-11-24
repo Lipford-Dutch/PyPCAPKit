@@ -1,0 +1,1863 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html">
+
+    <!-- Generated with Sphinx 9.2.0 and Furo 2025.12.19 -->
+        <title>pcapkit.foundation.reassembly.tcp - PyPCAPKit</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mermaid.css?v=10b7d883" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --font-stack: Georgia, serif;
+  --font-stack--monospace: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --font-stack: Georgia, serif;
+  --font-stack--monospace: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --font-stack: Georgia, serif;
+  --font-stack--monospace: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">PyPCAPKit</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  <span class="sidebar-brand-text">PyPCAPKit</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../pcapkit/index.html">Module Documentation</a><input aria-label="Toggle navigation of Module Documentation" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/interface/index.html">User Interface</a><input aria-label="Toggle navigation of User Interface" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/interface/core.html">Core Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/interface/misc.html">Auxiliary Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/index.html">Library Foundation</a><input aria-label="Toggle navigation of Library Foundation" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/foundation/extraction.html">File Extractor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/foundation/options.html">Extraction Options</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/engines/index.html">Engine Support</a><input aria-label="Toggle navigation of Engine Support" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/engines/engine.html">Base Engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/engines/builtin.html">Built-in Engines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/engines/3rdparty.html">3rd-Party Engines</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/index.html">Packets Reassembly</a><input aria-label="Toggle navigation of Packets Reassembly" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/reassembly.html">Reassembly Base Class</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/ip/index.html">IP Datagram Reassembly</a><input aria-label="Toggle navigation of IP Datagram Reassembly" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/ip/ip.html">IP Reassembly Base Class</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/ip/ipv4.html">IPv4 Datagram Reassembly</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/ip/ipv6.html">IPv6 Datagram Reassembly</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/tcp.html">TCP Datagram Reassembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/reassembly/dtls.html">DTLS Handshake-Message Reassembly</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/analysis/index.html">Reassembled Payload Analysis</a><input aria-label="Toggle navigation of Reassembled Payload Analysis" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/analysis/ip.html">IP Datagram Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/analysis/tcp.html">TCP Datagram Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/analysis/dtls.html">DTLS Handshake-Message Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/foundation/traceflow/index.html">Flow Tracing</a><input aria-label="Toggle navigation of Flow Tracing" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/traceflow/traceflow.html">Flow Tracing Base Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/foundation/traceflow/tcp.html">Follow TCP Stream</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/foundation/registry.html">Registry Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/index.html">Protocol Family</a><input aria-label="Toggle navigation of Protocol Family" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/protocols/protocol.html">Root Protocol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/link/index.html">Link Layer</a><input aria-label="Toggle navigation of Link Layer" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/link.html">Link Layer Base Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/ethernet.html">Ethernet Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/arp.html">ARP - Address Resolution Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/inarp.html">InARP - Inverse Address Resolution Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/frad.html">FRAD - Frame Relay Access Device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/gre.html">GRE - Generic Routing Encapsulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/ieee802_11.html">IEEE 802.11 - Wireless LAN MAC Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/l2tp.html">L2TP - Layer Two Tunnelling Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/l2tpv2.html">L2TPv2 - Layer Two Tunnelling Protocol Version 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/linux_sll.html">LinuxSLL - Linux “Cooked” Capture Encapsulation Family</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/linux_sll1.html">Linux “Cooked” Capture Encapsulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/linux_sll2.html">Linux “Cooked” Capture Encapsulation v2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/loopback.html">BSD Loopback Encapsulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/netlink.html">Netlink - Linux Netlink Socket Framing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/ppp.html">PPP - Point-to-Point Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/pppoe.html">PPPoE - PPP over Ethernet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/radiotap.html">Radiotap - IEEE 802.11 Radiotap Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/vlan.html">VLAN - 802.1Q/802.1ad VLAN Tag Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/c_tag.html">C_Tag - 802.1Q Customer VLAN Tag Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/link/s_tag.html">S_Tag - 802.1ad Service VLAN Tag Type</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/internet/index.html">Internet Layer</a><input aria-label="Toggle navigation of Internet Layer" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/internet.html">Internet Layer Base Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ip.html">IP - Internet Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv4.html">IPv4 - Internet Protocol Version 4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6.html">IPv6 - Internet Protocol Version 6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_ext.html">IPv6-Ext - IPv6 Extension Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_frag.html">IPv6-Frag - Fragment Header for IPv6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_opts.html">IPv6-Opts - Destination Options for IPv6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_route.html">IPv6-Route - Routing Header for IPv6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/hopopt.html">HOPOPT - IPv6 Hop-by-Hop Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipv6_option.html">IPv6 Options - Shared Option Helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/mh.html">MH - Mobility Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipsec.html">IPsec - Internet Protocol Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ah.html">AH - Authentication Header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/esp.html">ESP - Encapsulating Security Payload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/icmp.html">ICMP - Internet Control Message Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/icmpv4.html">ICMPv4 - Internet Control Message Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/icmpv6.html">ICMPv6 - Internet Control Message Protocol for IPv6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/hip.html">HIP - Host Identity Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/igmp.html">IGMP - Internet Group Management Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/igmpv1.html">IGMPv1 - Internet Group Management Protocol Version 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/igmpv2.html">IGMPv2 - Internet Group Management Protocol Version 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/igmpv3.html">IGMPv3 - Internet Group Management Protocol Version 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/internet/ipx.html">IPX - Internetwork Packet Exchange</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/transport/index.html">Transport Layer</a><input aria-label="Toggle navigation of Transport Layer" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/transport.html">Transport Layer Base Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/dccp.html">DCCP - Datagram Congestion Control Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/sctp.html">SCTP - Stream Control Transmission Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/tcp.html">TCP - Transmission Control Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/transport/udp.html">UDP - User Datagram Protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/application/index.html">Application Layer</a><input aria-label="Toggle navigation of Application Layer" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/application.html">Application Layer Base Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/dns.html">DNS - Domain Name System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/http.html">HTTP - Hypertext Transfer Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/httpv1.html">HTTP/1.* - Hypertext Transfer Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/httpv2.html">HTTP/2 - Hypertext Transfer Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ftp.html">FTP - File Transfer Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ftp_data.html">FTP_DATA - FTP Data Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ngap.html">NGAP - NG Application Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ospf.html">OSPF - Open Shortest Path First</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/rarp.html">RARP - Reverse Address Resolution Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/drarp.html">DRARP - Dynamic Reverse Address Resolution Protocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/ssl.html">SSL - Secure Sockets Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/sslv2.html">SSLv2 - Secure Sockets Layer Version 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/tls.html">TLS/SSL - Transport Layer Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/sslv3.html">SSLv3 - Secure Sockets Layer Version 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/application/dtls.html">DTLS - Datagram Transport Layer Security</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/protocols/misc/index.html">Auxiliary Protocols</a><input aria-label="Toggle navigation of Auxiliary Protocols" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/pcap.html">PCAP File Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/pcapng.html">PCAP-NG File Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/raw.html">Raw Packet Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/no_payload.html">No-Payload Packet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/protocols/misc/checksum.html">Checksums</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/utilities/index.html">Module Utilities</a><input aria-label="Toggle navigation of Module Utilities" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/exceptions.html">User Defined Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/warnings.html">User Defined Warnings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/logging.html">Logging System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/config.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/chardet.html">Character Set Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/datetime.html">Timestamp Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/pickle.html">Pickle Reductions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/contextvars.html">Shared Context Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/importlib.html">Lazy Imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/inspect.html">Abstract Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/utilities/callbacks.html">Running Callbacks</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/index.html">Core Utilities</a><input aria-label="Toggle navigation of Core Utilities" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/fields/index.html">Protocol Fields</a><input aria-label="Toggle navigation of Protocol Fields" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/field.html">Base Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/numbers.html">Numerical Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/strings.html">Text Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/ipaddress.html">IP Address Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/collections.html">Container Fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/fields/misc.html">Miscellaneous Fields</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/checksum/index.html">Checksums</a><input aria-label="Toggle navigation of Checksums" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/checksum/internet.html">Internet Checksum</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/const/index.html">Shared Format Constants</a><input aria-label="Toggle navigation of Shared Format Constants" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/const/capture.html">Capture-Format Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/const/ipheader.html">IP Header Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/const/tcpheader.html">TCP Header Constants</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/context.html">Parsing Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/decorators.html">Decorator Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/enum.html">Enumeration Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/infoclass.html">Info Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/io.html">I/O Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/module.html">Module Descriptor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/multidict.html">Multi-Mapping Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/packet.html">Deferred Packet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/protochain.html">Protocol Chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/registry.html">Registry Helpers</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../pcapkit/corekit/schema/index.html">Schema Helpers</a><input aria-label="Toggle navigation of Schema Helpers" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/byteorder.html">Byte-Order Helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/extlen.html">Extension-Header Length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/ipaddress.html">IP Address Conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/jumbogram.html">Jumbo Payload Lookup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/padding.html">Padding Arithmetic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../pcapkit/corekit/schema/shortread.html">Short-Read Replay</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/sentinels.html">Sentinel Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/corekit/version.html">Version Info</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/toolkit/index.html">Compatibility Tools</a><input aria-label="Toggle navigation of Compatibility Tools" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/toolkit/builtin.html">Built-in Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/toolkit/3rdparty.html">3rd-Party Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/dumpkit/index.html">Dump Utilities</a><input aria-label="Toggle navigation of Dump Utilities" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" role="switch" type="checkbox"/><label for="toctree-checkbox-22"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/dumpkit/common.html">Common Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/dumpkit/pcap.html">PCAP Dumper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/dumpkit/pcapng.html">PCAP-NG Dumper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/dumpkit/null.html">Null Dumper</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/const/index.html">Constant Enumerations</a><input aria-label="Toggle navigation of Constant Enumerations" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" role="switch" type="checkbox"/><label for="toctree-checkbox-23"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/reg.html">Protocol Type Registry Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/arp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ARP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ieee802_11.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IEEE802_11</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/l2tp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">L2TP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/linux.html">Linux-Specific Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ppp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PPP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/pppoe.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PPPoE</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/radiotap.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Radiotap</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/vlan.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">VLAN</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/esp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ESP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/hip.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">HIP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/icmp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ICMPv4</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/icmpv6.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ICMPv6</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/igmp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IGMP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ipv4.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPv4</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ipv6.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPv6</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ipx.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPX</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/mh.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">MH</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/dccp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">DCCP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/sctp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCTP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/tcp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/dns.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">DNS</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ftp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FTP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/http.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ngap.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">NGAP</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/ospf.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSPF</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/sslv2.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLv2</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/tls.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSL</span></code> Constant Enumerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/const/pcapng.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAPNG</span></code> Constant Enumerations</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../pcapkit/vendor/index.html">Vendor Crawlers</a><input aria-label="Toggle navigation of Vendor Crawlers" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" role="switch" type="checkbox"/><label for="toctree-checkbox-24"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/default.html">Base Crawler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/reg.html">Protocol Type Registry Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/arp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ARP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ieee802_11.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IEEE802_11</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/l2tp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">L2TP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/linux.html">Linux-Specific Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ppp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PPP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/pppoe.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PPPoE</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/radiotap.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Radiotap</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/vlan.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">VLAN</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/esp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ESP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/hip.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">HIP</span></code> Vendor Crawler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/icmp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ICMPv4</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/icmpv6.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">ICMPv6</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/igmp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IGMP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ipv4.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPv4</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ipv6.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPv6</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ipx.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">IPX</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/mh.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">MH</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/dccp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">DCCP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/sctp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SCTP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/tcp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">TCP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/dns.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">DNS</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ftp.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">FTP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/http.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTP</span></code> Vendor Crawler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ngap.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">NGAP</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/ospf.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSPF</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/sslv2.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLv2</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/tls.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSL</span></code> Vendor Crawlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../pcapkit/vendor/pcapng.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAPNG</span></code> Vendor Crawlers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides &amp; Changelog</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../engines.html">Engine Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ext.html">Customisation &amp; Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../demo.html">How to …</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../glossary.html">Glossary</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../changelog.html">Changelog</a><input aria-label="Toggle navigation of Changelog" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" role="switch" type="checkbox"/><label for="toctree-checkbox-25"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.6.2.html">1.6.2 – 2026-11-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.6.1.html">1.6.1 – 2026-11-05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.6.0.html">1.6.0 – 2026-11-05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.5.1.html">1.5.1 – 2026-10-30</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.5.0.html">1.5.0 – 2026-10-29</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.4.1.html">1.4.1 – 2026-08-22</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.4.0.html">1.4.0 – 2026-08-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.5.html">1.3.5 – 2024-11-16</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.4.html">1.3.4 – 2024-11-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.3.html">1.3.3 – 2024-11-03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.1.html">1.3.1 – 2023-12-21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.3.0.html">1.3.0 – 2023-10-04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.2.2.html">1.2.2 – 2023-09-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.2.1.html">1.2.1 – 2023-08-27</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.2.0.html">1.2.0 – 2023-08-26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.1.1.html">1.1.1 – 2023-08-15</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.1.0.html">1.1.0 – 2023-07-09</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.0.3.html">1.0.3 – 2023-06-29</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.0.2.html">1.0.2 – 2023-06-05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.0.1.html">1.0.1 – 2023-05-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/1.0.0.html">1.0.0 – 2023-05-09</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.16.3.html">0.16.3 – 2022-10-31</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.16.2.html">0.16.2 – 2022-08-03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.16.1.html">0.16.1 – 2022-06-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.16.0.html">0.16.0 – 2022-05-31</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.5.html">0.15.5 – 2020-10-11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.4.html">0.15.4 – 2020-08-28</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.3.html">0.15.3 – 2020-08-17</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.2.html">0.15.2 – 2020-06-27</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.1.html">0.15.1 – 2020-06-18</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.15.0.html">0.15.0 – 2020-06-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.5.html">0.14.5 – 2019-10-24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.4.html">0.14.4 – 2019-09-01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.3.html">0.14.3 – 2019-08-08</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.2.html">0.14.2 – 2019-03-28</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.1.html">0.14.1 – 2019-03-07</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.14.0.html">0.14.0 – 2019-03-02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.13.3.html">0.13.3 – 2019-02-26</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.13.2.html">0.13.2 – 2019-01-24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.13.1.html">0.13.1 – 2019-01-23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog/0.13.0.html">0.13.0 – 2018-12-08</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contributing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/testing.html">Testing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../contributing/conventions/index.html">House Conventions</a><input aria-label="Toggle navigation of House Conventions" class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" role="switch" type="checkbox"/><label for="toctree-checkbox-26"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/mint-criterion.html">Minting an Unrecognised Value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/sentinel-convention.html">Naming a Sentinel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/registry-protocol.html">The Registry Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/extension-header-subclassing.html">Extension-Header Base Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/protocol-family-grouping.html">Protocol Family Grouping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/protocol-member-order.html">Protocol Member Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/protocol-layer-placement.html">Protocol Layer Placement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/process.html">Running the Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/documentation.html">Writing the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/test-coverage.html">Testing a Change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/utilities-or-corekit.html">Choosing Between <code class="docutils literal notranslate"><span class="pre">utilities</span></code> and <code class="docutils literal notranslate"><span class="pre">corekit</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/reassembly-integration.html">Reassembly Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/const-vendor-pairing.html">Const-Vendor Pairing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/conventions/public-signatures.html">Public Signatures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/releasing.html">Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/workflows.html">GitHub Actions Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/maintenance.html">Maintenance Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/pep.html">Help Wanted</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Source code for pcapkit.foundation.reassembly.tcp</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">"""TCP Datagram Reassembly</span>
+<span class="sd">=============================</span>
+
+<span class="sd">.. module:: pcapkit.foundation.reassembly.tcp</span>
+
+<span class="sd">:mod:`pcapkit.foundation.reassembly.tcp` contains</span>
+<span class="sd">:class:`~pcapkit.foundation.reassembly.tcp.TCP` only,</span>
+<span class="sd">which reconstructs fragmented TCP packets back to origin.</span>
+
+<span class="sd">"""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.const.reg.apptype</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransportProtocol</span> <span class="k">as</span> <span class="n">Enum_TransportProtocol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.foundation.analysis.tcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">_analyze_payload</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.foundation.reassembly.data.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Completion</span><span class="p">,</span> <span class="n">Deferred</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.foundation.reassembly.data.tcp</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">HOLE_OPEN_BOUND</span><span class="p">,</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">BufferID</span><span class="p">,</span> <span class="n">Datagram</span><span class="p">,</span>
+                                                    <span class="n">DatagramID</span><span class="p">,</span> <span class="n">Fragment</span><span class="p">,</span> <span class="n">HoleDescriptor</span><span class="p">,</span> <span class="n">Packet</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.foundation.reassembly.reassembly</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReassemblyBase</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.protocols.transport.tcp.protocol</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCP</span> <span class="k">as</span> <span class="n">TCP_Protocol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Type</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pcapkit.const.reg.apptype</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCP</span> <span class="k">as</span> <span class="n">AppType_TCP</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'TCP'</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="TCP">
+<a class="viewcode-back" href="../../../../pcapkit/foundation/reassembly/tcp.html#pcapkit.foundation.reassembly.tcp.TCP">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TCP</span><span class="p">(</span><span class="n">ReassemblyBase</span><span class="p">[</span><span class="n">Packet</span><span class="p">,</span> <span class="n">Datagram</span><span class="p">,</span> <span class="n">BufferID</span><span class="p">,</span> <span class="n">Buffer</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Reassembly for TCP payload.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        strict: if :data:`True`, report a datagram that is not completely</span>
+<span class="sd">            reassembled as the tuple of its received runs; otherwise as one</span>
+<span class="sd">            contiguous payload, its holes zero-filled</span>
+<span class="sd">        store: if store reassembled datagram in memory, i.e.,</span>
+<span class="sd">            :attr:`self._dtgram &lt;pcapkit.foundation.reassembly.reassembly.Reassembly._dtgram&gt;`</span>
+<span class="sd">            (if not, datagram will be discarded after callback)</span>
+<span class="sd">        timeout: reassembly timeout in seconds, on the capture's own clock;</span>
+<span class="sd">            :data:`None` selects :attr:`__timeout__`, which for TCP disables</span>
+<span class="sd">            expiry</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from pcapkit.foundation.reassembly.tcp import TCP</span>
+<span class="sd">        # Initialise instance:</span>
+<span class="sd">        &gt;&gt;&gt; tcp_reassembly = TCP()</span>
+<span class="sd">        # Call reassembly:</span>
+<span class="sd">        &gt;&gt;&gt; tcp_reassembly(packet_dict)</span>
+<span class="sd">        # Fetch result:</span>
+<span class="sd">        &gt;&gt;&gt; result = tcp_reassembly.datagram</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        There are two coordinate systems in play here, and keeping them apart</span>
+<span class="sd">        matters. Sequence numbers -- in the :term:`hole descriptor list</span>
+<span class="sd">        &lt;reasm.tcp.buffer&gt;` of :rfc:`815`, and in each payload buffer's own</span>
+<span class="sd">        :attr:`~pcapkit.foundation.reassembly.data.tcp.Fragment.gap` and</span>
+<span class="sd">        :attr:`~pcapkit.foundation.reassembly.data.tcp.Fragment.conflict` lists</span>
+<span class="sd">        -- are kept **unwrapped**, inclusive of both bounds: every arriving</span>
+<span class="sd">        sequence number is read modulo ``2 ** 32`` relative to the data</span>
+<span class="sd">        already buffered under its buffer ID, per :rfc:`9293#section-3.4`, and</span>
+<span class="sd">        placed on one unbounded integer line. A connection that crosses</span>
+<span class="sd">        ``2 ** 32`` therefore continues at ``2 ** 32`` rather than back at</span>
+<span class="sd">        zero. A payload buffer, on the other hand, is indexed from zero, such</span>
+<span class="sd">        that</span>
+<span class="sd">        :attr:`buffer.raw[n] &lt;pcapkit.foundation.reassembly.data.tcp.Fragment.raw&gt;`</span>
+<span class="sd">        holds the octet with sequence number</span>
+<span class="sd">        :attr:`buffer.isn &lt;pcapkit.foundation.reassembly.data.tcp.Fragment.isn&gt;`</span>
+<span class="sd">        ``+ n``. :meth:`submit` converts between the two, subtracting that</span>
+<span class="sd">        buffer's initial sequence number from each gap bound, and reports</span>
+<span class="sd">        conflict ranges reduced back to modulo ``2 ** 32``.</span>
+
+<span class="sd">        The hole descriptor list is held once per buffer ID, across every</span>
+<span class="sd">        acknowledgement number's payload buffer, so it describes the *stream*</span>
+<span class="sd">        rather than any one payload buffer: it decides when a stream whose FIN</span>
+<span class="sd">        has been seen is whole and may be submitted. Whether each payload</span>
+<span class="sd">        buffer is complete is a question about that buffer alone, answered</span>
+<span class="sd">        from its own</span>
+<span class="sd">        :attr:`~pcapkit.foundation.reassembly.data.tcp.Fragment.gap` list.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        **Limitation.** Without the handshake the start of a stream is unknown,</span>
+<span class="sd">        so a FIN is taken to complete the stream once every octet from the</span>
+<span class="sd">        lowest one seen so far up to the FIN has arrived. Data that arrives</span>
+<span class="sd">        later but lies *below* everything seen before that FIN therefore opens</span>
+<span class="sd">        a buffer of its own, and the first buffer has already been reported</span>
+<span class="sd">        :attr:`~pcapkit.foundation.reassembly.data.data.Completion.COMPLETE`</span>
+<span class="sd">        although the stream was not: ``[seq 1000 A*5, FIN 1005, seq 990 B*10]``</span>
+<span class="sd">        gives ``B*10`` and ``A*5`` as two datagrams. This applies only to a</span>
+<span class="sd">        buffer begun without a SYN: once the SYN is captured, the stream's</span>
+<span class="sd">        start is the SYN's own sequence number, and a FIN completes the</span>
+<span class="sd">        stream only when every octet from there up to the FIN has arrived.</span>
+
+<span class="sd">    .. versionchanged:: 1.5.0</span>
+
+<span class="sd">       Of two overlapping segments that disagree, the octets received first</span>
+<span class="sd">       are kept, per :rfc:`9293#section-3.10`, and the contested range is</span>
+<span class="sd">       recorded in :attr:`Datagram.conflict</span>
+<span class="sd">       &lt;pcapkit.foundation.reassembly.data.tcp.Datagram.conflict&gt;`; 1.4.x</span>
+<span class="sd">       kept the later octets without a record (:issue:`443`).</span>
+
+<span class="sd">    .. versionremoved:: 1.6.0</span>
+
+<span class="sd">       ``__window__``, now :data:`~pcapkit.utilities.config.TCP_GAP_LIMIT`</span>
+<span class="sd">       (:issue:`2546`).</span>
+
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="s1">'Type[TCP_Protocol]'</span>
+
+    <span class="c1">##########################################################################</span>
+    <span class="c1"># Defaults.</span>
+    <span class="c1">##########################################################################</span>
+
+    <span class="c1">#: Protocol name of current reassembly object.</span>
+    <span class="n">__protocol_name__</span> <span class="o">=</span> <span class="s1">'TCP'</span>
+    <span class="c1">#: Protocol of current reassembly object.</span>
+    <span class="n">__protocol_type__</span> <span class="o">=</span> <span class="n">TCP_Protocol</span>
+
+    <span class="c1">#: float: Default reassembly timeout -- **disabled**, unlike IPv4 and IPv6.</span>
+    <span class="c1">#:</span>
+    <span class="c1">#: No specification gives TCP stream reassembly a deadline the way</span>
+    <span class="c1">#: :rfc:`1122#section-3.3.2` and :rfc:`8200#section-4.5` give IP</span>
+    <span class="c1">#: fragmentation one, and the numbers that look like candidates are not</span>
+    <span class="c1">#: reassembly timeouts: the Maximum Segment Lifetime of</span>
+    <span class="c1">#: :rfc:`9293#section-3.4.1` bounds how long a *segment* may linger in the</span>
+    <span class="c1">#: network, and the user timeout of :rfc:`9293#section-3.10.8` aborts a</span>
+    <span class="c1">#: connection whose data goes unacknowledged. Picking either as a default</span>
+    <span class="c1">#: would silently discard buffered stream data on captures that are merely</span>
+    <span class="c1">#: idle -- a long-lived connection with a two-minute lull is ordinary, while</span>
+    <span class="c1">#: a 60-second gap between fragments of one IP datagram is pathological.</span>
+    <span class="c1">#:</span>
+    <span class="c1">#: So the mechanism is available and the default is off: pass ``timeout`` to</span>
+    <span class="c1">#: ask for one, e.g. ``2 * 120`` for 2·MSL if that is the policy wanted.</span>
+    <span class="n">__timeout__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="c1">##########################################################################</span>
+    <span class="c1"># Methods.</span>
+    <span class="c1">##########################################################################</span>
+
+<div class="viewcode-block" id="TCP.reassembly">
+<a class="viewcode-back" href="../../../../pcapkit/foundation/reassembly/tcp.html#pcapkit.foundation.reassembly.tcp.TCP.reassembly">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reassembly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="s1">'Packet'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Reassembly procedure.</span>
+
+<span class="sd">        A segment is merged into the payload buffer it is read against by</span>
+<span class="sd">        zero-filling the gap between them, measured on whichever side the</span>
+<span class="sd">        segment lands: from the buffer's end to the segment's start, or from</span>
+<span class="sd">        the segment's end to the buffer's start. A gap wider than</span>
+<span class="sd">        :data:`~pcapkit.utilities.config.TCP_GAP_LIMIT` is not padded to; the</span>
+<span class="sd">        buffer held so far is submitted and a fresh one opened for the segment</span>
+<span class="sd">        instead. What that means depends on whether the buffer's SYN was</span>
+<span class="sd">        captured:</span>
+
+<span class="sd">        * **No SYN** -- the segment is taken to start a new stream on a reused</span>
+<span class="sd">          4-tuple, and the two buffers are reported independently.</span>
+<span class="sd">        * **SYN captured** -- the SYN proves both are the same stream with the</span>
+<span class="sd">          range in between lost, so that range is recorded in the</span>
+<span class="sd">          :attr:`~pcapkit.foundation.reassembly.data.tcp.Fragment.gap` of the</span>
+<span class="sd">          payload buffer the segment was read against and of the new one, and</span>
+<span class="sd">          both are reported</span>
+<span class="sd">          :attr:`~pcapkit.foundation.reassembly.data.data.Completion.PARTIAL`</span>
+<span class="sd">          (in strict mode, as a single run each). The new buffer keeps the</span>
+<span class="sd">          SYN's header and counts as having seen it.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            info: :term:`info &lt;reasm.tcp.packet&gt;` dict of packets to be reassembled</span>
+
+<span class="sd">        """</span>
+        <span class="c1"># clear cache</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flag_n</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cached__</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+        <span class="n">BUFID</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">bufid</span>   <span class="c1"># Buffer Identifier</span>
+        <span class="n">DSN</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">dsn</span>       <span class="c1"># Data Sequence Number</span>
+        <span class="n">ACK</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">ack</span>       <span class="c1"># Acknowledgement Number</span>
+        <span class="n">FIN</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">fin</span>       <span class="c1"># Finish Flag (Termination)</span>
+        <span class="n">RST</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">rst</span>       <span class="c1"># Reset Connection Flag (Termination)</span>
+        <span class="n">SYN</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">syn</span>       <span class="c1"># Synchronise Flag (Establishment)</span>
+        <span class="n">TS</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">timestamp</span>  <span class="c1"># Capture timestamp, i.e. the only clock we have</span>
+
+        <span class="c1"># This segment's arrival is the evidence that capture time has reached</span>
+        <span class="c1"># ``TS``. Off by default for TCP -- see ``__timeout__`` -- in which case</span>
+        <span class="c1"># this returns immediately.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expire</span><span class="p">(</span><span class="n">TS</span><span class="p">)</span>
+
+        <span class="c1"># Sequence number of the first octet of this segment's payload. A SYN</span>
+        <span class="c1"># occupies a sequence number of its own (:rfc:`793`), so payload sent</span>
+        <span class="c1"># by or after a SYN starts at ``dsn + 1`` rather than at ``dsn``.</span>
+        <span class="c1"># Without this the octet the SYN spends becomes a zero byte at the head</span>
+        <span class="c1"># of the payload buffer, and every complete datagram of a connection</span>
+        <span class="c1"># whose handshake was captured comes back one octet too long.</span>
+        <span class="n">PSN</span> <span class="o">=</span> <span class="n">DSN</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">SYN</span> <span class="k">else</span> <span class="n">DSN</span>
+
+        <span class="c1"># when SYN is set, reset buffer of existing session</span>
+        <span class="k">if</span> <span class="n">SYN</span> <span class="ow">and</span> <span class="n">BUFID</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_release</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">BUFID</span><span class="p">),</span> <span class="n">bufid</span><span class="o">=</span><span class="n">BUFID</span><span class="p">)</span>
+
+        <span class="c1"># Read the sequence number modulo 2**32 relative to the end of the data</span>
+        <span class="c1"># it most plausibly continues -- this ACK's own payload buffer, or else</span>
+        <span class="c1"># the most recently opened one -- per :rfc:`9293#section-3.4`. Plain</span>
+        <span class="c1"># integer comparison reads a stream crossing 2**32 as a gap of about</span>
+        <span class="c1"># 4 GiB. A segment landing farther than ``config.TCP_GAP_LIMIT``</span>
+        <span class="c1"># outside that buffer splits the stream instead -- see the docstring.</span>
+        <span class="n">SHIFT</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">HDR</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">header</span> <span class="k">if</span> <span class="n">SYN</span> <span class="k">else</span> <span class="sa">b</span><span class="s1">''</span>  <span class="c1"># header of the buffer opened below, if any</span>
+        <span class="n">ANCHORED</span> <span class="o">=</span> <span class="n">SYN</span>                     <span class="c1"># whether that buffer's stream start is known</span>
+        <span class="n">MISSING</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[tuple[int, int]] # range a split left out of it</span>
+        <span class="k">if</span> <span class="n">BUFID</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">:</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[</span><span class="n">BUFID</span><span class="p">]</span>
+            <span class="n">fragment</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">ack</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ACK</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fragment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fragment</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">buffer</span><span class="o">.</span><span class="n">ack</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+            <span class="n">END</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">isn</span> <span class="o">+</span> <span class="n">fragment</span><span class="o">.</span><span class="n">len</span>
+            <span class="n">UNWRAPPED</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unwrap</span><span class="p">(</span><span class="n">PSN</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+            <span class="c1"># the zero-filled gap merging this segment would open, either side</span>
+            <span class="n">limit</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">TCP_GAP_LIMIT</span>
+            <span class="k">if</span> <span class="n">limit</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="nb">max</span><span class="p">(</span><span class="n">UNWRAPPED</span> <span class="o">-</span> <span class="n">END</span><span class="p">,</span> <span class="n">fragment</span><span class="o">.</span><span class="n">isn</span> <span class="o">-</span> <span class="p">(</span><span class="n">UNWRAPPED</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">:</span>
+                <span class="n">old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">BUFID</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_anchored</span><span class="p">(</span><span class="n">old</span><span class="p">):</span>
+                    <span class="c1"># The SYN proves this is still the same stream, with the</span>
+                    <span class="c1"># range in between lost. Both halves record that range as</span>
+                    <span class="c1"># missing, so each is reported PARTIAL rather than COMPLETE.</span>
+                    <span class="n">MISSING</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">END</span><span class="p">,</span> <span class="n">UNWRAPPED</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">UNWRAPPED</span> <span class="o">&gt;</span> <span class="n">END</span>
+                                   <span class="k">else</span> <span class="p">(</span><span class="n">UNWRAPPED</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span><span class="p">,</span> <span class="n">fragment</span><span class="o">.</span><span class="n">isn</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+                    <span class="n">fragment</span><span class="o">.</span><span class="n">gap</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">MISSING</span><span class="p">)</span>
+                    <span class="n">HDR</span><span class="p">,</span> <span class="n">ANCHORED</span><span class="p">,</span> <span class="n">PSN</span> <span class="o">=</span> <span class="n">old</span><span class="o">.</span><span class="n">hdr</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">UNWRAPPED</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_release</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">bufid</span><span class="o">=</span><span class="n">BUFID</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">SHIFT</span> <span class="o">=</span> <span class="n">UNWRAPPED</span> <span class="o">-</span> <span class="n">PSN</span>
+                <span class="n">PSN</span> <span class="o">=</span> <span class="n">UNWRAPPED</span>
+
+        <span class="c1"># initialise buffer with BUFID &amp; ACK</span>
+        <span class="k">if</span> <span class="n">BUFID</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">:</span>
+            <span class="n">hdl</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">HoleDescriptor</span><span class="p">(</span>
+                    <span class="c1"># everything from the octet after this segment onwards is</span>
+                    <span class="c1"># still missing</span>
+                    <span class="n">first</span><span class="o">=</span><span class="n">PSN</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span><span class="p">,</span>
+                    <span class="n">last</span><span class="o">=</span><span class="n">HOLE_OPEN_BOUND</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ANCHORED</span><span class="p">:</span>
+                <span class="c1"># Without the handshake the stream's start is unknown, so what</span>
+                <span class="c1"># lies below this segment is open too. The sentinel lower bound</span>
+                <span class="c1"># marks this one hole as "before the capture began" rather than</span>
+                <span class="c1"># as data missing from the stream; it is what lets a segment</span>
+                <span class="c1"># arriving *below* this one leave a real hole between the two.</span>
+                <span class="n">hdl</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">HoleDescriptor</span><span class="p">(</span><span class="n">first</span><span class="o">=-</span><span class="n">HOLE_OPEN_BOUND</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="n">PSN</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[</span><span class="n">BUFID</span><span class="p">]</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">(</span>
+                <span class="n">hdl</span><span class="o">=</span><span class="n">hdl</span><span class="p">,</span>
+                <span class="n">hdr</span><span class="o">=</span><span class="n">HDR</span><span class="p">,</span>
+                <span class="n">ack</span><span class="o">=</span><span class="p">{</span>
+                    <span class="n">ACK</span><span class="p">:</span> <span class="n">Fragment</span><span class="p">(</span>
+                        <span class="n">ind</span><span class="o">=</span><span class="p">[</span>
+                            <span class="n">info</span><span class="o">.</span><span class="n">num</span><span class="p">,</span>
+                        <span class="p">],</span>
+                        <span class="n">isn</span><span class="o">=</span><span class="n">PSN</span><span class="p">,</span>
+                        <span class="nb">len</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">len</span><span class="p">,</span>
+                        <span class="n">raw</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span>
+                        <span class="c1"># this segment's own payload is, by definition, all</span>
+                        <span class="c1"># real; a split stream also records what it left out</span>
+                        <span class="n">gap</span><span class="o">=</span><span class="n">MISSING</span><span class="p">,</span>
+                        <span class="n">conflict</span><span class="o">=</span><span class="p">[],</span>
+                    <span class="p">),</span>
+                <span class="p">},</span>
+                <span class="n">timestamp</span><span class="o">=</span><span class="n">TS</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># initialise buffer with ACK</span>
+            <span class="k">if</span> <span class="n">ACK</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">buffer</span><span class="o">.</span><span class="n">ack</span><span class="p">:</span>
+                <span class="n">buffer</span><span class="o">.</span><span class="n">ack</span><span class="p">[</span><span class="n">ACK</span><span class="p">]</span> <span class="o">=</span> <span class="n">Fragment</span><span class="p">(</span>
+                    <span class="n">ind</span><span class="o">=</span><span class="p">[</span>
+                        <span class="n">info</span><span class="o">.</span><span class="n">num</span><span class="p">,</span>
+                    <span class="p">],</span>
+                    <span class="n">isn</span><span class="o">=</span><span class="n">PSN</span><span class="p">,</span>
+                    <span class="nb">len</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">len</span><span class="p">,</span>
+                    <span class="n">raw</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">payload</span><span class="p">,</span>
+                    <span class="n">gap</span><span class="o">=</span><span class="p">[],</span>
+                    <span class="n">conflict</span><span class="o">=</span><span class="p">[],</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># put header into header buffer</span>
+                <span class="k">if</span> <span class="n">SYN</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                    <span class="n">buffer</span><span class="o">.</span><span class="n">__update__</span><span class="p">(</span><span class="n">hdr</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+
+                <span class="c1"># append packet index</span>
+                <span class="n">fragment</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">ack</span><span class="p">[</span><span class="n">ACK</span><span class="p">]</span>
+                <span class="n">fragment</span><span class="o">.</span><span class="n">ind</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">num</span><span class="p">)</span>
+
+                <span class="c1"># record fragment payload</span>
+                <span class="k">if</span> <span class="n">PSN</span> <span class="o">&gt;=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">isn</span><span class="p">:</span>  <span class="c1"># if fragment goes after existing payload</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_reassemble_append</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">fragment</span><span class="p">,</span> <span class="n">PSN</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>                    <span class="c1"># if fragment exceeds existing payload</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_reassemble_prepend</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">fragment</span><span class="p">,</span> <span class="n">PSN</span><span class="p">)</span>
+
+            <span class="c1"># update hole descriptor list</span>
+            <span class="c1">#</span>
+            <span class="c1"># A segment carrying no payload -- a bare acknowledgement, SYN, FIN</span>
+            <span class="c1"># or RST -- fills no hole, so it must not be run through the</span>
+            <span class="c1"># :rfc:`815` algorithm: its ``last`` lies one below its ``first``,</span>
+            <span class="c1"># and letting that through would split whichever hole contains it</span>
+            <span class="c1"># into two adjacent holes covering the very same octets, growing</span>
+            <span class="c1"># the list without bound on a long-lived connection.</span>
+            <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_update_hole_descriptors</span><span class="p">(</span><span class="n">BUFID</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">SHIFT</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">last</span> <span class="o">+</span> <span class="n">SHIFT</span><span class="p">)</span>
+
+        <span class="c1"># A FIN fixes the end of the stream at the sequence number it occupies,</span>
+        <span class="c1"># and nothing more: data sent before it may still arrive after it. So</span>
+        <span class="c1"># the open-ended hole is cut back to end there, and the buffer is</span>
+        <span class="c1"># submitted once every octet below the FIN has arrived -- here, or on</span>
+        <span class="c1"># whichever later segment closes the last hole -- or else when the</span>
+        <span class="c1"># capture ends.</span>
+        <span class="k">if</span> <span class="n">FIN</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_close_hole_descriptors</span><span class="p">(</span><span class="n">BUFID</span><span class="p">,</span> <span class="n">PSN</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span><span class="p">)</span>
+
+        <span class="c1"># An RST, unlike a FIN, aborts the connection: :rfc:`9293#section-3.10.7.4`</span>
+        <span class="c1"># has the receiver flush its segment queues and enter CLOSED, so it</span>
+        <span class="c1"># accepts nothing sent before the RST that arrives after it. The buffer</span>
+        <span class="c1"># is therefore submitted at once, as the receiver last saw it.</span>
+        <span class="k">if</span> <span class="n">RST</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream_whole</span><span class="p">(</span><span class="n">BUFID</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_release</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">BUFID</span><span class="p">),</span> <span class="n">bufid</span><span class="o">=</span><span class="n">BUFID</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TCP.submit">
+<a class="viewcode-back" href="../../../../pcapkit/foundation/reassembly/tcp.html#pcapkit.foundation.reassembly.tcp.TCP.submit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">submit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buf</span><span class="p">:</span> <span class="s1">'Buffer'</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">bufid</span><span class="p">:</span> <span class="s1">'BufferID'</span><span class="p">,</span>  <span class="c1"># type: ignore[override] # pylint: disable=arguments-differ</span>
+               <span class="n">expired</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="s1">'bool'</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'list[Datagram]'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Submit reassembled payload.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            buf: :term:`buffer &lt;reasm.tcp.buffer&gt;` dict of reassembled packets</span>
+<span class="sd">            bufid: buffer identifier</span>
+<span class="sd">            expired: whether this buffer is being submitted because</span>
+<span class="sd">                :meth:`~pcapkit.foundation.reassembly.reassembly.Reassembly.expire`</span>
+<span class="sd">                abandoned it under the reassembly timeout</span>
+<span class="sd">            store: whether ``buf`` has left</span>
+<span class="sd">                :attr:`~pcapkit.foundation.reassembly.reassembly.Reassembly._buffer`</span>
+<span class="sd">                for good, so its datagrams join</span>
+<span class="sd">                :attr:`~pcapkit.foundation.reassembly.reassembly.Reassembly._dtgram`</span>
+<span class="sd">                before the callbacks run, and one that raises cannot lose them</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Reassembled :term:`packets &lt;reasm.tcp.datagram&gt;`. Where the payload</span>
+<span class="sd">            is one contiguous run, its ``packet`` is the parse</span>
+<span class="sd">            :func:`~pcapkit.foundation.analysis.tcp.tcp_datagram` runs, by this</span>
+<span class="sd">            reassembly's own</span>
+<span class="sd">            :attr:`protocol &lt;pcapkit.foundation.reassembly.reassembly.Reassembly.protocol&gt;`,</span>
+<span class="sd">            deferred to its first read.</span>
+
+<span class="sd">        Important:</span>
+<span class="sd">            The ``(source, destination)`` pair handed to</span>
+<span class="sd">            :class:`~pcapkit.foundation.reassembly.data.data.Deferred` is a pair</span>
+<span class="sd">            of :class:`~pcapkit.const.reg.apptype.tcp.TCP` members rather than</span>
+<span class="sd">            of the bare port numbers :data:`BufferID` holds (:issue:`2417`), so</span>
+<span class="sd">            a deferred analysis dispatches on the named service rather than on a</span>
+<span class="sd">            number. The resolution is :meth:`Transport._make_port</span>
+<span class="sd">            &lt;pcapkit.protocols.transport.transport.Transport._make_port&gt;`, so it</span>
+<span class="sd">            is the one the maker path uses and cannot drift from it. See</span>
+<span class="sd">            :meth:`_make_ports` for why it is reached through</span>
+<span class="sd">            :class:`~pcapkit.protocols.transport.tcp.protocol.TCP` rather than through</span>
+<span class="sd">            :attr:`self.protocol</span>
+<span class="sd">            &lt;pcapkit.foundation.reassembly.reassembly.ReassemblyBase.protocol&gt;`.</span>
+
+<span class="sd">            For a *registered* port that is the very member</span>
+<span class="sd">            :attr:`TCP.src &lt;pcapkit.protocols.transport.tcp.protocol.TCP.src&gt;` reads off</span>
+<span class="sd">            a parsed header. For an unassigned one the two are **equal but not</span>
+<span class="sd">            identical**, and not even equally named: the parse path builds its</span>
+<span class="sd">            member through :meth:`EnumField._unregistered_member</span>
+<span class="sd">            &lt;pcapkit.corekit.fields.numbers.EnumField._unregistered_member&gt;`,</span>
+<span class="sd">            whose ``.name`` is ``'&lt;unassigned&gt;'``, where ``get`` builds its own,</span>
+<span class="sd">            named ``'unknown'`` -- measured on port ``50000``. Both are real</span>
+<span class="sd">            members of the same registry carrying the same :attr:`AppType.port</span>
+<span class="sd">            &lt;pcapkit.const.reg.apptype.apptype.AppType.port&gt;`, which is what</span>
+<span class="sd">            every reader of this pair goes on to use, so the distinction costs</span>
+<span class="sd">            nothing here; it is recorded because "the same member the header</span>
+<span class="sd">            carries" would be an overstatement of it.</span>
+
+<span class="sd">        .. versionchanged:: 1.7.0</span>
+
+<span class="sd">           ``timeout`` is renamed ``expired``, with no alias (:issue:`2839`).</span>
+
+<span class="sd">        """</span>
+        <span class="n">datagram</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[Datagram] # reassembled datagram</span>
+
+        <span class="c1"># check through every buffer with ACK</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">ack</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span> <span class="ow">in</span> <span class="n">buf</span><span class="o">.</span><span class="n">ack</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Translate this payload buffer's own gap list, kept in unwrapped</span>
+            <span class="c1"># sequence numbers, into offsets into the buffer, which is indexed</span>
+            <span class="c1"># from its own initial sequence number. The buffer-wide hole</span>
+            <span class="c1"># descriptor list cannot answer this: it is shared by every</span>
+            <span class="c1"># acknowledgement number, so another payload buffer filling a hole</span>
+            <span class="c1"># there says nothing about this one, and it never learns of a gap</span>
+            <span class="c1"># opened below the first segment to arrive. Entries are clipped to</span>
+            <span class="c1"># the buffer rather than being allowed to index from its far end.</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="o">.</span><span class="n">raw</span><span class="p">)</span>
+            <span class="n">holes</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[tuple[int, int]]</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span> <span class="ow">in</span> <span class="n">buffer</span><span class="o">.</span><span class="n">gap</span><span class="p">:</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">first</span> <span class="o">-</span> <span class="n">buffer</span><span class="o">.</span><span class="n">isn</span>            <span class="c1"># inclusive lower bound</span>
+                <span class="n">stop</span> <span class="o">=</span> <span class="n">last</span> <span class="o">-</span> <span class="n">buffer</span><span class="o">.</span><span class="n">isn</span> <span class="o">+</span> <span class="mi">1</span>          <span class="c1"># exclusive upper bound</span>
+                <span class="k">if</span> <span class="n">stop</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">length</span><span class="p">:</span>
+                    <span class="k">continue</span>                          <span class="c1"># gap lies outside the buffer</span>
+                <span class="n">holes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">max</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">stop</span><span class="p">,</span> <span class="n">length</span><span class="p">)))</span>
+            <span class="n">holes</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="c1"># reported in sequence space proper, i.e. modulo 2**32</span>
+            <span class="n">conflict</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">first</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span> <span class="n">last</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span> <span class="ow">in</span> <span class="n">buffer</span><span class="o">.</span><span class="n">conflict</span><span class="p">)</span>
+
+            <span class="c1"># How completely this buffer came out, and why it stopped. Derived</span>
+            <span class="c1"># once per buffer, so the two branches cannot disagree about it.</span>
+            <span class="c1"># Any gap entry counts, including one lying wholly outside ``raw``:</span>
+            <span class="c1"># that is the range a split stream left out (see ``reassembly``).</span>
+            <span class="n">completion</span> <span class="o">=</span> <span class="n">Completion</span><span class="o">.</span><span class="n">COMPLETE</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">buffer</span><span class="o">.</span><span class="n">gap</span> <span class="k">else</span> <span class="p">(</span>
+                <span class="n">Completion</span><span class="o">.</span><span class="n">TIMEOUT</span> <span class="k">if</span> <span class="n">expired</span> <span class="k">else</span> <span class="n">Completion</span><span class="o">.</span><span class="n">PARTIAL</span>
+            <span class="p">)</span>
+
+            <span class="c1"># if this buffer is incomplete</span>
+            <span class="c1"># go through every hole and extract received payload</span>
+            <span class="k">if</span> <span class="n">completion</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Completion</span><span class="o">.</span><span class="n">COMPLETE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flag_s</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[bytes]</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">hole_start</span><span class="p">,</span> <span class="n">hole_stop</span><span class="p">)</span> <span class="ow">in</span> <span class="n">holes</span><span class="p">:</span>
+                    <span class="n">byte</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">raw</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">hole_start</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">byte</span><span class="p">:</span>    <span class="c1"># strip empty payload</span>
+                        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">byte</span><span class="p">))</span>
+                    <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">hole_stop</span><span class="p">)</span>
+                <span class="n">byte</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">raw</span><span class="p">[</span><span class="n">start</span><span class="p">:]</span>
+                <span class="k">if</span> <span class="n">byte</span><span class="p">:</span>    <span class="c1"># strip empty payload</span>
+                    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">byte</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">data</span><span class="p">:</span>    <span class="c1"># strip empty buffer</span>
+                    <span class="n">packet</span> <span class="o">=</span> <span class="n">Datagram</span><span class="p">(</span>
+                        <span class="n">completed</span><span class="o">=</span><span class="n">completion</span><span class="p">,</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="n">DatagramID</span><span class="p">(</span>
+                            <span class="n">src</span><span class="o">=</span><span class="p">(</span><span class="n">bufid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bufid</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                            <span class="n">dst</span><span class="o">=</span><span class="p">(</span><span class="n">bufid</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">bufid</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+                            <span class="n">ack</span><span class="o">=</span><span class="n">ack</span><span class="p">,</span>
+                        <span class="p">),</span>
+                        <span class="n">index</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">buffer</span><span class="o">.</span><span class="n">ind</span><span class="p">),</span>
+                        <span class="n">header</span><span class="o">=</span><span class="n">buf</span><span class="o">.</span><span class="n">hdr</span><span class="p">,</span>
+                        <span class="n">payload</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                        <span class="n">packet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">conflict</span><span class="o">=</span><span class="n">conflict</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">datagram</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+
+            <span class="c1"># if this buffer is complete -- or if it is not, and ``strict``</span>
+            <span class="c1"># asked for one contiguous payload rather than the received runs</span>
+            <span class="c1">#</span>
+            <span class="c1"># NOTE: ``strict=False`` reports the buffer with holes zero-filled, as</span>
+            <span class="c1"># :func:`~pcapkit.interface.misc.follow_tcp_stream` wants, and ``completed`` says so.</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">payload</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">raw</span>
+                <span class="k">if</span> <span class="n">payload</span><span class="p">:</span>    <span class="c1"># strip empty buffer</span>
+                    <span class="n">packet</span> <span class="o">=</span> <span class="n">Datagram</span><span class="p">(</span>
+                        <span class="n">completed</span><span class="o">=</span><span class="n">completion</span><span class="p">,</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="n">DatagramID</span><span class="p">(</span>
+                            <span class="n">src</span><span class="o">=</span><span class="p">(</span><span class="n">bufid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bufid</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                            <span class="n">dst</span><span class="o">=</span><span class="p">(</span><span class="n">bufid</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">bufid</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+                            <span class="n">ack</span><span class="o">=</span><span class="n">ack</span><span class="p">,</span>
+                        <span class="p">),</span>
+                        <span class="n">index</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">buffer</span><span class="o">.</span><span class="n">ind</span><span class="p">),</span>
+                        <span class="n">header</span><span class="o">=</span><span class="n">buf</span><span class="o">.</span><span class="n">hdr</span><span class="p">,</span>
+                        <span class="n">payload</span><span class="o">=</span><span class="nb">bytes</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span>
+                        <span class="n">packet</span><span class="o">=</span><span class="n">Deferred</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">_analyze_payload</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span><span class="p">),</span>
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">_make_ports</span><span class="p">(</span><span class="n">bufid</span><span class="p">),</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">payload</span><span class="p">)),</span>
+                        <span class="n">conflict</span><span class="o">=</span><span class="n">conflict</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">datagram</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_notify</span><span class="p">(</span><span class="n">datagram</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span></div>
+
+
+    <span class="c1">##########################################################################</span>
+    <span class="c1"># Utilities.</span>
+    <span class="c1">##########################################################################</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_unwrap</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'int'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Place a 32-bit sequence number on the unwrapped line near ``ref``.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            seq: sequence number as carried on the wire, i.e. modulo 2**32</span>
+<span class="sd">            ref: unwrapped sequence number the segment is expected to be near</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The integer congruent to ``seq`` modulo 2**32 that lies within</span>
+<span class="sd">            2**31 of ``ref``, which is how :rfc:`9293#section-3.4` compares</span>
+<span class="sd">            sequence numbers.</span>
+
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="n">ref</span> <span class="o">+</span> <span class="p">(</span><span class="n">seq</span> <span class="o">-</span> <span class="n">ref</span> <span class="o">+</span> <span class="mh">0x80000000</span><span class="p">)</span> <span class="o">%</span> <span class="mh">0x100000000</span> <span class="o">-</span> <span class="mh">0x80000000</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_anchored</span><span class="p">(</span><span class="n">buf</span><span class="p">:</span> <span class="s1">'Buffer'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'bool'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Whether a buffer's stream start is known, i.e. its SYN was captured.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            buf: :term:`buffer &lt;reasm.tcp.buffer&gt;` to look at</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :data:`False` exactly when the hole descriptor list still opens</span>
+<span class="sd">            with the sentinel hole that a buffer begun without a SYN carries.</span>
+
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">hdl</span> <span class="ow">and</span> <span class="n">buf</span><span class="o">.</span><span class="n">hdl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">first</span> <span class="o">==</span> <span class="o">-</span><span class="n">HOLE_OPEN_BOUND</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_stream_whole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">BUFID</span><span class="p">:</span> <span class="s1">'BufferID'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'bool'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Whether a stream has seen its FIN and every octet below it.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            BUFID: buffer identifier of the stream</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :data:`True` once a FIN has cut back the open-ended hole and the</span>
+<span class="sd">            only hole left, if any, is the sentinel one below the first octet</span>
+<span class="sd">            of a capture that missed the handshake.</span>
+
+<span class="sd">        """</span>
+        <span class="k">for</span> <span class="n">hole</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[</span><span class="n">BUFID</span><span class="p">]</span><span class="o">.</span><span class="n">hdl</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">hole</span><span class="o">.</span><span class="n">first</span> <span class="o">!=</span> <span class="o">-</span><span class="n">HOLE_OPEN_BOUND</span> <span class="ow">or</span> <span class="n">hole</span><span class="o">.</span><span class="n">last</span> <span class="o">==</span> <span class="n">HOLE_OPEN_BOUND</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_close_hole_descriptors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">BUFID</span><span class="p">:</span> <span class="s1">'BufferID'</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Cut the hole descriptor list back to end below a FIN.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            BUFID: buffer identifier of the stream</span>
+<span class="sd">            end: unwrapped sequence number the FIN occupies, i.e. one past the</span>
+<span class="sd">                last octet of the stream</span>
+
+<span class="sd">        """</span>
+        <span class="n">HDL</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[</span><span class="n">BUFID</span><span class="p">]</span><span class="o">.</span><span class="n">hdl</span>
+        <span class="n">HDL</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">hole</span> <span class="k">if</span> <span class="n">hole</span><span class="o">.</span><span class="n">last</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="k">else</span> <span class="n">HoleDescriptor</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="n">hole</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="n">end</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">hole</span> <span class="ow">in</span> <span class="n">HDL</span> <span class="k">if</span> <span class="n">hole</span><span class="o">.</span><span class="n">first</span> <span class="o">&lt;</span> <span class="n">end</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reassemble_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="s1">'Packet'</span><span class="p">,</span> <span class="n">fragment</span><span class="p">:</span> <span class="s1">'Fragment'</span><span class="p">,</span> <span class="n">PSN</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Merge a segment that starts at or after the buffered payload's end.</span>
+
+<span class="sd">        Covers both an ordinary (or zero-length) forward gap and a tail-side</span>
+<span class="sd">        overlap. Mutates ``fragment`` in place: its ``gap`` list, its</span>
+<span class="sd">        ``conflict`` list, and finally its ``raw``/``len`` via</span>
+<span class="sd">        :meth:`~pcapkit.corekit.infoclass.Info.__update__`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            info: :term:`info &lt;reasm.tcp.packet&gt;` dict of the arriving segment</span>
+<span class="sd">            fragment: this ACK bucket's own</span>
+<span class="sd">                :class:`~pcapkit.foundation.reassembly.data.tcp.Fragment`</span>
+<span class="sd">            PSN: payload sequence number of the arriving segment</span>
+
+<span class="sd">        """</span>
+        <span class="n">ISN</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">isn</span>       <span class="c1"># Initial Sequence Number</span>
+        <span class="n">RAW</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">raw</span>       <span class="c1"># Raw Payload Data</span>
+        <span class="n">GAPS</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">gap</span>      <span class="c1"># this fragment's own gap list</span>
+        <span class="n">LEN</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">len</span>
+        <span class="n">GAP</span> <span class="o">=</span> <span class="n">PSN</span> <span class="o">-</span> <span class="p">(</span><span class="n">ISN</span> <span class="o">+</span> <span class="n">LEN</span><span class="p">)</span>  <span class="c1"># gap length between payloads</span>
+        <span class="k">if</span> <span class="n">GAP</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>             <span class="c1"># if fragment goes after existing payload</span>
+            <span class="k">if</span> <span class="n">GAP</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">GAPS</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ISN</span> <span class="o">+</span> <span class="n">LEN</span><span class="p">,</span> <span class="n">PSN</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">RAW</span> <span class="o">+=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">GAP</span><span class="p">)</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="n">payload</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Fragment partially overlaps existing payload. Per</span>
+            <span class="c1"># :rfc:`9293#section-3.10` ("we reconstruct the segment</span>
+            <span class="c1"># to contain just the new data"), an already-*received*</span>
+            <span class="c1"># byte wins over a conflicting arriving one; only a</span>
+            <span class="c1"># position this *fragment* has not received yet (per</span>
+            <span class="c1"># its own ``gap`` list, not the buffer-wide ``HDL`` --</span>
+            <span class="c1"># see</span>
+            <span class="c1"># :attr:`~pcapkit.foundation.reassembly.data.tcp.Fragment.gap`)</span>
+            <span class="c1"># has nothing to disagree with, so the arriving byte</span>
+            <span class="c1"># is simply accepted there -- an ordinary gap fill,</span>
+            <span class="c1"># not a conflict.</span>
+            <span class="n">OFFSET</span> <span class="o">=</span> <span class="n">PSN</span> <span class="o">-</span> <span class="n">ISN</span>                     <span class="c1"># index into RAW where the overlap begins</span>
+            <span class="n">OVERLAP</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">len</span><span class="p">,</span> <span class="n">LEN</span> <span class="o">-</span> <span class="n">OFFSET</span><span class="p">)</span>  <span class="c1"># length of the overlapping range</span>
+            <span class="n">merged</span><span class="p">,</span> <span class="n">conflicts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_overlap</span><span class="p">(</span>
+                <span class="n">GAPS</span><span class="p">,</span>
+                <span class="nb">bytes</span><span class="p">(</span><span class="n">RAW</span><span class="p">[</span><span class="n">OFFSET</span><span class="p">:</span><span class="n">OFFSET</span> <span class="o">+</span> <span class="n">OVERLAP</span><span class="p">]),</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">payload</span><span class="p">[:</span><span class="n">OVERLAP</span><span class="p">]),</span>
+                <span class="n">PSN</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">RAW</span><span class="p">[</span><span class="n">OFFSET</span><span class="p">:</span><span class="n">OFFSET</span> <span class="o">+</span> <span class="n">OVERLAP</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span>
+            <span class="n">fragment</span><span class="o">.</span><span class="n">conflict</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">conflicts</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span> <span class="o">&gt;</span> <span class="n">OVERLAP</span><span class="p">:</span>  <span class="c1"># fragment reaches past the buffered end</span>
+                <span class="n">RAW</span> <span class="o">+=</span> <span class="n">info</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="n">OVERLAP</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trim_gaps</span><span class="p">(</span><span class="n">GAPS</span><span class="p">,</span> <span class="n">PSN</span><span class="p">,</span> <span class="n">PSN</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">fragment</span><span class="o">.</span><span class="n">__update__</span><span class="p">(</span>
+            <span class="n">raw</span><span class="o">=</span><span class="n">RAW</span><span class="p">,</span>       <span class="c1"># update payload datagram</span>
+            <span class="nb">len</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">RAW</span><span class="p">),</span>  <span class="c1"># update payload length</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reassemble_prepend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="s1">'Packet'</span><span class="p">,</span> <span class="n">fragment</span><span class="p">:</span> <span class="s1">'Fragment'</span><span class="p">,</span> <span class="n">PSN</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Merge a segment that starts before the buffered payload's own ``isn``.</span>
+
+<span class="sd">        Revises this fragment's ``isn`` down to ``PSN``, then covers both an</span>
+<span class="sd">        ordinary (or zero-length) reach-back gap and a head-side overlap --</span>
+<span class="sd">        which may also extend a new tail past the buffered end in the same</span>
+<span class="sd">        call. Mutates ``fragment`` in place: its ``isn``, its ``gap`` list,</span>
+<span class="sd">        its ``conflict`` list, and finally its ``raw``/``len`` via</span>
+<span class="sd">        :meth:`~pcapkit.corekit.infoclass.Info.__update__`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            info: :term:`info &lt;reasm.tcp.packet&gt;` dict of the arriving segment</span>
+<span class="sd">            fragment: this ACK bucket's own</span>
+<span class="sd">                :class:`~pcapkit.foundation.reassembly.data.tcp.Fragment`</span>
+<span class="sd">            PSN: payload sequence number of the arriving segment</span>
+
+<span class="sd">        """</span>
+        <span class="n">ISN</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">isn</span>       <span class="c1"># Initial Sequence Number, before revision</span>
+        <span class="n">RAW</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">raw</span>       <span class="c1"># Raw Payload Data</span>
+        <span class="n">GAPS</span> <span class="o">=</span> <span class="n">fragment</span><span class="o">.</span><span class="n">gap</span>      <span class="c1"># this fragment's own gap list</span>
+        <span class="n">LEN</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span>
+        <span class="n">GAP</span> <span class="o">=</span> <span class="n">ISN</span> <span class="o">-</span> <span class="p">(</span><span class="n">PSN</span> <span class="o">+</span> <span class="n">LEN</span><span class="p">)</span>  <span class="c1"># gap length between payloads</span>
+        <span class="n">fragment</span><span class="o">.</span><span class="n">__update__</span><span class="p">(</span>
+            <span class="n">isn</span><span class="o">=</span><span class="n">PSN</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">GAP</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>             <span class="c1"># if fragment exceeds existing payload</span>
+            <span class="k">if</span> <span class="n">GAP</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">GAPS</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">PSN</span> <span class="o">+</span> <span class="n">LEN</span><span class="p">,</span> <span class="n">ISN</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">RAW</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">payload</span> <span class="o">+</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">GAP</span><span class="p">)</span> <span class="o">+</span> <span class="n">RAW</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Mirrored reach-back case: the fragment starts before</span>
+            <span class="c1"># ``ISN`` and its tail overlaps the start of the</span>
+            <span class="c1"># already-buffered payload. Same resolution -- keep</span>
+            <span class="c1"># already-received bytes, fill any gap among them from</span>
+            <span class="c1"># the arriving segment, and prepend the genuinely new</span>
+            <span class="c1"># head. The new head-prepend below is *not* mutually</span>
+            <span class="c1"># exclusive with the rare case of also appending a new</span>
+            <span class="c1"># tail past the buffered end (full engulfment plus</span>
+            <span class="c1"># extension) -- both can happen in the same call, since</span>
+            <span class="c1"># they come from independent ends of the fragment. What</span>
+            <span class="c1"># *is* mutually exclusive is which one of the old tail</span>
+            <span class="c1"># (``RAW[OVERLAP:]``) or a genuinely new one</span>
+            <span class="c1"># (``info.payload[OFFSET + OVERLAP:]``) is non-empty --</span>
+            <span class="c1"># never both, since ``OVERLAP`` is capped at whichever</span>
+            <span class="c1"># of the two is shorter.</span>
+            <span class="c1">#</span>
+            <span class="c1"># ``GAPS`` is not touched here at all: it is kept in</span>
+            <span class="c1"># absolute sequence numbers, so revising ``isn``</span>
+            <span class="c1"># downward above does not require shifting or</span>
+            <span class="c1"># re-prefixing a single entry in it.</span>
+            <span class="n">OFFSET</span> <span class="o">=</span> <span class="n">ISN</span> <span class="o">-</span> <span class="n">PSN</span>                     <span class="c1"># index into info.payload where the overlap begins</span>
+            <span class="n">OVERLAP</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">RAW</span><span class="p">),</span> <span class="n">LEN</span> <span class="o">-</span> <span class="n">OFFSET</span><span class="p">)</span>  <span class="c1"># length of the overlapping range</span>
+            <span class="n">merged</span><span class="p">,</span> <span class="n">conflicts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_overlap</span><span class="p">(</span>
+                <span class="n">GAPS</span><span class="p">,</span>
+                <span class="nb">bytes</span><span class="p">(</span><span class="n">RAW</span><span class="p">[:</span><span class="n">OVERLAP</span><span class="p">]),</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="n">OFFSET</span><span class="p">:</span><span class="n">OFFSET</span> <span class="o">+</span> <span class="n">OVERLAP</span><span class="p">]),</span>
+                <span class="n">ISN</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">RAW</span><span class="p">[:</span><span class="n">OVERLAP</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span>
+            <span class="n">fragment</span><span class="o">.</span><span class="n">conflict</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">conflicts</span><span class="p">)</span>
+            <span class="n">RAW</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">payload</span><span class="p">[:</span><span class="n">OFFSET</span><span class="p">]</span> <span class="o">+</span> <span class="n">RAW</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="n">OFFSET</span> <span class="o">+</span> <span class="n">OVERLAP</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trim_gaps</span><span class="p">(</span><span class="n">GAPS</span><span class="p">,</span> <span class="n">PSN</span><span class="p">,</span> <span class="n">PSN</span> <span class="o">+</span> <span class="n">info</span><span class="o">.</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">fragment</span><span class="o">.</span><span class="n">__update__</span><span class="p">(</span>
+            <span class="n">raw</span><span class="o">=</span><span class="n">RAW</span><span class="p">,</span>       <span class="c1"># update payload datagram</span>
+            <span class="nb">len</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">RAW</span><span class="p">),</span>  <span class="c1"># update payload length</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_hole_descriptors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">BUFID</span><span class="p">:</span> <span class="s1">'BufferID'</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Update the buffer-wide hole descriptor list per :rfc:`815`.</span>
+
+<span class="sd">        Called only for a segment that carries payload (``info.len &gt; 0``);</span>
+<span class="sd">        a bare acknowledgement, SYN, FIN or RST fills no hole, and running</span>
+<span class="sd">        one through this would split whichever hole contains it into two</span>
+<span class="sd">        adjacent holes covering the very same octets, growing the list</span>
+<span class="sd">        without bound on a long-lived connection.</span>
+
+<span class="sd">        The end of the stream is not settled here: a FIN cuts the open-ended</span>
+<span class="sd">        hole back afterwards, in :meth:`_close_hole_descriptors`, whether or</span>
+<span class="sd">        not it carries payload.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            BUFID: buffer identifier of the session this fragment belongs to</span>
+<span class="sd">            first: unwrapped sequence number of the segment's first octet</span>
+<span class="sd">            last: unwrapped sequence number of the segment's last octet</span>
+
+<span class="sd">        """</span>
+        <span class="n">HDL</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[</span><span class="n">BUFID</span><span class="p">]</span><span class="o">.</span><span class="n">hdl</span>                          <span class="c1"># HDL alias</span>
+        <span class="n">new_hdl</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[HoleDescriptor]</span>
+        <span class="k">for</span> <span class="n">hole</span> <span class="ow">in</span> <span class="n">HDL</span><span class="p">:</span>                                       <span class="c1"># step one</span>
+            <span class="k">if</span> <span class="n">first</span> <span class="o">&gt;</span> <span class="n">hole</span><span class="o">.</span><span class="n">last</span> <span class="ow">or</span> <span class="n">last</span> <span class="o">&lt;</span> <span class="n">hole</span><span class="o">.</span><span class="n">first</span><span class="p">:</span>         <span class="c1"># steps two and three</span>
+                <span class="n">new_hdl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hole</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="c1"># step four: this hole is (partly) filled and replaced by what of</span>
+            <span class="c1"># it survives, on either side of the segment</span>
+            <span class="k">if</span> <span class="n">first</span> <span class="o">&gt;</span> <span class="n">hole</span><span class="o">.</span><span class="n">first</span><span class="p">:</span>                             <span class="c1"># step five</span>
+                <span class="n">new_hdl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">HoleDescriptor</span><span class="p">(</span>
+                    <span class="n">first</span><span class="o">=</span><span class="n">hole</span><span class="o">.</span><span class="n">first</span><span class="p">,</span>
+                    <span class="n">last</span><span class="o">=</span><span class="n">first</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">))</span>
+            <span class="k">if</span> <span class="n">last</span> <span class="o">&lt;</span> <span class="n">hole</span><span class="o">.</span><span class="n">last</span><span class="p">:</span>                               <span class="c1"># step six</span>
+                <span class="n">new_hdl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">HoleDescriptor</span><span class="p">(</span>
+                    <span class="n">first</span><span class="o">=</span><span class="n">last</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">last</span><span class="o">=</span><span class="n">hole</span><span class="o">.</span><span class="n">last</span>
+                <span class="p">))</span>
+            <span class="c1"># step seven: go on to the next hole, since one segment may span</span>
+            <span class="c1"># several of them</span>
+        <span class="n">HDL</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">new_hdl</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_trim_gaps</span><span class="p">(</span><span class="n">gap</span><span class="p">:</span> <span class="s1">'list[tuple[int, int]]'</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'None'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Remove a received range from a fragment's gap list, in place.</span>
+
+<span class="sd">        Only an entry lying outside :attr:`~pcapkit.foundation.reassembly.data.tcp.Fragment.raw`</span>
+<span class="sd">        -- the range a split stream left out, see :meth:`TCP.reassembly` -- can</span>
+<span class="sd">        still overlap a segment once it is merged; :meth:`_merge_overlap` has</span>
+<span class="sd">        already closed every entry inside ``raw`` that the segment covers.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            gap: the fragment's gap list</span>
+<span class="sd">            first: unwrapped sequence number of the segment's first octet</span>
+<span class="sd">            last: unwrapped sequence number of the segment's last octet</span>
+
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">first</span> <span class="o">&gt;</span> <span class="n">last</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">still_gap</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[tuple[int, int]]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span> <span class="ow">in</span> <span class="n">gap</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">hi</span> <span class="o">&lt;</span> <span class="n">first</span> <span class="ow">or</span> <span class="n">lo</span> <span class="o">&gt;</span> <span class="n">last</span><span class="p">:</span>
+                <span class="n">still_gap</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">first</span><span class="p">:</span>
+                <span class="n">still_gap</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">lo</span><span class="p">,</span> <span class="n">first</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">hi</span> <span class="o">&gt;</span> <span class="n">last</span><span class="p">:</span>
+                <span class="n">still_gap</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">last</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span><span class="p">))</span>
+        <span class="n">gap</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">still_gap</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_merge_overlap</span><span class="p">(</span><span class="n">gap</span><span class="p">:</span> <span class="s1">'list[tuple[int, int]]'</span><span class="p">,</span> <span class="n">old</span><span class="p">:</span> <span class="s1">'bytes'</span><span class="p">,</span> <span class="n">new</span><span class="p">:</span> <span class="s1">'bytes'</span><span class="p">,</span>
+                        <span class="n">start</span><span class="p">:</span> <span class="s1">'int'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'tuple[bytes, list[tuple[int, int]]]'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Merge an arriving segment into an overlapping range of buffered bytes.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            gap: this *fragment's own*</span>
+<span class="sd">                :attr:`~pcapkit.foundation.reassembly.data.tcp.Fragment.gap`</span>
+<span class="sd">                list -- absolute, inclusive sequence ranges still zero-fill</span>
+<span class="sd">                placeholder in ``old``. **Mutated in place**: whichever</span>
+<span class="sd">                portion of a gap entry falls inside ``[start, start +</span>
+<span class="sd">                len(old) - 1]`` is filled from ``new`` and removed (or</span>
+<span class="sd">                trimmed, if only part of the entry falls inside the range).</span>
+<span class="sd">                Deliberately **not** derived from</span>
+<span class="sd">                :attr:`~pcapkit.foundation.reassembly.data.tcp.Buffer.hdl`,</span>
+<span class="sd">                which is shared across every acknowledgement number under the</span>
+<span class="sd">                same buffer ID: a *different* fragment closing a hole there</span>
+<span class="sd">                says nothing about what *this* fragment has received, and</span>
+<span class="sd">                using it here would discard this fragment's own real</span>
+<span class="sd">                bytes whenever another fragment happened to cover the same</span>
+<span class="sd">                absolute sequence numbers first.</span>
+<span class="sd">            old: already-buffered bytes of this fragment over the range.</span>
+<span class="sd">            new: the arriving segment's bytes over the same range.</span>
+<span class="sd">            start: absolute sequence number of ``old[0]``/``new[0]``, which</span>
+<span class="sd">                cover the same range by construction -- see the call sites,</span>
+<span class="sd">                :meth:`_reassemble_append` and :meth:`_reassemble_prepend`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The bytes to keep for the range, and any ``(first, last)``</span>
+<span class="sd">            absolute sequence ranges -- inclusive, same convention as</span>
+<span class="sd">            :attr:`gap` and :attr:`~pcapkit.foundation.reassembly.data.tcp.Fragment.conflict`</span>
+<span class="sd">            -- where already-*received* bytes disagreed with the arriving</span>
+<span class="sd">            segment.</span>
+
+<span class="sd">        A position still covered by a ``gap`` entry has no already-received</span>
+<span class="sd">        byte to disagree with, so the arriving segment's byte is simply</span>
+<span class="sd">        accepted there and that slice of the gap is closed: an ordinary gap</span>
+<span class="sd">        fill, not a conflict. Only a position outside every gap -- already</span>
+<span class="sd">        received -- can conflict, per :rfc:`9293#section-3.10`: the</span>
+<span class="sd">        already-received byte wins and the arriving one is discarded, but the</span>
+<span class="sd">        disagreement itself is what this records for :attr:`Fragment.conflict</span>
+<span class="sd">        &lt;pcapkit.foundation.reassembly.data.tcp.Fragment.conflict&gt;`.</span>
+
+<span class="sd">        """</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>                <span class="c1"># inclusive</span>
+        <span class="n">merged</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+
+        <span class="c1"># A position is a hole exactly while some gap entry covers it; build</span>
+        <span class="c1"># that once, per this call, from the compact interval list rather</span>
+        <span class="c1"># than keeping a per-octet marker between calls. Any gap entry (or</span>
+        <span class="c1"># remaining slice of one) outside ``[start, end]`` is untouched.</span>
+        <span class="n">received</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\x01</span><span class="s1">'</span> <span class="o">*</span> <span class="n">length</span><span class="p">)</span>  <span class="c1"># scratch for this call only</span>
+        <span class="n">still_gap</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[tuple[int, int]]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span> <span class="ow">in</span> <span class="n">gap</span><span class="p">:</span>
+            <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">start</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">last</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">lo</span> <span class="o">&gt;</span> <span class="n">hi</span><span class="p">:</span>             <span class="c1"># this entry misses the range entirely</span>
+                <span class="n">still_gap</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="n">rel_lo</span><span class="p">,</span> <span class="n">rel_hi</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">hi</span> <span class="o">-</span> <span class="n">start</span>         <span class="c1"># inclusive</span>
+            <span class="n">merged</span><span class="p">[</span><span class="n">rel_lo</span><span class="p">:</span><span class="n">rel_hi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">rel_lo</span><span class="p">:</span><span class="n">rel_hi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">received</span><span class="p">[</span><span class="n">rel_lo</span><span class="p">:</span><span class="n">rel_hi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">rel_hi</span> <span class="o">-</span> <span class="n">rel_lo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">first</span> <span class="o">&lt;</span> <span class="n">lo</span><span class="p">:</span>          <span class="c1"># a leading slice of the entry survives</span>
+                <span class="n">still_gap</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">first</span><span class="p">,</span> <span class="n">lo</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">last</span> <span class="o">&gt;</span> <span class="n">hi</span><span class="p">:</span>           <span class="c1"># a trailing slice of the entry survives</span>
+                <span class="n">still_gap</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">last</span><span class="p">))</span>
+        <span class="n">gap</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">still_gap</span>
+
+        <span class="n">conflicts</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: list[tuple[int, int]]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">received</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="ow">or</span> <span class="n">old</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">==</span> <span class="n">new</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="n">index</span>
+            <span class="k">while</span> <span class="n">stop</span> <span class="o">&lt;</span> <span class="n">length</span> <span class="ow">and</span> <span class="n">received</span><span class="p">[</span><span class="n">stop</span><span class="p">]</span> <span class="ow">and</span> <span class="n">old</span><span class="p">[</span><span class="n">stop</span><span class="p">]</span> <span class="o">!=</span> <span class="n">new</span><span class="p">[</span><span class="n">stop</span><span class="p">]:</span>
+                <span class="n">stop</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">conflicts</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start</span> <span class="o">+</span> <span class="n">index</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">stop</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">merged</span><span class="p">),</span> <span class="n">conflicts</span>
+
+<div class="viewcode-block" id="TCP._make_ports">
+<a class="viewcode-back" href="../../../../pcapkit/foundation/reassembly/tcp.html#pcapkit.foundation.reassembly.tcp.TCP._make_ports">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_ports</span><span class="p">(</span><span class="n">bufid</span><span class="p">:</span> <span class="s1">'BufferID'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'tuple[AppType_TCP, AppType_TCP]'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""The flow's ``(source, destination)`` ports, as application types.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            bufid: :term:`buffer &lt;reasm.tcp.buffer&gt;` identifier, whose positions</span>
+<span class="sd">                ``1`` and ``3`` are the source and destination ports.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The pair :meth:`submit` hands</span>
+<span class="sd">            :class:`~pcapkit.foundation.reassembly.data.data.Deferred`, i.e. what</span>
+<span class="sd">            :meth:`Transport.analyze</span>
+<span class="sd">            &lt;pcapkit.protocols.transport.transport.Transport.analyze&gt;` dispatches</span>
+<span class="sd">            the reassembled payload on (:issue:`2417`). Typed as the</span>
+<span class="sd">            *per-transport* registry :class:`~pcapkit.const.reg.apptype.tcp.TCP`</span>
+<span class="sd">            rather than as the base</span>
+<span class="sd">            :class:`~pcapkit.const.reg.apptype.apptype.AppType`, because that is</span>
+<span class="sd">            what it really is: ``proto=tcp`` sends</span>
+<span class="sd">            :meth:`AppType.get &lt;pcapkit.const.reg.apptype.apptype.AppType.get&gt;`</span>
+<span class="sd">            through :meth:`AppType._dispatch</span>
+<span class="sd">            &lt;pcapkit.const.reg.apptype.apptype.AppType._dispatch&gt;` to the TCP</span>
+<span class="sd">            registry, and ``type(...) is TCP`` holds of the member it answers</span>
+<span class="sd">            with -- measured, for a registered port and an unassigned one alike.</span>
+<span class="sd">            :meth:`Transport.analyze</span>
+<span class="sd">            &lt;pcapkit.protocols.transport.transport.Transport.analyze&gt;` keeps the</span>
+<span class="sd">            base in its own signature, since it is the one method</span>
+<span class="sd">            :class:`~pcapkit.protocols.transport.udp.protocol.UDP` and</span>
+<span class="sd">            :class:`~pcapkit.protocols.transport.sctp.protocol.SCTP` share, and each of</span>
+<span class="sd">            them would name a different registry.</span>
+
+<span class="sd">        Important:</span>
+<span class="sd">            Every port a 16-bit header field can hold resolves to a member, so</span>
+<span class="sd">            this raises for nothing that can come off the wire:</span>
+<span class="sd">            :meth:`AppType.get &lt;pcapkit.const.reg.apptype.apptype.AppType.get&gt;`</span>
+<span class="sd">            answers an assignment with its canonical service, a port inside a</span>
+<span class="sd">            documented IANA span with that span's label (``reserved`` for ``0``),</span>
+<span class="sd">            and one in no span at all with an unregistered ``unknown`` member --</span>
+<span class="sd">            never :obj:`None`, and without growing the registry (:issue:`860`).</span>
+<span class="sd">            It rejects a port outside ``0``-``65535`` and a non-:obj:`int`.</span>
+
+<span class="sd">            A :obj:`bool` is rejected by :meth:`Transport._make_port</span>
+<span class="sd">            &lt;pcapkit.protocols.transport.transport.Transport._make_port&gt;` rather</span>
+<span class="sd">            than by ``get``, which is the reason to go through it here and not</span>
+<span class="sd">            call ``get`` directly: :obj:`bool` is an :obj:`int` subclass, so</span>
+<span class="sd">            ``AppType.get(True, proto=tcp)`` resolves ``True`` as port ``1`` and</span>
+<span class="sd">            answers ``&lt;TCP.tcpmux: 1 [tcp]&gt;`` -- measured -- where ``_make_port``</span>
+<span class="sd">            raises, which is what closed :issue:`2287`. Calling ``get`` straight</span>
+<span class="sd">            would reopen it. None of the three can come out of a TCP header</span>
+<span class="sd">            either way; what ``_make_port`` also buys is idempotence, so a</span>
+<span class="sd">            ``bufid`` already holding a member passes through untouched.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            The resolution is reached through</span>
+<span class="sd">            :class:`~pcapkit.protocols.transport.tcp.protocol.TCP` rather than through</span>
+<span class="sd">            :attr:`self.protocol</span>
+<span class="sd">            &lt;pcapkit.foundation.reassembly.reassembly.ReassemblyBase.protocol&gt;`,</span>
+<span class="sd">            which is what :meth:`submit` reads the analyser itself off. That is</span>
+<span class="sd">            deliberate: ``__protocol_type__`` is an extension point, and an</span>
+<span class="sd">            analyser plugged into it need only define ``analyze`` -- it is not</span>
+<span class="sd">            required to be a</span>
+<span class="sd">            :class:`~pcapkit.protocols.transport.transport.Transport` subclass</span>
+<span class="sd">            and so need not have ``_make_port`` at all, which reaching it</span>
+<span class="sd">            through ``self.protocol`` would turn into an</span>
+<span class="sd">            :exc:`AttributeError`. What a TCP port *means* belongs to the TCP</span>
+<span class="sd">            protocol either way, not to whatever consumes the payload, which is</span>
+<span class="sd">            also why the transport below is named outright rather than read off</span>
+<span class="sd">            the analyser.</span>
+
+<span class="sd">        """</span>
+        <span class="c1"># NOTE: the protected ``_make_port`` is reused rather than duplicated, so no second port</span>
+        <span class="c1"># normaliser drifts from the maker path's; it is idempotent on members.</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">TCP_Protocol</span><span class="o">.</span><span class="n">_make_port</span><span class="p">(</span><span class="n">bufid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Enum_TransportProtocol</span><span class="o">.</span><span class="n">tcp</span><span class="p">),</span>  <span class="c1"># pylint: disable=protected-access</span>
+                <span class="n">TCP_Protocol</span><span class="o">.</span><span class="n">_make_port</span><span class="p">(</span><span class="n">bufid</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">Enum_TransportProtocol</span><span class="o">.</span><span class="n">tcp</span><span class="p">))</span>  <span class="c1"># pylint: disable=protected-access</span></div>
+</div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2017-2026, Jarry Shaw
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/documentation_options.js?v=469f8872"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: fit-content;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: auto;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: fit-content;\n}\n\n.mermaid-container > pre > svg {\n    height: auto;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false, "flowchart": {"useMaxWidth": false}, "state": {"useMaxWidth": false}, "sequence": {"useMaxWidth": false}},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false, "flowchart": {"useMaxWidth": false}, "state": {"useMaxWidth": false}, "sequence": {"useMaxWidth": false}},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    </body>
+</html>
